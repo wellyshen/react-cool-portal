@@ -1,6 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions, jsx-a11y/anchor-is-valid */
-
-import React, { SFC, useState } from 'react';
+import React, { SFC } from 'react';
 import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
@@ -9,8 +7,16 @@ import usePortal from '../../src';
 import { root, container, title, subtitle } from './styles';
 
 const App: SFC<{}> = () => {
-  const [show, setShow] = useState(true);
-  const { Portal } = usePortal();
+  const {
+    Portal,
+    portalIsShow,
+    showPortal,
+    hidePortal,
+    togglePortal
+  } = usePortal({
+    containerId: 'portal'
+  });
+  console.log('Portal is show: ', portalIsShow);
 
   return (
     <>
@@ -24,30 +30,45 @@ const App: SFC<{}> = () => {
         <GitHubCorner url="https://github.com/wellyshen/react-cool-portal" />
         <h1 css={title}>React Cool Portal</h1>
         <p css={subtitle}>
-          React hook to listen for clicks outside of the component(s).
+          {
+            'React hook for Portals, which renders modals, dropdowns, tooltips etc. to <body> or else.'
+          }
         </p>
         <button
-          onClick={() => {
-            setShow(!show);
+          onClick={(): void => {
+            showPortal();
           }}
           type="button"
         >
-          Btn
+          Show
         </button>
-        {show && (
-          <Portal>
-            {/* <div
-              style={{
-                background: 'blue',
-                display: 'inline-block',
-                padding: '1rem'
-              }}
-            >
-              I am Tooltip!
-            </div> */}
+        <button
+          onClick={(): void => {
+            hidePortal();
+          }}
+          type="button"
+        >
+          Hide
+        </button>
+        <button
+          onClick={(): void => {
+            togglePortal();
+          }}
+          type="button"
+        >
+          Toggle
+        </button>
+        <Portal>
+          <div
+            style={{
+              background: 'blue',
+              display: 'inline-block',
+              padding: '1rem'
+            }}
+          >
             I am Tooltip!
-          </Portal>
-        )}
+          </div>
+        </Portal>
       </div>
     </>
   );
