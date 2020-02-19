@@ -7,16 +7,10 @@ import usePortal from '../../src';
 import { root, container, title, subtitle } from './styles';
 
 const App: SFC<{}> = () => {
-  const {
-    Portal,
-    portalIsShow,
-    showPortal,
-    hidePortal,
-    togglePortal
-  } = usePortal({
+  const { Portal, isShow, show, hide, toggle } = usePortal({
     containerId: 'portal'
   });
-  console.log('Portal is show: ', portalIsShow);
+  console.log('Portal is show: ', isShow);
 
   return (
     <>
@@ -36,7 +30,7 @@ const App: SFC<{}> = () => {
         </p>
         <button
           onClick={(): void => {
-            showPortal();
+            show();
           }}
           type="button"
         >
@@ -44,7 +38,7 @@ const App: SFC<{}> = () => {
         </button>
         <button
           onClick={(): void => {
-            hidePortal();
+            hide();
           }}
           type="button"
         >
@@ -52,7 +46,7 @@ const App: SFC<{}> = () => {
         </button>
         <button
           onClick={(): void => {
-            togglePortal();
+            toggle();
           }}
           type="button"
         >

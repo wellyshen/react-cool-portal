@@ -7,10 +7,10 @@ interface Args {
 }
 interface Return {
   Portal: SFC<Props>;
-  portalIsShow: boolean;
-  showPortal: () => void;
-  hidePortal: () => void;
-  togglePortal: () => void;
+  isShow: boolean;
+  show: () => void;
+  hide: () => void;
+  toggle: () => void;
 }
 
 const usePortal = ({
@@ -23,19 +23,19 @@ const usePortal = ({
     isShow
   ]);
 
-  const showPortal = useCallback((): void => {
+  const show = useCallback((): void => {
     setIsShow(true);
   }, []);
 
-  const hidePortal = useCallback((): void => {
+  const hide = useCallback((): void => {
     setIsShow(false);
   }, []);
 
-  const togglePortal = useCallback((): void => {
+  const toggle = useCallback((): void => {
     setIsShow(!isShow);
   }, [isShow]);
 
-  return { Portal, portalIsShow: isShow, showPortal, hidePortal, togglePortal };
+  return { Portal, isShow, show, hide, toggle };
 };
 
 export default usePortal;
