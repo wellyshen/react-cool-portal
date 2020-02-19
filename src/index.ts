@@ -1,15 +1,13 @@
-import { ReactNode, ReactPortal, SFC } from 'react';
-import { createPortal } from 'react-dom';
+import { SFC, useEffect } from 'react';
 
-interface Props {
-  children: ReactNode;
-}
+import createPortal, { Props } from './createPortal';
 
-const Portal = (id: string) => ({ children }: Props): ReactPortal =>
-  createPortal(children, document.getElementById(id));
+const usePortal = (containerId?: string): { Portal: SFC<Props> } => {
+  useEffect(() => {
+    // ...
+  }, []);
 
-const usePortal = (containerId: string): { Portal: SFC<Props> } => {
-  return { Portal: Portal(containerId) };
+  return { Portal: createPortal(containerId) };
 };
 
 export default usePortal;
