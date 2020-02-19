@@ -13,13 +13,12 @@ export interface Props {
   children: ReactNode;
 }
 
-export default (containerId?: string): SFC<Props> => ({
+export default (id: string, isShow: boolean): SFC<Props> => ({
   children
 }: Props): ReactPortal => {
   const [container, setContainer] = useState(null);
 
   useEffect(() => {
-    const id = containerId || 'react-cool-portal';
     setContainer(document.getElementById(id) || createEl(id));
 
     return (): void => {
@@ -32,5 +31,5 @@ export default (containerId?: string): SFC<Props> => ({
     };
   }, [container]);
 
-  return container && createPortal(children, container);
+  return isShow && container && createPortal(children, container);
 };
