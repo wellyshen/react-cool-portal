@@ -9,10 +9,8 @@ import usePortal from '../../src';
 import { root, container, title, subtitle } from './styles';
 
 const App: SFC<{}> = () => {
-  const [show1, setShow1] = useState(true);
-  const [show2, setShow2] = useState(true);
-  const { Portal: Portal1 } = usePortal('my-port');
-  const { Portal: Portal2 } = usePortal('my-port');
+  const [show, setShow] = useState(true);
+  const { Portal } = usePortal();
 
   return (
     <>
@@ -30,29 +28,25 @@ const App: SFC<{}> = () => {
         </p>
         <button
           onClick={() => {
-            setShow1(!show1);
+            setShow(!show);
           }}
           type="button"
         >
-          Btn1
+          Btn
         </button>
-        {show1 && (
-          <Portal1>
-            <div>I am Tooltip1!</div>
-          </Portal1>
-        )}
-        <button
-          onClick={() => {
-            setShow2(!show2);
-          }}
-          type="button"
-        >
-          Btn2
-        </button>
-        {show2 && (
-          <Portal2>
-            <div>I am Tooltip2!</div>
-          </Portal2>
+        {show && (
+          <Portal>
+            {/* <div
+              style={{
+                background: 'blue',
+                display: 'inline-block',
+                padding: '1rem'
+              }}
+            >
+              I am Tooltip!
+            </div> */}
+            I am Tooltip!
+          </Portal>
         )}
       </div>
     </>
