@@ -24,7 +24,6 @@ export default ({ files }) => `
     </head>
     <body>
       <div id="app"></div>
-      <div id="portals"></div>
       <script type="text/javascript" src=${files.js[0].fileName}></script>
     </body>
   </html>
