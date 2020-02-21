@@ -11,4 +11,5 @@
 - [ ] Demo app
 - [ ] Demo code
 - [ ] Typescript type definition
+- [ ] CI/CD
 - [ ] Documentation
