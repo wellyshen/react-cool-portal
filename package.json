@@ -86,7 +86,6 @@
       "@typescript-eslint",
       "prettier",
       "emotion",
-      "jest",
       "testing-library"
     ],
     "extends": [
@@ -95,8 +94,7 @@
       "plugin:@typescript-eslint/recommended",
       "plugin:prettier/recommended",
       "prettier/@typescript-eslint",
-      "prettier/react",
-      "plugin:jest/all"
+      "prettier/react"
     ],
     "settings": {
       "import/parsers": {
@@ -210,7 +208,6 @@
     "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-emotion": "^10.0.27",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^23.7.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.14.3",
