@@ -4,7 +4,7 @@
 
 - [x] Renders element outside the DOM hierarchy of its parent
 - [x] Show/hide/toggle the portal element
-- [ ] onShown/onHidden event callbacks
+- [ ] onShow/onHide event callbacks
 - [ ] support onClickOutside and esc keyboard interaction
 - [ ] Server-side rendering compatibility
 - [ ] Unit testing
