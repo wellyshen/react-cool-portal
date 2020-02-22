@@ -8,7 +8,13 @@ import { root, container, title, subtitle } from './styles';
 
 const App: SFC<{}> = () => {
   const { Portal, isShow, show, hide, toggle } = usePortal({
-    containerId: 'portal'
+    containerId: 'portal',
+    onShow: e => {
+      console.log('onShow: ', e);
+    },
+    onHide: e => {
+      console.log('onHide: ', e);
+    }
   });
   console.log('Portal is show: ', isShow);
 
@@ -28,28 +34,13 @@ const App: SFC<{}> = () => {
             'React hook for Portals, which renders modals, dropdowns, tooltips etc. to <body> or else.'
           }
         </p>
-        <button
-          onClick={(): void => {
-            show();
-          }}
-          type="button"
-        >
+        <button onClick={show} type="button">
           Show
         </button>
-        <button
-          onClick={(): void => {
-            hide();
-          }}
-          type="button"
-        >
+        <button onClick={hide} type="button">
           Hide
         </button>
-        <button
-          onClick={(): void => {
-            toggle();
-          }}
-          type="button"
-        >
+        <button onClick={toggle} type="button">
           Toggle
         </button>
         <Portal>
