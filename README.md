@@ -2,9 +2,10 @@
 
 🚧 This library is in-progress. Milestone as below:
 
-- [x] Renders element outside the DOM hierarchy of its parent
+- [x] Auto creating the container of a portal
+- [x] Renders element to the portal container
 - [x] Show/hide/toggle the portal element
-- [ ] onShow/onHide event callbacks
+- [x] onShow/onHide event callbacks
 - [ ] support onClickOutside and esc keyboard interaction
 - [ ] Server-side rendering compatibility
 - [ ] Unit testing
