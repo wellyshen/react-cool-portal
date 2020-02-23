@@ -46,6 +46,8 @@ const App: SFC<{}> = () => {
         <Portal>
           <div
             style={{
+              position: 'absolute',
+              top: '0',
               background: 'blue',
               display: 'inline-block',
               padding: '1rem'

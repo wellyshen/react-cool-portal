@@ -1,5 +1,7 @@
-import { SFC, ReactNode, ReactPortal, useState, useEffect } from 'react';
+import { SFC, ReactPortal, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+
+import { RCPF, Props } from './types';
 
 const createEl = (id: string): HTMLDivElement => {
   const el = document.createElement('div');
@@ -9,13 +11,11 @@ const createEl = (id: string): HTMLDivElement => {
   return el;
 };
 
-export interface Props {
-  children: ReactNode;
-}
-
-export default (id: string, isShow: boolean): SFC<Props> => ({
-  children
-}: Props): ReactPortal => {
+export default (
+  id: string,
+  isShow: boolean,
+  hide: RCPF | false
+): SFC<Props> => ({ children }: Props): ReactPortal => {
   const [container, setContainer] = useState(null);
 
   useEffect(() => {
@@ -28,6 +28,21 @@ export default (id: string, isShow: boolean): SFC<Props> => ({
         clearTimeout(timer);
         if (container.innerHTML === '') container.remove();
       }, 100);
+    };
+  }, [container]);
+
+  useEffect(() => {
+    if (!hide || !container) return;
+
+    const handler = (e: MouseEvent): void => {
+      if (!container.contains(e.target)) hide(e);
+    };
+
+    document.addEventListener('click', handler);
+
+    // eslint-disable-next-line consistent-return
+    return (): void => {
+      document.removeEventListener('click', handler);
     };
   }, [container]);
 

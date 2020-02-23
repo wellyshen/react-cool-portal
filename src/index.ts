@@ -1,35 +1,13 @@
-import {
-  SFC,
-  SyntheticEvent,
-  useState,
-  useRef,
-  useEffect,
-  useMemo,
-  useCallback
-} from 'react';
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 
-import createPortal, { Props } from './createPortal';
-
-interface RCPF<T extends SyntheticEvent | Event = SyntheticEvent> {
-  (event?: T): void;
-}
-interface Args {
-  containerId?: string;
-  onShow?: RCPF;
-  onHide?: RCPF;
-}
-interface Return {
-  Portal: SFC<Props>;
-  isShow: boolean;
-  show: RCPF;
-  hide: RCPF;
-  toggle: RCPF;
-}
+import { Args, Return, RCPF } from './types';
+import createPortal from './createPortal';
 
 const usePortal = ({
   containerId = 'react-cool-portal',
   onShow,
-  onHide
+  onHide,
+  onClickOutside = true
 }: Args = {}): Return => {
   const [isShow, setIsShow] = useState(true);
   const onShowRef = useRef(null);
@@ -39,11 +17,6 @@ const usePortal = ({
     if (onShow) onShowRef.current = onShow;
     if (onHide) onHideRef.current = onHide;
   }, [onShow, onHide]);
-
-  const Portal = useMemo(() => createPortal(containerId, isShow), [
-    containerId,
-    isShow
-  ]);
 
   const show: RCPF = useCallback(
     e => {
@@ -74,7 +47,12 @@ const usePortal = ({
     [isShow, onShow, onHide]
   );
 
-  return { Portal, isShow, show, hide, toggle };
+  const Portal = useMemo(
+    () => createPortal(containerId, isShow, onClickOutside && hide),
+    [containerId, isShow, onClickOutside, hide]
+  );
+
+  return { isShow, show, hide, toggle, Portal };
 };
 
 export default usePortal;
