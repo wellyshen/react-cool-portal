@@ -28,7 +28,7 @@ const usePortal = ({
     [isShow, onShow]
   );
 
-  const hide: RCPF = useCallback(
+  const hide = useCallback(
     e => {
       if (!isShow) return;
 

@@ -1,8 +1,6 @@
 import { SFC, SyntheticEvent, ReactNode } from 'react';
 
-type E = SyntheticEvent | Event;
-
-export interface RCPF<T extends E = E> {
+export interface RCPF<T extends SyntheticEvent | Event = SyntheticEvent> {
   (event?: T): void;
 }
 

@@ -14,7 +14,7 @@ const createEl = (id: string): HTMLDivElement => {
 export default (
   id: string,
   isShow: boolean,
-  hide: RCPF | false
+  hide: RCPF<MouseEvent> | false
 ): SFC<Props> => ({ children }: Props): ReactPortal => {
   const [container, setContainer] = useState(null);
 
