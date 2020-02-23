@@ -8,7 +8,7 @@ export interface Args {
   containerId?: string;
   onShow?: RCPF;
   onHide?: RCPF;
-  onClickOutside?: boolean;
+  clickOutsideToClose?: boolean;
 }
 
 export interface Return {

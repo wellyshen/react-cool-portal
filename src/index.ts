@@ -7,7 +7,7 @@ const usePortal = ({
   containerId = 'react-cool-portal',
   onShow,
   onHide,
-  onClickOutside = true
+  clickOutsideToClose = true
 }: Args = {}): Return => {
   const [isShow, setIsShow] = useState(true);
   const [skipClickOutside, setSkipClickOutside] = useState(false);
@@ -23,37 +23,41 @@ const usePortal = ({
     if (onHide) onHideRef.current = onHide;
   }, [onShow, onHide]);
 
+  const handleSkipClickOutside = useCallback(() => {
+    if (clickOutsideToClose && isShow) setSkipClickOutside(true);
+  }, [clickOutsideToClose, isShow]);
+
   const show: RCPF = useCallback(
     e => {
-      if (onClickOutside && isShow) setSkipClickOutside(true);
+      handleSkipClickOutside();
       if (isShow) return;
 
       setIsShow(true);
       if (onShow) onShowRef.current(e);
     },
-    [onClickOutside, isShow, onShow]
+    [handleSkipClickOutside, isShow, onShow]
   );
 
   const hide = useCallback(
     e => {
-      if (onClickOutside && isShow) setSkipClickOutside(true);
+      handleSkipClickOutside();
       if (!isShow) return;
 
       setIsShow(false);
       if (onHide) onHideRef.current(e);
     },
-    [onClickOutside, isShow, onHide]
+    [handleSkipClickOutside, isShow, onHide]
   );
 
   const toggle: RCPF = useCallback(
     e => {
-      if (onClickOutside && isShow) setSkipClickOutside(true);
+      handleSkipClickOutside();
 
       setIsShow(!isShow);
       if (onShow && !isShow) onShowRef.current(e);
       if (onHide && isShow) onHideRef.current(e);
     },
-    [onClickOutside, isShow, onShow, onHide]
+    [handleSkipClickOutside, isShow, onShow, onHide]
   );
 
   const Portal = useMemo(
@@ -61,9 +65,9 @@ const usePortal = ({
       createPortal(
         containerId,
         isShow,
-        onClickOutside && !skipClickOutside && isShow && hide
+        clickOutsideToClose && !skipClickOutside && isShow && hide
       ),
-    [containerId, isShow, onClickOutside, skipClickOutside, hide]
+    [containerId, isShow, clickOutsideToClose, skipClickOutside, hide]
   );
 
   return { isShow, show, hide, toggle, Portal };
