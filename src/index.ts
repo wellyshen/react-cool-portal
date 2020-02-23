@@ -10,8 +10,7 @@ import {
 
 import createPortal, { Props } from './createPortal';
 
-type E = SyntheticEvent | Event;
-interface RCPF<T extends E = E> {
+interface RCPF<T extends SyntheticEvent | Event = SyntheticEvent> {
   (event?: T): void;
 }
 interface Args {
