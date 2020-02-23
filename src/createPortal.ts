@@ -32,6 +32,8 @@ export default (
   }, [container]);
 
   useEffect(() => {
+    console.log('LOG ===> Portal rendered!');
+
     if (!hide || !container) return;
 
     const handler = (e: MouseEvent): void => {

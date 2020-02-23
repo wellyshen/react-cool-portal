@@ -10,8 +10,13 @@ const usePortal = ({
   onClickOutside = true
 }: Args = {}): Return => {
   const [isShow, setIsShow] = useState(true);
+  const [skipClickOutside, setSkipClickOutside] = useState(false);
   const onShowRef = useRef(null);
   const onHideRef = useRef(null);
+
+  useEffect(() => {
+    if (skipClickOutside) setSkipClickOutside(false);
+  }, [skipClickOutside]);
 
   useEffect(() => {
     if (onShow) onShowRef.current = onShow;
@@ -20,36 +25,45 @@ const usePortal = ({
 
   const show: RCPF = useCallback(
     e => {
+      if (onClickOutside && isShow) setSkipClickOutside(true);
       if (isShow) return;
 
       setIsShow(true);
       if (onShow) onShowRef.current(e);
     },
-    [isShow, onShow]
+    [onClickOutside, isShow, onShow]
   );
 
   const hide = useCallback(
     e => {
+      if (onClickOutside && isShow) setSkipClickOutside(true);
       if (!isShow) return;
 
       setIsShow(false);
       if (onHide) onHideRef.current(e);
     },
-    [isShow, onHide]
+    [onClickOutside, isShow, onHide]
   );
 
   const toggle: RCPF = useCallback(
     e => {
+      if (onClickOutside && isShow) setSkipClickOutside(true);
+
       setIsShow(!isShow);
       if (onShow && !isShow) onShowRef.current(e);
       if (onHide && isShow) onHideRef.current(e);
     },
-    [isShow, onShow, onHide]
+    [onClickOutside, isShow, onShow, onHide]
   );
 
   const Portal = useMemo(
-    () => createPortal(containerId, isShow, onClickOutside && hide),
-    [containerId, isShow, onClickOutside, hide]
+    () =>
+      createPortal(
+        containerId,
+        isShow,
+        onClickOutside && !skipClickOutside && isShow && hide
+      ),
+    [containerId, isShow, onClickOutside, skipClickOutside, hide]
   );
 
   return { isShow, show, hide, toggle, Portal };
