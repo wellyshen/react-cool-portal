@@ -10,18 +10,20 @@ import {
 
 import createPortal, { Props } from './createPortal';
 
-type Fn = (event?: SyntheticEvent) => void;
+interface RCPF<T extends SyntheticEvent | Event = SyntheticEvent> {
+  (event?: T): void;
+}
 interface Args {
   containerId?: string;
-  onShow?: Fn;
-  onHide?: Fn;
+  onShow?: RCPF;
+  onHide?: RCPF;
 }
 interface Return {
   Portal: SFC<Props>;
   isShow: boolean;
-  show: Fn;
-  hide: Fn;
-  toggle: Fn;
+  show: RCPF;
+  hide: RCPF;
+  toggle: RCPF;
 }
 
 const usePortal = ({
@@ -43,7 +45,7 @@ const usePortal = ({
     isShow
   ]);
 
-  const show: Fn = useCallback(
+  const show: RCPF = useCallback(
     e => {
       if (isShow) return;
 
@@ -53,7 +55,7 @@ const usePortal = ({
     [isShow, onShow]
   );
 
-  const hide: Fn = useCallback(
+  const hide: RCPF = useCallback(
     e => {
       if (!isShow) return;
 
@@ -63,7 +65,7 @@ const usePortal = ({
     [isShow, onHide]
   );
 
-  const toggle: Fn = useCallback(
+  const toggle: RCPF = useCallback(
     e => {
       setIsShow(!isShow);
       if (onShow && !isShow) onShowRef.current(e);
