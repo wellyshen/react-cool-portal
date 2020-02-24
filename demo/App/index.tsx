@@ -10,13 +10,13 @@ const App: SFC<{}> = () => {
   const { Portal, visible, setVisible } = usePortal({
     containerId: 'portal',
     onShow: e => {
-      console.log('onShow: ', e);
+      console.log('LOG ===> onShow: ', e);
     },
     onHide: e => {
-      console.log('onHide: ', e);
+      console.log('LOG ===> onHide: ', e);
     }
   });
-  console.log('Portal is show: ', visible);
+  console.log('LOG ===> visible: ', visible);
 
   return (
     <>
