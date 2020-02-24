@@ -15,7 +15,7 @@
 - [ ] CI/CD
 - [ ] Documentation
 
-## 💡 Idea
+## 💡 My Idea
 
 The following example shows you how to create your own modal component by `react-cool-portal`.
 
@@ -59,18 +59,14 @@ const App = () => {
       <Portal>
         {/* The "visible" can be used to control CSS transition, animation */}
         <div class={`modal ${visible ? 'fade-in' : 'fade-out'}`} role="dialog">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button class="close-button" onClick={handleClose}>
-                  Close Modal
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>Modal body text goes here.</p>
-              </div>
-            </div>
+          <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button class="close-button" onClick={handleClose}>
+              ✕
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Modal body text goes here.</p>
           </div>
         </div>
       </Portal>
