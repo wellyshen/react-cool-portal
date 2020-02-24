@@ -7,7 +7,7 @@ import usePortal from '../../src';
 import { root, container, title, subtitle } from './styles';
 
 const App: SFC<{}> = () => {
-  const { Portal, visible, setVisible } = usePortal({
+  const { Portal, isShow, show, hide, toggle } = usePortal({
     containerId: 'portal',
     onShow: e => {
       console.log('LOG ===> onShow: ', e);
@@ -16,7 +16,7 @@ const App: SFC<{}> = () => {
       console.log('LOG ===> onHide: ', e);
     }
   });
-  console.log('LOG ===> visible: ', visible);
+  console.log('LOG ===> isShow: ', isShow);
 
   return (
     <>
@@ -34,11 +34,14 @@ const App: SFC<{}> = () => {
             'React hook for Portals, which renders modals, dropdowns, tooltips etc. to <body> or else.'
           }
         </p>
-        <button onClick={e => setVisible(true, e)} type="button">
+        <button onClick={show} type="button">
           Show
         </button>
-        <button onClick={e => setVisible(false, e)} type="button">
+        <button onClick={hide} type="button">
           Hide
+        </button>
+        <button onClick={toggle} type="button">
+          Toggle
         </button>
         <Portal>
           <div

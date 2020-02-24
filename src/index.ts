@@ -8,38 +8,36 @@ import {
   useCallback
 } from 'react';
 
-import createPortal, { Portal } from './createPortal';
+import createPortal, { Portal as PortalType } from './createPortal';
 
-type E = SyntheticEvent | Event;
-interface EventCallback<T extends E = ReactMouseEvent> {
+interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
   (event?: T): void;
-}
-interface SetVisible<T extends E = ReactMouseEvent> {
-  (val: boolean, event?: T): void;
 }
 interface Args {
   containerId?: string;
-  defaultVisible?: boolean;
-  onShow?: EventCallback;
-  onHide?: EventCallback<ReactMouseEvent | MouseEvent | KeyboardEvent>;
-  clickOutsideToClose?: boolean;
-  escToClose?: boolean;
+  defaultIsShow?: boolean;
+  onShow?: RCPF;
+  onHide?: RCPF<ReactMouseEvent | MouseEvent | KeyboardEvent>;
+  clickOutsideToHide?: boolean;
+  escToHide?: boolean;
 }
 interface Return {
-  readonly Portal: Portal;
-  readonly visible: boolean;
-  readonly setVisible: SetVisible;
+  readonly Portal: PortalType;
+  readonly isShow: boolean;
+  readonly show: RCPF;
+  readonly hide: RCPF;
+  readonly toggle: RCPF;
 }
 
 const usePortal = ({
   containerId = 'react-cool-portal',
-  defaultVisible = true,
+  defaultIsShow = false,
   onShow,
   onHide,
-  clickOutsideToClose = true,
-  escToClose = true
+  clickOutsideToHide = true,
+  escToHide = true
 }: Args = {}): Return => {
-  const [visible, updateVisible] = useState(defaultVisible);
+  const [isShow, setIsShow] = useState(!defaultIsShow);
   const onShowRef = useRef(null);
   const onHideRef = useRef(null);
   const skipClickOutsideRef = useRef(false);
@@ -50,46 +48,69 @@ const usePortal = ({
   }, [onShow, onHide]);
 
   const setSkipClickOutside = useCallback((): void => {
+    if (!clickOutsideToHide || !isShow) return;
+
     skipClickOutsideRef.current = true;
     const timer = setTimeout(() => {
       clearTimeout(timer);
       skipClickOutsideRef.current = false;
     }, 100);
-  }, []);
+  }, [clickOutsideToHide, isShow]);
 
-  const handleClose = useCallback(
+  const show = useCallback(
     e => {
-      if (skipClickOutsideRef.current) return;
+      setSkipClickOutside();
 
-      updateVisible(false);
-      if (onHide) onHideRef.current(e);
+      if (isShow) return;
+
+      setIsShow(true);
+      if (onShow) onShow(e);
     },
-    [onHide]
+    [setSkipClickOutside, isShow, onShow]
   );
 
-  return {
-    visible,
-    setVisible: useCallback(
-      (val, e) => {
-        if (clickOutsideToClose && visible) setSkipClickOutside();
+  const hide = useCallback(
+    e => {
+      setSkipClickOutside();
 
-        updateVisible(val);
-        if (onShow && !visible && val) onShowRef.current(e);
-        if (onHide && visible && !val) onHideRef.current(e);
-      },
-      [clickOutsideToClose, visible, setSkipClickOutside, onShow, onHide]
-    ),
-    Portal: useMemo(
-      () =>
-        createPortal(
-          containerId,
-          visible,
-          clickOutsideToClose && handleClose,
-          escToClose && handleClose
-        ),
-      [containerId, visible, clickOutsideToClose, escToClose, handleClose]
-    )
-  };
+      if (!isShow) return;
+
+      setIsShow(false);
+      if (onHide) onHide(e);
+    },
+    [setSkipClickOutside, isShow, onHide]
+  );
+
+  const toggle = useCallback(
+    e => {
+      setSkipClickOutside();
+
+      setIsShow(!isShow);
+      if (onShow && !isShow) onShow(e);
+      if (onHide && isShow) onHide(e);
+    },
+    [setSkipClickOutside, isShow, onShow, onHide]
+  );
+
+  const handleHide = useCallback(
+    e => {
+      if (!skipClickOutsideRef.current) hide(e);
+    },
+    [hide]
+  );
+
+  const Portal = useMemo(
+    () =>
+      createPortal(
+        containerId,
+        isShow,
+        clickOutsideToHide && handleHide,
+        escToHide && handleHide
+      ),
+    [containerId, isShow, clickOutsideToHide, escToHide, handleHide]
+  );
+
+  return { isShow, show, hide, toggle, Portal };
 };
 
 export default usePortal;

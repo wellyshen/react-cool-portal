@@ -6,40 +6,36 @@ declare module 'react-cool-portal' {
     ReactNode
   } from 'react';
 
-  type E = SyntheticEvent | Event;
-
-  export interface EventCallback<T extends E = ReactMouseEvent> {
+  export interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
     (event?: T): void;
-  }
-
-  export interface SetVisible<T extends E = ReactMouseEvent> {
-    (val: boolean, event?: T): void;
   }
 
   type Portal = SFC<{ children: ReactNode }>;
 
   interface Args {
     containerId?: string;
-    defaultVisible?: boolean;
-    onShow?: EventCallback;
-    onHide?: EventCallback<ReactMouseEvent | MouseEvent | KeyboardEvent>;
-    clickOutsideToClose?: boolean;
-    escToClose?: boolean;
+    defaultIsShow?: boolean;
+    onShow?: RCPF;
+    onHide?: RCPF<ReactMouseEvent | MouseEvent | KeyboardEvent>;
+    clickOutsideToHide?: boolean;
+    escToHide?: boolean;
   }
 
   interface Return {
     readonly Portal: Portal;
-    readonly visible: boolean;
-    readonly setVisible: SetVisible;
+    readonly isShow: boolean;
+    readonly show: RCPF;
+    readonly hide: RCPF;
+    readonly toggle: RCPF;
   }
 
   const usePortal: ({
     containerId,
-    defaultVisible,
+    defaultIsShow,
     onShow,
     onHide,
-    clickOutsideToClose,
-    escToClose
+    clickOutsideToHide,
+    escToHide
   }?: Args) => Return;
 
   export default usePortal;

@@ -6,7 +6,7 @@
 - [x] Renders element to the portal container
 - [x] Control the visible of a portal
 - [x] Visible event callbacks
-- [x] Support clickOutsideToClose and escToClose
+- [x] Support clickOutsideToHide and escToHide
 - [ ] Server-side rendering compatibility
 - [ ] Unit testing
 - [ ] Demo app
@@ -24,46 +24,31 @@ import React from 'react';
 import usePortal from 'react-cool-portal';
 
 const App = () => {
-  const { Portal, visible, setVisible } = usePortal({
+  const { Portal, isShow, show, hide, toggle } = usePortal({
     containerId: 'my-portal-root', // Use your own portal container. If no set, we'll create it for you.
-    defaultVisible: false, // Default is true.
-    clickOutsideToClose: false, // Default is true.
-    escToClose: false, // Default is true.
+    defaultIsShow: false, // Default is true.
+    clickOutsideToHide: true, // Default is true.
+    escToHide: true, // Default is true.
     onShow: e => {
       // Triggered on show portal.
-      // The event object will be: your passed event, MouseEvent, KeyboardEvent.
+      // The event object will be: MouseEvent, KeyboardEvent, Your custom event.
     },
     onHide: e => {
       // Triggered on show portal.
-      // The event object will be: your passed event, MouseEvent, KeyboardEvent.
+      // The event object will be: MouseEvent, KeyboardEvent, Your custom event.
     }
   });
 
-  const handleOpen = e => {
-    // Show the children of <Portal />.
-    // You don't have to set the event parameter, unless you want to access it via onShow(e).
-    setVisible(true, e);
-  };
-
-  const handleClose = e => {
-    // Hide the children of <Portal />.
-    // You don't have to set the event parameter, unless you want to access it via onHide(e).
-    setVisible(false, e);
-  };
-
   return (
     <div>
-      <button class="open-button" onClick={handleOpen}>
-        Open Modal
-      </button>
+      <button onClick={show}>Open Modal</button>
+      <button onClick={hide}>Close Modal</button>
+      <button onClick={toggle}>Toggle Modal</button>
       <Portal>
         {/* The "visible" can be used to control CSS transition, animation */}
         <div class={`modal ${visible ? 'fade-in' : 'fade-out'}`} role="dialog">
           <div class="modal-header">
             <h5 class="modal-title">Modal title</h5>
-            <button class="close-button" onClick={handleClose}>
-              ✕
-            </button>
           </div>
           <div class="modal-body">
             <p>Modal body text goes here.</p>
