@@ -31,13 +31,13 @@ interface Return {
 
 const usePortal = ({
   containerId = 'react-cool-portal',
-  defaultIsShow = false,
+  defaultIsShow = true,
   onShow,
   onHide,
   clickOutsideToHide = true,
   escToHide = true
 }: Args = {}): Return => {
-  const [isShow, setIsShow] = useState(!defaultIsShow);
+  const [isShow, setIsShow] = useState(defaultIsShow);
   const onShowRef = useRef(null);
   const onHideRef = useRef(null);
   const skipClickOutsideRef = useRef(false);
