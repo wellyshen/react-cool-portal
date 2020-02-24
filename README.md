@@ -6,7 +6,7 @@
 - [x] Renders element to the portal container
 - [x] Control the visible of a portal
 - [x] Visible event callbacks
-- [x] support clickOutsideToClose and escToClose
+- [x] Support clickOutsideToClose and escToClose
 - [ ] Server-side rendering compatibility
 - [ ] Unit testing
 - [ ] Demo app
