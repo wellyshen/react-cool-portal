@@ -69,7 +69,7 @@ const plugins = [
     copy({
       targets: [
         {
-          src: 'src/types/react-cool-portal.d.ts',
+          src: 'src/react-cool-portal.d.ts',
           dest: pkg.types.split('/')[0],
           rename: 'index.d.ts'
         }

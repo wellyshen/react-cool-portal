@@ -1,7 +1,10 @@
-import { SFC, ReactPortal, useState, useEffect } from 'react';
+import { ReactNode, SFC, ReactPortal, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import { RCPF, Props } from './types';
+interface Props {
+  children: ReactNode;
+}
+export type Portal = SFC<Props>;
 
 const createEl = (id: string): HTMLDivElement => {
   const el = document.createElement('div');
@@ -13,9 +16,9 @@ const createEl = (id: string): HTMLDivElement => {
 
 export default (
   id: string,
-  isShow: boolean,
-  cb: RCPF<MouseEvent> | false
-): SFC<Props> => ({ children }: Props): ReactPortal => {
+  visible: boolean,
+  cb: (e: MouseEvent) => void | false
+): Portal => ({ children }: Props): ReactPortal => {
   const [container, setContainer] = useState(null);
 
   useEffect(() => {
@@ -32,7 +35,7 @@ export default (
   }, [container]);
 
   useEffect(() => {
-    if (!cb || !isShow || !container) return;
+    if (!cb || !visible || !container) return;
 
     const handler = (e: MouseEvent): void => {
       if (!container.contains(e.target)) cb(e);
@@ -46,5 +49,5 @@ export default (
     };
   }, [container]);
 
-  return isShow && container && createPortal(children, container);
+  return visible && container && createPortal(children, container);
 };
