@@ -2,11 +2,11 @@
 
 🚧 This library is in-progress. Milestone as below:
 
-- [x] Auto creating the container of a portal
+- [x] Auto creating the container of the portal
 - [x] Renders element to the portal container
-- [x] Control the visible of a portal
-- [x] Visible event callbacks
-- [x] Support clickOutsideToHide and escToHide
+- [x] Show/hide/toggle the portal
+- [x] onShow/onHide event callbacks
+- [x] Support clickOutsideToHide and escToHide interactions
 - [ ] Server-side rendering compatibility
 - [ ] Unit testing
 - [ ] Demo app
@@ -45,8 +45,8 @@ const App = () => {
       <button onClick={hide}>Close Modal</button>
       <button onClick={toggle}>Toggle Modal</button>
       <Portal>
-        {/* The "visible" can be used to control CSS transition, animation */}
-        <div class={`modal ${visible ? 'fade-in' : 'fade-out'}`} role="dialog">
+        {/* The "isShow" can be used to control CSS transition, animation */}
+        <div class={`modal ${isShow ? 'fade-in' : 'fade-out'}`} role="dialog">
           <div class="modal-header">
             <h5 class="modal-title">Modal title</h5>
           </div>
