@@ -14,7 +14,7 @@ const createEl = (id: string): HTMLDivElement => {
 export default (
   id: string,
   isShow: boolean,
-  hide: RCPF<MouseEvent> | false
+  cb: RCPF<MouseEvent> | false
 ): SFC<Props> => ({ children }: Props): ReactPortal => {
   const [container, setContainer] = useState(null);
 
@@ -32,12 +32,10 @@ export default (
   }, [container]);
 
   useEffect(() => {
-    console.log('LOG ===> Portal rendered!');
-
-    if (!hide || !container) return;
+    if (!cb || !isShow || !container) return;
 
     const handler = (e: MouseEvent): void => {
-      if (!container.contains(e.target)) hide(e);
+      if (!container.contains(e.target)) cb(e);
     };
 
     document.addEventListener('click', handler);
