@@ -41,13 +41,13 @@ const App = () => {
 
   const handleOpen = e => {
     // Show the children of <Portal />.
-    // You don't have to set the event parameter, unless you want to access it via onShow().
+    // You don't have to set the event parameter, unless you want to access it via onShow(e).
     setVisible(true, e);
   };
 
   const handleClose = e => {
     // Hide the children of <Portal />.
-    // You don't have to set the event parameter, unless you want to access it via onHide().
+    // You don't have to set the event parameter, unless you want to access it via onHide(e).
     setVisible(false, e);
   };
 
