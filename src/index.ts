@@ -1,4 +1,5 @@
 import {
+  MouseEvent as ReactMouseEvent,
   SyntheticEvent,
   useState,
   useRef,
@@ -9,17 +10,28 @@ import {
 
 import createPortal, { Portal } from './createPortal';
 
-interface EventCallback<T extends SyntheticEvent | Event = SyntheticEvent> {
+type E = ReactMouseEvent | SyntheticEvent | Event;
+interface OnShow<T extends E = ReactMouseEvent> {
   (event?: T): void;
 }
-interface SetVisible<T extends SyntheticEvent | Event = SyntheticEvent> {
+interface OnHide<
+  T extends E | MouseEvent | KeyboardEvent =
+    | ReactMouseEvent
+    | MouseEvent
+    | KeyboardEvent
+> {
+  (event?: T): void;
+}
+interface SetVisible<T extends E = ReactMouseEvent> {
   (val: boolean, event?: T): void;
 }
 interface Args {
   containerId?: string;
-  onShow?: EventCallback;
-  onHide?: EventCallback;
+  defaultVisible?: boolean;
+  onShow?: OnShow;
+  onHide?: OnHide;
   clickOutsideToClose?: boolean;
+  escToClose?: boolean;
 }
 interface Return {
   Portal: Portal;
@@ -29,11 +41,13 @@ interface Return {
 
 const usePortal = ({
   containerId = 'react-cool-portal',
+  defaultVisible = true,
   onShow,
   onHide,
-  clickOutsideToClose = true
+  clickOutsideToClose = true,
+  escToClose = true
 }: Args = {}): Return => {
-  const [visible, updateVisible] = useState(true);
+  const [visible, updateVisible] = useState(defaultVisible);
   const onShowRef = useRef(null);
   const onHideRef = useRef(null);
   const skipClickOutsideRef = useRef(false);
@@ -51,7 +65,7 @@ const usePortal = ({
     }, 100);
   }, []);
 
-  const handleClickOutside = useCallback(
+  const handleClose = useCallback(
     e => {
       if (skipClickOutsideRef.current) return;
 
@@ -68,8 +82,8 @@ const usePortal = ({
         if (clickOutsideToClose && visible) setSkipClickOutside();
 
         updateVisible(val);
-        if (onShow && !val) onShowRef.current(e);
-        if (onHide && val) onHideRef.current(e);
+        if (onShow && !visible && val) onShowRef.current(e);
+        if (onHide && visible && !val) onHideRef.current(e);
       },
       [clickOutsideToClose, visible, setSkipClickOutside, onShow, onHide]
     ),
@@ -78,11 +92,10 @@ const usePortal = ({
         createPortal(
           containerId,
           visible,
-          clickOutsideToClose &&
-            !skipClickOutsideRef.current &&
-            handleClickOutside
+          clickOutsideToClose && handleClose,
+          escToClose && handleClose
         ),
-      [containerId, visible, clickOutsideToClose, handleClickOutside]
+      [containerId, visible, clickOutsideToClose, escToClose, handleClose]
     )
   };
 };

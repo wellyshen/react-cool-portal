@@ -4,6 +4,9 @@ import { createPortal } from 'react-dom';
 interface Props {
   children: ReactNode;
 }
+interface Callback<T extends MouseEvent | KeyboardEvent> {
+  (event: T): void | false;
+}
 export type Portal = SFC<Props>;
 
 const createEl = (id: string): HTMLDivElement => {
@@ -17,7 +20,8 @@ const createEl = (id: string): HTMLDivElement => {
 export default (
   id: string,
   visible: boolean,
-  cb: (e: MouseEvent) => void | false
+  clickOutsideCb: Callback<MouseEvent>,
+  escCb: Callback<KeyboardEvent>
 ): Portal => ({ children }: Props): ReactPortal => {
   const [container, setContainer] = useState(null);
 
@@ -35,17 +39,22 @@ export default (
   }, [container]);
 
   useEffect(() => {
-    if (!cb || !visible || !container) return;
+    if (!(clickOutsideCb && escCb) || !visible || !container) return;
 
-    const handler = (e: MouseEvent): void => {
-      if (!container.contains(e.target)) cb(e);
+    const handleClick = (e: MouseEvent): void => {
+      if (!container.contains(e.target)) clickOutsideCb(e);
+    };
+    const handleKeyDown = (e: KeyboardEvent): void => {
+      if (e.keyCode === 27) escCb(e);
     };
 
-    document.addEventListener('click', handler);
+    if (clickOutsideCb) document.addEventListener('click', handleClick);
+    if (escCb) document.addEventListener('keydown', handleKeyDown);
 
     // eslint-disable-next-line consistent-return
     return (): void => {
-      document.removeEventListener('click', handler);
+      if (clickOutsideCb) document.removeEventListener('click', handleClick);
+      if (escCb) document.removeEventListener('keydown', handleKeyDown);
     };
   }, [container]);
 
