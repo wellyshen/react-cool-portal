@@ -1,11 +1,11 @@
 import { ReactNode, SFC, ReactPortal, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-interface Props {
-  children: ReactNode;
-}
 interface Callback<T extends MouseEvent | KeyboardEvent> {
   (event: T): void | false;
+}
+interface Props {
+  children: ReactNode;
 }
 export type Portal = SFC<Props>;
 

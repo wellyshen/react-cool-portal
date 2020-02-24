@@ -11,7 +11,7 @@
 - [ ] Unit testing
 - [ ] Demo app
 - [ ] Demo code
-- [ ] Typescript type definition
+- [x] Typescript type definition
 - [ ] CI/CD
 - [ ] Documentation
 

@@ -1,6 +1,6 @@
 import {
-  MouseEvent as ReactMouseEvent,
   SyntheticEvent,
+  MouseEvent as ReactMouseEvent,
   useState,
   useRef,
   useEffect,
@@ -10,16 +10,8 @@ import {
 
 import createPortal, { Portal } from './createPortal';
 
-type E = ReactMouseEvent | SyntheticEvent | Event;
-interface OnShow<T extends E = ReactMouseEvent> {
-  (event?: T): void;
-}
-interface OnHide<
-  T extends E | MouseEvent | KeyboardEvent =
-    | ReactMouseEvent
-    | MouseEvent
-    | KeyboardEvent
-> {
+type E = SyntheticEvent | Event;
+interface EventCallback<T extends E = ReactMouseEvent> {
   (event?: T): void;
 }
 interface SetVisible<T extends E = ReactMouseEvent> {
@@ -28,15 +20,15 @@ interface SetVisible<T extends E = ReactMouseEvent> {
 interface Args {
   containerId?: string;
   defaultVisible?: boolean;
-  onShow?: OnShow;
-  onHide?: OnHide;
+  onShow?: EventCallback;
+  onHide?: EventCallback<ReactMouseEvent | MouseEvent | KeyboardEvent>;
   clickOutsideToClose?: boolean;
   escToClose?: boolean;
 }
 interface Return {
-  Portal: Portal;
-  visible: boolean;
-  setVisible: SetVisible;
+  readonly Portal: Portal;
+  readonly visible: boolean;
+  readonly setVisible: SetVisible;
 }
 
 const usePortal = ({
