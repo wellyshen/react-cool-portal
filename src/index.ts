@@ -44,8 +44,11 @@ const usePortal = ({
 
   useEffect(() => {
     if (onShow) onShowRef.current = onShow;
+  }, [onShow]);
+
+  useEffect(() => {
     if (onHide) onHideRef.current = onHide;
-  }, [onShow, onHide]);
+  }, [onHide]);
 
   const setSkipClickOutside = useCallback((): void => {
     if (!clickOutsideToHide || !isShow) return;
