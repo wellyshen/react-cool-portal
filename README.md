@@ -26,7 +26,7 @@ import usePortal from 'react-cool-portal';
 const App = () => {
   const { Portal, isShow, show, hide, toggle } = usePortal({
     containerId: 'my-portal-root', // Use your own portal container. If no set, we'll create it for you.
-    defaultIsShow: false, // Default is true.
+    defaultShow: false, // Default is true.
     clickOutsideToHide: true, // Default is true.
     escToHide: true, // Default is true.
     onShow: e => {
