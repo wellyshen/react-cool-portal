@@ -1,5 +1,7 @@
 # React Cool Portal
 
+This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) for [Portals](https://reactjs.org/docs/portals.html). It helps you handle modals, dropdowns, tooltips etc. without struggle. Hope you guys 👍🏻 it.
+
 [![build status](https://img.shields.io/travis/wellyshen/react-cool-portal/master?style=flat-square)](https://travis-ci.org/wellyshen/react-cool-portal)
 
 <!-- [![coverage status](https://img.shields.io/coveralls/github/wellyshen/react-cool-portal?style=flat-square)](https://coveralls.io/github/wellyshen/react-cool-portal?branch=master) -->
@@ -13,7 +15,11 @@
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](https://github.com/wellyshen/react-cool-portal/blob/master/CONTRIBUTING.md)
 [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Freact-cool-portal)](https://twitter.com/intent/tweet?text=With%20@react-cool-portal,%20I%20can%20build%20modals,%20dropdowns,%20tooltips%20etc.%20without%20struggle!%20Thanks,%20@Welly%20Shen%20🤩)
 
-🚧 This library is in-progress. Milestone as below:
+![portal](https://user-images.githubusercontent.com/21308003/75577457-f6c93180-5a9c-11ea-94a7-6718bcf92fbf.gif)
+
+⚡️ Try yourself: https://react-cool-portal.netlify.com
+
+## 🚧 This library is in-progress. Milestone as below:
 
 - [x] Auto creating/removing the container of the portal
 - [x] Renders element to the portal container
