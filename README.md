@@ -22,7 +22,7 @@
 - [x] Support clickOutsideToHide and escToHide interactions
 - [ ] Server-side rendering compatibility
 - [ ] Unit testing
-- [ ] Demo app
+- [x] Demo app
 - [ ] Demo code
 - [x] Typescript type definition
 - [x] CI/CD
