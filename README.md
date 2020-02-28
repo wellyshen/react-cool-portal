@@ -25,7 +25,7 @@
 - [ ] Demo app
 - [ ] Demo code
 - [x] Typescript type definition
-- [ ] CI/CD
+- [x] CI/CD
 - [ ] Documentation
 
 ## 💡 My Idea
