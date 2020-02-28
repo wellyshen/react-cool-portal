@@ -15,7 +15,7 @@
 
 🚧 This library is in-progress. Milestone as below:
 
-- [x] Auto creating the container of the portal
+- [x] Auto creating/removing the container of the portal
 - [x] Renders element to the portal container
 - [x] Show/hide/toggle the portal
 - [x] onShow/onHide event callbacks
