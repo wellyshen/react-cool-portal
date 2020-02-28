@@ -15,7 +15,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](https://github.com/wellyshen/react-cool-portal/blob/master/CONTRIBUTING.md)
 [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Freact-cool-portal)](https://twitter.com/intent/tweet?text=With%20@react-cool-portal,%20I%20can%20build%20modals,%20dropdowns,%20tooltips%20etc.%20without%20struggle!%20Thanks,%20@Welly%20Shen%20🤩)
 
-![portal](https://user-images.githubusercontent.com/21308003/75577457-f6c93180-5a9c-11ea-94a7-6718bcf92fbf.gif)
+![portal](https://user-images.githubusercontent.com/21308003/75579375-9e942e80-5aa0-11ea-9e66-7b7bd5c0518d.gif)
 
 ⚡️ Try yourself: https://react-cool-portal.netlify.com
 
