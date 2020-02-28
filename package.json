@@ -1,6 +1,6 @@
 {
   "name": "react-cool-portal",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "React hook for Portals, which renders modals, dropdowns, tooltips etc. to <body> or else.",
   "license": "MIT",
   "homepage": "https://react-cool-portal.netlify.com",
@@ -18,6 +18,8 @@
     "dropdown",
     "tooltip",
     "popover",
+    "loading-bar",
+    "status-bar",
     "typescript"
   ],
   "author": "Welly Shen <hivoid19@gmail.com> (https://github.com/wellyshen)",
