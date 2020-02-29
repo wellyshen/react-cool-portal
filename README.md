@@ -1,3 +1,5 @@
+> ⚠️ This library is in-progress, API might changed rapidly. I don't recommend to use it now. If you'd like to give it a try, please follow the [release note](https://github.com/wellyshen/react-cool-portal/releases) for any change. Here's the [milestone](#milestone).
+
 # React Cool Portal
 
 This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) for [Portals](https://reactjs.org/docs/portals.html). It helps you render an element outside of its component hierarchy. From now on you will never need to struggle with modals, dropdowns, tooltips etc. Hope you guys 👍🏻 it.
@@ -16,13 +18,14 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 
 ⚡️ Try yourself: https://react-cool-portal.netlify.com
 
-## 🚧 This library is in-progress. Milestone as below:
+## Milestone
 
 - [x] Auto creating/removing the container of the portal
 - [x] Renders element to the portal container
 - [x] Show/hide/toggle the portal
 - [x] onShow/onHide event callbacks
 - [x] Support clickOutsideToHide and escToHide interactions
+- [ ] Delay hide portal for animation (maybe...)
 - [ ] Server-side rendering compatibility
 - [ ] Unit testing
 - [x] Demo app
