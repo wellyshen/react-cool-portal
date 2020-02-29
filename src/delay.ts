@@ -1,4 +1,4 @@
-export default (cb: Function, delay = 100): void => {
+export default (cb: () => void, delay = 100): void => {
   const timer = setTimeout(() => {
     clearTimeout(timer);
     cb();
