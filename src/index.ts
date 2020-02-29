@@ -8,6 +8,7 @@ import {
   useCallback
 } from 'react';
 
+import delay from './delay';
 import createPortal, { Portal as PortalType } from './createPortal';
 
 interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
@@ -54,10 +55,9 @@ const usePortal = ({
     if (!clickOutsideToHide || !isShow) return;
 
     skipClickOutsideRef.current = true;
-    const timer = setTimeout(() => {
-      clearTimeout(timer);
+    delay(() => {
       skipClickOutsideRef.current = false;
-    }, 100);
+    });
   }, [clickOutsideToHide, isShow]);
 
   const show = useCallback(

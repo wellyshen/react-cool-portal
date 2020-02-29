@@ -1,6 +1,8 @@
 import { ReactNode, SFC, ReactPortal, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
+import delay from './delay';
+
 interface Callback<T extends MouseEvent | KeyboardEvent> {
   (event: T): void | false;
 }
@@ -31,10 +33,9 @@ export default (
     return (): void => {
       if (!container) return;
 
-      const timer = setTimeout(() => {
-        clearTimeout(timer);
+      delay(() => {
         if (container.innerHTML === '') container.remove();
-      }, 100);
+      });
     };
   }, [container]);
 
