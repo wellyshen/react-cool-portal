@@ -87,7 +87,7 @@ export const tipHeader = css`
     font-weight: 700;
     text-shadow: 0 1px 0 #fff;
     color: #000;
-    background: transparent;
+    background: none;
     opacity: 0.5;
     cursor: pointer;
     user-select: none;
