@@ -21,7 +21,7 @@ const createEl = (id: string): HTMLDivElement => {
 
 export default (
   id: string,
-  isShow: boolean,
+  showPortal: boolean,
   clickOutsideCb: Callback<MouseEvent>,
   escCb: Callback<KeyboardEvent>
 ): Portal => ({ children }: Props): ReactPortal => {
@@ -40,7 +40,7 @@ export default (
   }, [container]);
 
   useEffect(() => {
-    if (!(clickOutsideCb && escCb) || !isShow || !container) return;
+    if (!(clickOutsideCb && escCb) || !showPortal || !container) return;
 
     const handleClick = (e: MouseEvent): void => {
       if (!container.contains(e.target)) clickOutsideCb(e);
@@ -59,5 +59,5 @@ export default (
     };
   }, [container]);
 
-  return isShow && container && createPortal(children, container);
+  return showPortal && container && createPortal(children, container);
 };
