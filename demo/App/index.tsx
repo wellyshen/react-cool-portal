@@ -16,12 +16,7 @@ import {
 } from './styles';
 
 const App: SFC<{}> = () => {
-  const { isShow, Portal, show, hide } = usePortal({
-    defaultShow: false,
-    delayToHide: 0
-  });
-
-  console.log('LOG ===> ', isShow);
+  const { Portal, show, hide } = usePortal({ defaultShow: false });
 
   return (
     <>
