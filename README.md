@@ -48,6 +48,7 @@ const App = () => {
     defaultShow: false, // Default is true.
     clickOutsideToHide: true, // Default is true.
     escToHide: true, // Default is true.
+    delayToHide: 500 // Waiting for CSS animation finished. Unit is millisecond, default is 0.
     onShow: e => {
       // Triggered on show portal.
       // The event object will be: MouseEvent, KeyboardEvent, Your custom event.
