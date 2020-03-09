@@ -54,7 +54,7 @@ const App = () => {
       // The event object will be: MouseEvent, KeyboardEvent, Your custom event.
     },
     onHide: e => {
-      // Triggered on show portal.
+      // Triggered on hide portal.
       // The event object will be: MouseEvent, KeyboardEvent, Your custom event.
     }
   });
