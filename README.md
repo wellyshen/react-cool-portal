@@ -25,7 +25,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - [x] Show/hide/toggle the portal
 - [x] onShow/onHide event callbacks
 - [x] Support clickOutsideToHide and escToHide interactions
-- [ ] Delay hide portal for animation (maybe...)
+- [x] Delay hide portal for animation
 - [ ] Server-side rendering compatibility
 - [ ] Unit testing
 - [x] Demo app
