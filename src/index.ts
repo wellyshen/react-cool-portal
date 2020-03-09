@@ -11,8 +11,6 @@ import {
 import delay from './delay';
 import createPortal, { Portal as PortalType } from './createPortal';
 
-let isHidingPortal = false;
-
 interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
   (event?: T): void;
 }
@@ -44,6 +42,7 @@ const usePortal = ({
 }: Args = {}): Return => {
   const [isShow, setIsShow] = useState(defaultShow);
   const [showPortal, setShowPortal] = useState(defaultShow);
+  const waitingForHidingRef = useRef(false);
   const skipClickOutsideRef = useRef(false);
   const onShowRef = useRef(null);
   const onHideRef = useRef(null);
@@ -72,9 +71,9 @@ const usePortal = ({
         return;
       }
 
-      isHidingPortal = true;
+      waitingForHidingRef.current = true;
       delay(() => {
-        isHidingPortal = false;
+        waitingForHidingRef.current = false;
         setShowPortal(false);
       }, delayToHide);
     },
@@ -83,7 +82,7 @@ const usePortal = ({
 
   const show = useCallback(
     e => {
-      if (isHidingPortal) return;
+      if (waitingForHidingRef.current) return;
 
       setSkipClickOutside();
 
@@ -98,7 +97,7 @@ const usePortal = ({
 
   const hide = useCallback(
     e => {
-      if (isHidingPortal) return;
+      if (waitingForHidingRef.current) return;
 
       setSkipClickOutside();
 
@@ -113,7 +112,7 @@ const usePortal = ({
 
   const toggle = useCallback(
     e => {
-      if (isHidingPortal) return;
+      if (waitingForHidingRef.current) return;
 
       setSkipClickOutside();
 
