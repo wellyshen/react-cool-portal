@@ -18,7 +18,7 @@ import {
 const App: SFC<{}> = () => {
   const { isShow, Portal, show, hide } = usePortal({
     defaultShow: false,
-    delayToHide: 3000
+    delayToHide: 0
   });
 
   console.log('LOG ===> ', isShow);
