@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css, keyframes } from '@emotion/core';
 
 import mq from '../utils/mq';
 
@@ -56,6 +56,15 @@ export const btn = css`
   }
 `;
 
+const fade = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
 export const tip = css`
   position: absolute;
   top: 14rem;
@@ -67,6 +76,11 @@ export const tip = css`
   color: #212529;
   background: #fff;
   transform: translate(-50%);
+  animation: ${fade} 0.3s;
+`;
+
+export const tipFadeOut = css`
+  animation-direction: reverse;
 `;
 
 export const tipHeader = css`

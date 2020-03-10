@@ -10,13 +10,17 @@ import {
   title,
   btn,
   tip,
+  tipFadeOut,
   tipHeader,
   tipBody,
   arrow
 } from './styles';
 
 const App: SFC<{}> = () => {
-  const { Portal, show, hide } = usePortal({ defaultShow: false });
+  const { Portal, isShow, show, hide } = usePortal({
+    defaultShow: false,
+    delayToHide: 300
+  });
 
   return (
     <>
@@ -38,7 +42,7 @@ const App: SFC<{}> = () => {
           Show Tooltip
         </button>
         <Portal>
-          <div css={tip}>
+          <div css={[tip, !isShow && tipFadeOut]}>
             <div css={tipHeader}>
               {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
               <h3>👋🏻 Hola</h3>
