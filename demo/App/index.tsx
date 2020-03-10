@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { SFC, MouseEvent } from 'react';
 import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
@@ -8,12 +8,17 @@ import {
   root,
   container,
   title,
+  subtitle,
   btn,
-  tip,
-  tipFadeOut,
-  tipHeader,
-  tipBody,
-  arrow
+  modal,
+  modalFadeOut,
+  modalDialog,
+  modalDialogSlideOut,
+  modalContent,
+  modalHeader,
+  modalTitle,
+  modalClose,
+  modalBody
 } from './styles';
 
 const App: SFC<{}> = () => {
@@ -21,6 +26,10 @@ const App: SFC<{}> = () => {
     defaultShow: false,
     delayToHide: 300
   });
+
+  const handleClickModalContent = (e: MouseEvent): void => {
+    e.stopPropagation();
+  };
 
   return (
     <>
@@ -33,27 +42,52 @@ const App: SFC<{}> = () => {
       <div css={container}>
         <GitHubCorner url="https://github.com/wellyshen/react-cool-portal" />
         <h1 css={title}>React Cool Portal</h1>
-        <p>
+        <p css={subtitle}>
           {
             'React hook for Portals, which renders modals, dropdowns, tooltips etc. to <body> or else.'
           }
         </p>
         <button css={btn} onClick={show} type="button">
-          Show Tooltip
+          Open Modal
         </button>
         <Portal>
-          <div css={[tip, !isShow && tipFadeOut]}>
-            <div css={tipHeader}>
-              {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
-              <h3>👋🏻 Hola</h3>
-              <button onClick={hide} type="button">
-                ×
-              </button>
+          <div
+            css={[modal, !isShow && modalFadeOut]}
+            onClick={hide}
+            tabIndex={-1}
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div
+              css={[modalDialog, !isShow && modalDialogSlideOut]}
+              role="document"
+            >
+              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+              <div css={modalContent} onClick={handleClickModalContent}>
+                <div css={modalHeader}>
+                  <h5 css={modalTitle} id="exampleModalLabel">
+                    <span role="img" aria-label="Hello">
+                      👋🏻
+                    </span>{' '}
+                    Hola
+                  </h5>
+                  <button
+                    css={modalClose}
+                    onClick={hide}
+                    type="button"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div css={modalBody}>
+                  <p>
+                    You can also close me by pressing the &quot;ESC&quot; key.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div css={tipBody}>
-              You can also close me by clicking outside of the portal.
-            </div>
-            <div css={arrow} />
           </div>
         </Portal>
       </div>

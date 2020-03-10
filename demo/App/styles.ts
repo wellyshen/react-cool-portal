@@ -31,9 +31,11 @@ export const title = css`
   margin: 0 0 0.75rem;
 `;
 
+export const subtitle = css`
+  margin: 0 0 2.5rem;
+`;
+
 export const btn = css`
-  position: absolute;
-  top: 21.6rem;
   padding: 0.375rem 0.75rem;
   border: 1px solid transparent;
   border-color: #6c757d;
@@ -41,7 +43,6 @@ export const btn = css`
   line-height: 1.5;
   color: #fff;
   background: #6c757d;
-  transform: translate(-50%);
   cursor: pointer;
   user-select: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
@@ -57,87 +58,95 @@ export const btn = css`
 `;
 
 const fade = keyframes`
-  from {
+  0% {
     opacity: 0;
   }
-  to {
+  50% {
     opacity: 1;
   }
 `;
 
-export const tip = css`
-  position: absolute;
-  top: 14rem;
-  left: 50%;
-  width: 90%;
-  max-width: 300px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 0.3rem;
-  color: #212529;
-  background: #fff;
-  transform: translate(-50%);
-  animation: ${fade} 0.3s;
+export const modal = css`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  animation: ${fade} 0.3s linear;
 `;
 
-export const tipFadeOut = css`
+export const modalFadeOut = css`
   animation-direction: reverse;
 `;
 
-export const tipHeader = css`
+const slideIn = keyframes`
+  from {
+    transform: translateY(-50px);
+  }
+  to {
+    transform: translateY(0);
+  }
+`;
+
+const slideOut = keyframes`
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50px);
+  }
+`;
+
+export const modalDialog = css`
+  animation: ${slideIn} 0.3s ease-out;
+`;
+
+export const modalDialogSlideOut = css`
+  animation: ${slideOut} 0.3s ease-out;
+`;
+
+export const modalContent = css`
+  margin: 1.75rem auto;
+  width: 90%;
+  max-width: 500px;
+  background: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+`;
+
+export const modalHeader = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
-  background: #f7f7f7;
-  border-bottom: 1px solid #ebebeb;
-  border-top-left-radius: calc(0.3rem - 1px);
-  border-top-right-radius: calc(0.3rem - 1px);
-  h3 {
-    margin: 0;
-  }
-  button {
-    border: none;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-shadow: 0 1px 0 #fff;
-    color: #000;
-    background: none;
-    opacity: 0.5;
-    cursor: pointer;
-    user-select: none;
-    &:hover {
-      opacity: 0.75;
-    }
-    &:focus {
-      outline: none;
-    }
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+`;
+
+export const modalTitle = css`
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.5;
+`;
+
+export const modalClose = css`
+  margin: -1rem -1rem -1rem;
+  padding: 1rem;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  background: inherit;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.5;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.75;
   }
 `;
 
-export const tipBody = css`
-  padding: 0.75rem;
-`;
-
-export const arrow = css`
-  position: absolute;
-  left: 50%;
-  bottom: calc(-0.5rem - 1px);
-  width: 1rem;
-  height: 0.5rem;
-  transform: translate(-50%);
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    border-color: transparent;
-    border-style: solid;
-    border-width: 0.5rem 0.5rem 0;
-  }
-  &::before {
-    border-top-color: rgba(0, 0, 0, 0.25);
-  }
-  &::after {
-    bottom: 1px;
-    border-top-color: #fff;
-  }
+export const modalBody = css`
+  padding: 1rem;
 `;
