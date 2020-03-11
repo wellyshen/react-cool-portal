@@ -28,8 +28,7 @@ const App: SFC<{}> = () => {
   });
 
   const handleClickBackdrop = (e: MouseEvent): void => {
-    // @ts-ignore
-    const { id } = e.target;
+    const { id } = e.target as HTMLDivElement;
 
     if (id === 'modal' || id === 'modal-dialog') hide();
   };
