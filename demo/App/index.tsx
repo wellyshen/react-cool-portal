@@ -27,8 +27,11 @@ const App: SFC<{}> = () => {
     delayToHide: 300
   });
 
-  const handleClickModalContent = (e: MouseEvent): void => {
-    e.stopPropagation();
+  const handleClickBackdrop = (e: MouseEvent): void => {
+    // @ts-ignore
+    const { id } = e.target;
+
+    if (id === 'modal' || id === 'modal-dialog') hide();
   };
 
   return (
@@ -52,19 +55,20 @@ const App: SFC<{}> = () => {
         </button>
         <Portal>
           <div
+            id="modal"
             css={[modal, !isShow && modalFadeOut]}
-            onClick={hide}
+            onClick={handleClickBackdrop}
             tabIndex={-1}
             role="dialog"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
           >
             <div
+              id="modal-dialog"
               css={[modalDialog, !isShow && modalDialogSlideOut]}
               role="document"
             >
-              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-              <div css={modalContent} onClick={handleClickModalContent}>
+              <div css={modalContent}>
                 <div css={modalHeader}>
                   <h5 css={modalTitle} id="exampleModalLabel">
                     <span role="img" aria-label="Hello">
