@@ -19,7 +19,6 @@ declare module 'react-cool-portal' {
     onHide?: RCPF<ReactMouseEvent | MouseEvent | KeyboardEvent>;
     clickOutsideToHide?: boolean;
     escToHide?: boolean;
-    delayToHide?: number;
   }
 
   interface Return {

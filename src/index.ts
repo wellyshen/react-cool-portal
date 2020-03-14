@@ -21,7 +21,6 @@ interface Args {
   onHide?: RCPF<ReactMouseEvent | MouseEvent | KeyboardEvent>;
   clickOutsideToHide?: boolean;
   escToHide?: boolean;
-  delayToHide?: number;
 }
 interface Return {
   readonly Portal: PortalType;
@@ -37,12 +36,9 @@ const usePortal = ({
   onShow,
   onHide,
   clickOutsideToHide = true,
-  escToHide = true,
-  delayToHide = 0
+  escToHide = true
 }: Args = {}): Return => {
   const [isShow, setIsShow] = useState(defaultShow);
-  const [isShowDelay, setIsShowDelay] = useState(defaultShow);
-  const waitingForHidingRef = useRef(false);
   const skipClickOutsideRef = useRef(false);
   const onShowRef = useRef(null);
   const onHideRef = useRef(null);
@@ -64,66 +60,39 @@ const usePortal = ({
     });
   }, [clickOutsideToHide, isShow]);
 
-  const handleIsShowDelay = useCallback(
-    (val: boolean): void => {
-      if (!delayToHide) return;
-
-      if (val) {
-        setIsShowDelay(true);
-        return;
-      }
-
-      waitingForHidingRef.current = true;
-      delay(() => {
-        waitingForHidingRef.current = false;
-        setIsShowDelay(false);
-      }, delayToHide);
-    },
-    [delayToHide]
-  );
-
   const show = useCallback(
     e => {
-      if (waitingForHidingRef.current) return;
-
       setSkipClickOutside();
 
       if (isShow) return;
 
       setIsShow(true);
-      handleIsShowDelay(true);
       if (onShow) onShow(e);
     },
-    [setSkipClickOutside, isShow, handleIsShowDelay, onShow]
+    [setSkipClickOutside, isShow, onShow]
   );
 
   const hide = useCallback(
     e => {
-      if (waitingForHidingRef.current) return;
-
       setSkipClickOutside();
 
       if (!isShow) return;
 
       setIsShow(false);
-      handleIsShowDelay(false);
       if (onHide) onHide(e);
     },
-    [setSkipClickOutside, isShow, handleIsShowDelay, onHide]
+    [setSkipClickOutside, isShow, onHide]
   );
 
   const toggle = useCallback(
     e => {
-      if (waitingForHidingRef.current) return;
-
-      setSkipClickOutside();
-
-      setIsShow(!isShow);
-      handleIsShowDelay(!isShow);
-      if (onShow && !isShow) onShow(e);
-      if (onHide && isShow) onHide(e);
+      if (isShow) {
+        hide(e);
+      } else {
+        show(e);
+      }
     },
-    [setSkipClickOutside, isShow, handleIsShowDelay, onShow, onHide]
+    [isShow, hide, show]
   );
 
   const handleHide = useCallback(
@@ -137,22 +106,14 @@ const usePortal = ({
     () =>
       createPortal(
         containerId,
-        delayToHide ? isShowDelay : isShow,
+        isShow,
         clickOutsideToHide && handleHide,
         escToHide && handleHide
       ),
-    [
-      containerId,
-      delayToHide,
-      isShowDelay,
-      isShow,
-      clickOutsideToHide,
-      escToHide,
-      handleHide
-    ]
+    [containerId, isShow, clickOutsideToHide, escToHide, handleHide]
   );
 
-  return { isShow, show, hide, toggle, Portal };
+  return { Portal, isShow, show, hide, toggle };
 };
 
 export default usePortal;
