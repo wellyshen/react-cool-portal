@@ -15,7 +15,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](https://github.com/wellyshen/react-cool-portal/blob/master/CONTRIBUTING.md)
 [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Freact-cool-portal)](https://twitter.com/intent/tweet?text=With%20@react-cool-portal,%20I%20can%20build%20modals,%20dropdowns,%20tooltips%20etc.%20without%20struggle!%20Thanks,%20@Welly%20Shen%20🤩)
 
-![portal](https://user-images.githubusercontent.com/21308003/75579375-9e942e80-5aa0-11ea-9e66-7b7bd5c0518d.gif)
+![portal_modal](https://user-images.githubusercontent.com/21308003/76686161-6ff78580-6654-11ea-916b-117c85862711.gif)
 
 ⚡️ Try yourself: https://react-cool-portal.netlify.com
 
@@ -26,7 +26,6 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - [x] Show/hide/toggle the portal
 - [x] onShow/onHide event callbacks
 - [x] Support clickOutsideToHide and escToHide interactions
-- [x] Delay hide portal for animation
 - [ ] Server-side rendering compatibility
 - [ ] Unit testing
 - [x] Demo app
@@ -49,7 +48,6 @@ const App = () => {
     defaultShow: false, // Default is true.
     clickOutsideToHide: true, // Default is true.
     escToHide: true, // Default is true.
-    delayToHide: 500 // Waiting for CSS animation finished. Unit is millisecond, default is 0.
     onShow: e => {
       // Triggered on show portal.
       // The event object will be: MouseEvent, KeyboardEvent, Your custom event.
@@ -65,9 +63,9 @@ const App = () => {
       <button onClick={show}>Open Modal</button>
       <button onClick={hide}>Close Modal</button>
       <button onClick={toggle}>Toggle Modal</button>
+      <p>Modal is {isShow ? 'opened' : 'closed'}</p>
       <Portal>
-        {/* The "isShow" can be used to control CSS transition, animation */}
-        <div class={`modal ${isShow ? 'fade-in' : 'fade-out'}`} role="dialog">
+        <div class="modal" role="dialog">
           <div class="modal-header">
             <h5 class="modal-title">Modal title</h5>
           </div>
