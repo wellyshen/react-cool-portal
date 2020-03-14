@@ -1,4 +1,4 @@
-import React, { SFC, MouseEvent } from 'react';
+import React, { SFC, MouseEvent, useState, useEffect } from 'react';
 import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
@@ -13,7 +13,6 @@ import {
   modal,
   modalFadeOut,
   modalDialog,
-  modalDialogSlideOut,
   modalContent,
   modalHeader,
   modalTitle,
@@ -22,16 +21,40 @@ import {
 } from './styles';
 
 const App: SFC<{}> = () => {
-  const { Portal, isShow, show, hide } = usePortal({
+  const [isFadeOut, setIsFadeOut] = useState(false);
+  const { Portal, show, hide, isShow } = usePortal({
     defaultShow: false,
-    delayToHide: 300
+    escToHide: false
   });
+
+  const close = (): void => {
+    setIsFadeOut(true);
+  };
 
   const handleClickBackdrop = (e: MouseEvent): void => {
     const { id } = e.target as HTMLDivElement;
 
-    if (id === 'modal' || id === 'modal-dialog') hide();
+    if (id === 'modal' || id === 'modal-dialog') close();
   };
+
+  const handleAnimEnd = (): void => {
+    if (!isFadeOut) return;
+
+    setIsFadeOut(false);
+    hide();
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent): void => {
+      if (isShow && e.keyCode === 27) close();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return (): void => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isShow]);
 
   return (
     <>
@@ -55,18 +78,15 @@ const App: SFC<{}> = () => {
         <Portal>
           <div
             id="modal"
-            css={[modal, !isShow && modalFadeOut]}
+            css={[modal, isFadeOut && modalFadeOut]}
             onClick={handleClickBackdrop}
+            onAnimationEnd={handleAnimEnd}
             tabIndex={-1}
             role="dialog"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
           >
-            <div
-              id="modal-dialog"
-              css={[modalDialog, !isShow && modalDialogSlideOut]}
-              role="document"
-            >
+            <div id="modal-dialog" css={modalDialog} role="document">
               <div css={modalContent}>
                 <div css={modalHeader}>
                   <h5 css={modalTitle} id="exampleModalLabel">
@@ -77,7 +97,7 @@ const App: SFC<{}> = () => {
                   </h5>
                   <button
                     css={modalClose}
-                    onClick={hide}
+                    onClick={close}
                     type="button"
                     aria-label="Close"
                   >

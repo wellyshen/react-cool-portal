@@ -4,6 +4,48 @@ import mq from '../utils/mq';
 
 const { sm, md, lg } = mq;
 
+const slideIn = keyframes`
+  from {
+    transform: translateY(-50px);
+  }
+  to {
+    transform: translateY(0);
+  }
+`;
+
+const slideOut = keyframes`
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50px);
+  }
+`;
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+`;
+
 export const root = css`
   body {
     font-family: 'Open Sans', sans-serif;
@@ -57,13 +99,8 @@ export const btn = css`
   }
 `;
 
-const fade = keyframes`
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
+export const modalDialog = css`
+  animation: ${slideIn} 0.3s ease-out;
 `;
 
 export const modal = css`
@@ -72,37 +109,14 @@ export const modal = css`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  animation: ${fade} 0.3s linear;
+  animation: ${fadeIn} 0.3s linear;
 `;
 
 export const modalFadeOut = css`
-  animation-direction: reverse;
-`;
-
-const slideIn = keyframes`
-  from {
-    transform: translateY(-50px);
+  animation-name: ${fadeOut};
+  .css-${modalDialog.name} {
+    animation-name: ${slideOut};
   }
-  to {
-    transform: translateY(0);
-  }
-`;
-
-const slideOut = keyframes`
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-50px);
-  }
-`;
-
-export const modalDialog = css`
-  animation: ${slideIn} 0.3s ease-out;
-`;
-
-export const modalDialogSlideOut = css`
-  animation: ${slideOut} 0.3s ease-out;
 `;
 
 export const modalContent = css`
