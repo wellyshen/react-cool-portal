@@ -36,9 +36,69 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - [x] CI/CD
 - [ ] Documentation
 
-## 💡 My Idea
+## Requirement
 
-The following example shows you how to create your own modal component by `react-cool-portal`.
+To use `react-cool-portal`, you must use `react@16.8.0` or greater which includes hooks.
+
+## Installation
+
+This package is distributed via [npm](https://www.npmjs.com/package/react-cool-portal).
+
+```sh
+$ yarn add react-cool-portal
+# or
+$ npm install --save react-cool-portal
+```
+
+## Usage
+
+### Basic Use Case
+
+Inserts an element or component into the a different location in the DOM.
+
+```js
+import React from 'react';
+import usePortal from 'react-cool-portal';
+
+const App = () => {
+  const { Portal } = usePortal();
+
+  return (
+    <div>
+      <Portal>
+        <div>
+          Wow! I am rendered outside the DOM hierarchy of my parent component.
+        </div>
+      </Portal>
+    </div>
+  );
+};
+```
+
+By default, the children of the `Portal` is rendered into `<div id="react-cool-portal">` of `<body>`. You can use your own container element by the `containerId` option.
+
+```js
+import React from 'react';
+import usePortal from 'react-cool-portal';
+
+const App = () => {
+  const { Portal } = usePortal({ containerId: 'my-portal-root' });
+
+  return (
+    <div>
+      <Portal>
+        <div>Now I am rendered into the "my-portal-root" element.</div>
+      </Portal>
+    </div>
+  );
+};
+```
+
+> Note: If the container element doesn't exist, we will create it for you.
+
+### Use with State
+
+`react-cool-portal` provides many useful features, which enable you to build a component with state like modal, dropdown, tooltip and so on.
 
 ```js
 import React from 'react';
@@ -46,17 +106,17 @@ import usePortal from 'react-cool-portal';
 
 const App = () => {
   const { Portal, isShow, show, hide, toggle } = usePortal({
-    containerId: 'my-portal-root', // Use your own portal container. If no set, we'll create it for you.
+    containerId: 'my-portal-root',
     defaultShow: false, // Default is true.
     clickOutsideToHide: true, // Default is true.
     escToHide: true, // Default is true.
     onShow: e => {
       // Triggered on show portal.
-      // The event object will be: MouseEvent, KeyboardEvent, Your custom event.
+      // The event object will be MouseEvent, KeyboardEvent, Your custom event. Depends on your interaction.
     },
     onHide: e => {
       // Triggered on hide portal.
-      // The event object will be: MouseEvent, KeyboardEvent, Your custom event.
+      // The event object will be MouseEvent, KeyboardEvent, Your custom event. Depends on your interaction.
     }
   });
 
@@ -64,15 +124,23 @@ const App = () => {
     <div>
       <button onClick={show}>Open Modal</button>
       <button onClick={hide}>Close Modal</button>
-      <button onClick={toggle}>Toggle Modal</button>
-      <p>Modal is {isShow ? 'opened' : 'closed'}</p>
+      <button onClick={toggle}>{isShow ? 'Close' : 'Open'} Modal</button>
       <Portal>
-        <div class="modal" role="dialog">
-          <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
-          </div>
-          <div class="modal-body">
-            <p>Modal body text goes here.</p>
+        <div class="modal-backdrop" tabIndex={-1}>
+          <div
+            class="modal"
+            role="dialog"
+            aria-labelledby="modal-label"
+            aria-modal="true"
+          >
+            <div class="modal-header">
+              <h5 id="modal-label" class="modal-title">
+                Modal title
+              </h5>
+            </div>
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+            </div>
           </div>
         </div>
       </Portal>
@@ -80,6 +148,8 @@ const App = () => {
   );
 };
 ```
+
+> ♻️ When no element in the container, we will auto remove it for you. Therefore, doesn't produce DOM mess.
 
 ## Contributors ✨
 
