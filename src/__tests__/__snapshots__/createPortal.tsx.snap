@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createPortal should not render child 1`] = `
+<body>
+  <div
+    id="react-cool-portal"
+  />
+  <div />
+</body>
+`;
+
+exports[`createPortal should render correctly 1`] = `
+<body>
+  <div />
+  <div
+    id="react-cool-portal"
+  >
+    <div>
+      Test
+    </div>
+  </div>
+</body>
+`;
