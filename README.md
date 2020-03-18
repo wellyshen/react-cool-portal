@@ -149,7 +149,7 @@ const App = () => {
 };
 ```
 
-> 🧹 When no element in the container, we will auto remove it for you. Therefore, doesn't produce DOM mess.
+> 🧹 When no element in the container, we will remove it for you to avoid DOM mess.
 
 ## Contributors ✨
 
