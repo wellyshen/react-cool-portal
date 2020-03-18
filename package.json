@@ -41,6 +41,7 @@
     "type-check": "tsc --noEmit",
     "type-check:watch": "yarn type-check --watch",
     "test": "jest",
+    "test:update": "yarn test --updateSnapshot",
     "test:watch": "yarn test --watch",
     "test:cov": "yarn clean:cov && yarn test --coverage",
     "build:demo": "yarn clean:dev && yarn clean:demo && rollup -c rollup/config.js --environment BUILD:demo",

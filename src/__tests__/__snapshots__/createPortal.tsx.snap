@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`createPortal should auto remove root 1`] = `
+<body>
+  <div />
+</body>
+`;
+
 exports[`createPortal should not render child 1`] = `
 <body>
   <div
@@ -15,7 +21,9 @@ exports[`createPortal should render correctly 1`] = `
   <div
     id="react-cool-portal"
   >
-    <div>
+    <div
+      data-testid="test"
+    >
       Test
     </div>
   </div>
