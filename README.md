@@ -17,6 +17,8 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](https://github.com/wellyshen/react-cool-portal/blob/master/CONTRIBUTING.md)
 [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Freact-cool-portal)](https://twitter.com/intent/tweet?text=With%20@react-cool-portal,%20I%20can%20build%20modals,%20dropdowns,%20tooltips%20etc.%20without%20struggle!%20Thanks,%20@Welly%20Shen%20🤩)
 
+## Live Demo
+
 ![portal_modal](https://user-images.githubusercontent.com/21308003/76686161-6ff78580-6654-11ea-916b-117c85862711.gif)
 
 ⚡️ Try yourself: https://react-cool-portal.netlify.com
@@ -28,6 +30,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - [x] Show/hide/toggle the portal
 - [x] onShow/onHide event callbacks
 - [x] Support clickOutsideToHide and escToHide interactions
+- [x] Provide a flexible way to handle animations
 - [x] Server-side rendering compatibility
 - [ ] Unit testing
 - [x] Demo app
@@ -52,6 +55,8 @@ $ npm install --save react-cool-portal
 
 ## Usage
 
+Here are some minimal examples of how does it work. You can learn more about it by checking the [API](#api) out.
+
 ### Basic Use Case
 
 Inserts an element or component into the a different location in the DOM.
@@ -75,7 +80,7 @@ const App = () => {
 };
 ```
 
-By default, the children of the `Portal` is rendered into `<div id="react-cool-portal">` of `<body>`. You can use your own container element by the `containerId` option.
+By default, the children of portal is rendered into `<div id="react-cool-portal">` of `<body>`. You can use your own container by the `containerId` option.
 
 ```js
 import React from 'react';
@@ -106,17 +111,14 @@ import usePortal from 'react-cool-portal';
 
 const App = () => {
   const { Portal, isShow, show, hide, toggle } = usePortal({
-    containerId: 'my-portal-root',
-    defaultShow: false, // Default is true.
-    clickOutsideToHide: true, // Default is true.
-    escToHide: true, // Default is true.
+    defaultShow: false, // The default visibility of portal, default is true
     onShow: e => {
-      // Triggered on show portal.
-      // The event object will be MouseEvent, KeyboardEvent, Your custom event. Depends on your interaction.
+      // Triggered when portal is shown
+      // The event object will be the parameter of "show()"
     },
     onHide: e => {
-      // Triggered on hide portal.
-      // The event object will be MouseEvent, KeyboardEvent, Your custom event. Depends on your interaction.
+      // Triggered when portal is hidden
+      // The event object will be the parameter of "hide()", MouseEvent (on clicks outside) or KeyboardEvent (press ESC key)
     }
   });
 
@@ -126,9 +128,9 @@ const App = () => {
       <button onClick={hide}>Close Modal</button>
       <button onClick={toggle}>{isShow ? 'Close' : 'Open'} Modal</button>
       <Portal>
-        <div class="modal-backdrop" tabIndex={-1}>
+        <div class="modal" tabIndex={-1}>
           <div
-            class="modal"
+            class="modal-dialog"
             role="dialog"
             aria-labelledby="modal-label"
             aria-modal="true"
@@ -150,6 +152,91 @@ const App = () => {
 ```
 
 > 🧹 When no element in the container, we will remove it for you to avoid DOM mess.
+
+The above example shows how easy you can handle the visibility of your component. You may ask how to handle the visibility with animations? No worries, you can disable the built-in `show/hide` functions by setting the `internalShowHide` option as `false` then handling the visibility of your component via the `isShow` state.
+
+```js
+import React from 'react';
+import usePortal from 'react-cool-portal';
+
+const App = () => {
+  const { Portal, isShow, show, hide, toggle } = usePortal({
+    defaultShow: false,
+    internalShowHide: false, // Disable the built-in show/hide portal functions, default is true
+    onShow: e => {
+      // Triggered when "isShow" is set as true
+    },
+    onHide: e => {
+      // Triggered when "isShow" is set as false
+    }
+  });
+
+  return (
+    <div>
+      <button onClick={show}>Open Modal</button>
+      <button onClick={hide}>Close Modal</button>
+      <button onClick={toggle}>{isShow ? 'Close' : 'Open'} Modal</button>
+      <Portal>
+        <div
+          // Now you can use the "isShow" state to handle the CSS animations
+          class={`modal${isShow ? ' modal-open' : ''}`}
+          tabIndex={-1}
+        >
+          <div
+            class="modal-dialog"
+            role="dialog"
+            aria-labelledby="modal-label"
+            aria-modal="true"
+          >
+            <div class="modal-header">
+              <h5 id="modal-label" class="modal-title">
+                Modal title
+              </h5>
+            </div>
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+            </div>
+          </div>
+        </div>
+      </Portal>
+    </div>
+  );
+};
+```
+
+Besides that, you can also handle the visibility of your component via React [animation events](https://reactjs.org/docs/events.html#animation-events) or [translation events](https://reactjs.org/docs/events.html#transition-events) like [what I did](https://github.com/wellyshen/react-cool-portal/blob/master/demo/App/index.tsx) for the [demo app](#live-demo).
+
+## API
+
+```js
+const return = usePortal(parameter);
+```
+
+### Return object
+
+It's returned with the following properties.
+
+| Key    | Type      | Default | Description                                                                                   |
+| ------ | --------- | ------- | --------------------------------------------------------------------------------------------- |
+| Portal | component |         | Element(s) wrapped by the component will be rendered outside the DOM hierarchy of its parent. |
+| isShow | boolean   | `false` | The show/hide state of portal.                                                                |
+| show   | function  |         | To show the portal or set the `isShow` as `true`.                                             |
+| hide   | function  |         | To hide the portal or set the `isShow` as `false`.                                            |
+| toggle | function  |         | To toggle (show/hide) the portal or set the `isShow` as `true/false`.                         |
+
+### Parameter object (optional)
+
+When use `react-cool-portal` you can configure the following options via the parameter.
+
+| Key                | Type     | Default             | Description                                                                                                     |
+| ------------------ | -------- | ------------------- | --------------------------------------------------------------------------------------------------------------- |
+| containerId        | string   | `react-cool-portal` | You can use your own portal container by setting it as the id of the DOM element.                               |
+| defaultShow        | boolean  | `true`              | The initial show/hide state of the portal.                                                                      |
+| clickOutsideToHide | boolean  | `true`              | Hide the portal by clicking outside of it.                                                                      |
+| escToHide          | boolean  | `true`              | Hide the portal by pressing ESC key.                                                                            |
+| internalShowHide   | boolean  | `true`              | Enable/disable the built-in `show/hide` portal functions, which gives you a flexible way to handle your portal. |
+| onShow             | function |                     | Triggered when portal is shown or the `isShow` set to `true`.                                                   |
+| onHide             | function |                     | Triggered when portal is hidden or the `isShow` set to `false`.                                                 |
 
 ## Contributors ✨
 
