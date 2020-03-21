@@ -15,10 +15,11 @@ declare module 'react-cool-portal' {
   interface Args {
     containerId?: string;
     defaultShow?: boolean;
-    onShow?: RCPF;
-    onHide?: RCPF<ReactMouseEvent | MouseEvent | KeyboardEvent>;
     clickOutsideToHide?: boolean;
     escToHide?: boolean;
+    internalShowHide?: boolean;
+    onShow?: RCPF;
+    onHide?: RCPF<ReactMouseEvent | MouseEvent | KeyboardEvent>;
   }
 
   interface Return {
@@ -32,10 +33,10 @@ declare module 'react-cool-portal' {
   const usePortal: ({
     containerId,
     defaultShow,
-    onShow,
-    onHide,
     clickOutsideToHide,
-    escToHide
+    escToHide,
+    onShow,
+    onHide
   }?: Args) => Return;
 
   export default usePortal;

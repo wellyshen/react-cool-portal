@@ -17,10 +17,11 @@ interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
 interface Args {
   containerId?: string;
   defaultShow?: boolean;
-  onShow?: RCPF;
-  onHide?: RCPF<ReactMouseEvent | MouseEvent | KeyboardEvent>;
   clickOutsideToHide?: boolean;
   escToHide?: boolean;
+  internalShowHide?: boolean;
+  onShow?: RCPF;
+  onHide?: RCPF<ReactMouseEvent | MouseEvent | KeyboardEvent>;
 }
 interface Return {
   readonly Portal: PortalType;
@@ -33,10 +34,11 @@ interface Return {
 const usePortal = ({
   containerId = 'react-cool-portal',
   defaultShow = true,
-  onShow,
-  onHide,
   clickOutsideToHide = true,
-  escToHide = true
+  escToHide = true,
+  internalShowHide = true,
+  onShow,
+  onHide
 }: Args = {}): Return => {
   const [isShow, setIsShow] = useState(defaultShow);
   const skipClickOutsideRef = useRef(false);
@@ -106,11 +108,18 @@ const usePortal = ({
     () =>
       createPortal(
         containerId,
-        isShow,
+        !internalShowHide || isShow,
         clickOutsideToHide && handleHide,
         escToHide && handleHide
       ),
-    [containerId, isShow, clickOutsideToHide, escToHide, handleHide]
+    [
+      containerId,
+      internalShowHide,
+      isShow,
+      clickOutsideToHide,
+      escToHide,
+      handleHide
+    ]
   );
 
   return { Portal, isShow, show, hide, toggle };
