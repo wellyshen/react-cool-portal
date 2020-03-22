@@ -1,8 +1,6 @@
-> ⚠️ This library is in-progress, API might changed rapidly. I don't recommend to use it now. If you'd like to give it a try, please follow the [release note](https://github.com/wellyshen/react-cool-portal/releases) for any change. Here's the [milestone](#milestone).
-
 # React Cool Portal
 
-This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) for [Portals](https://reactjs.org/docs/portals.html). It helps you render an element outside of its component hierarchy. From now on you will never need to struggle with modals, dropdowns, tooltips etc. Hope you guys 👍🏻 it.
+This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) for [Portals](https://reactjs.org/docs/portals.html). It helps you render children into a DOM node that exists outside the DOM hierarchy of the parent component. From now on you will never need to struggle with modals, dropdowns, tooltips etc. Check the [features](#features) section out to learn more. Hope you guys 👍🏻 it.
 
 ❤️ it? ⭐️ it on [GitHub](https://github.com/wellyshen/react-cool-portal/stargazers) or [Tweet](https://twitter.com/intent/tweet?text=With%20@react-cool-portal,%20I%20can%20build%20modals,%20dropdowns,%20tooltips%20etc.%20without%20struggle!%20Thanks,%20@Welly%20Shen%20🤩) about it.
 
@@ -23,21 +21,16 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 
 ⚡️ Try yourself: https://react-cool-portal.netlify.com
 
-## Milestone
+## Features
 
-- [x] Auto creating/removing the container of the portal
-- [x] Renders element to the portal container
-- [x] Show/hide/toggle the portal
-- [x] onShow/onHide event callbacks
-- [x] Support clickOutsideToHide and escToHide interactions
-- [x] Provide a flexible way to handle animations
-- [x] Server-side rendering compatibility
-- [ ] Unit testing
-- [x] Demo app
-- [ ] Demo code
-- [x] Typescript type definition
-- [x] CI/CD
-- [ ] Documentation
+- 🍒 Renders an element or component to `<body>` or [a specified DOM element](#basic-use-case).
+- 🎣 React [Portals](https://reactjs.org/docs/portals.html) feat. [Hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook).
+- 🤖 Built-in [state controllers](#use-with-state), event listeners and many [useful features](#api) for a comprehensive DX.
+- 🧱 Used as a scaffold to [build your customized hook](#build-your-customized-hook).
+- 🧹 Auto remove un-used portal container for you. Doesn't produce any DOM mess.
+- 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
+- 🗄️ Server-side rendering compatibility.
+- 🦠 Tiny size ([~ 1.4KB gzipped](https://bundlephobia.com/result?p=react-cool-portal)). No external dependencies, aside for the `react` and `react-dom`.
 
 ## Requirement
 
@@ -71,16 +64,16 @@ const App = () => {
   return (
     <div>
       <Portal>
-        <div>
+        <p>
           Wow! I am rendered outside the DOM hierarchy of my parent component.
-        </div>
+        </p>
       </Portal>
     </div>
   );
 };
 ```
 
-By default, the children of portal is rendered into `<div id="react-cool-portal">` of `<body>`. You can use your own container by the `containerId` option.
+By default, the children of portal is rendered into `<div id="react-cool-portal">` of `<body>`. You can specify the DOM element you want through the `containerId` option.
 
 ```js
 import React from 'react';
@@ -92,7 +85,7 @@ const App = () => {
   return (
     <div>
       <Portal>
-        <div>Now I am rendered into the "my-portal-root" element.</div>
+        <p>Now I am rendered into the specify element (id="my-portal-root").</p>
       </Portal>
     </div>
   );
@@ -103,7 +96,7 @@ const App = () => {
 
 ### Use with State
 
-`react-cool-portal` provides many useful features, which enable you to build a component with state like modal, dropdown, tooltip and so on.
+`react-cool-portal` provides many useful features, which enable you to build a component with state. For instance, modal, dropdown, tooltip and so on.
 
 ```js
 import React from 'react';
@@ -206,6 +199,66 @@ const App = () => {
 
 Besides that, you can also handle the visibility of your component via React [animation events](https://reactjs.org/docs/events.html#animation-events) or [translation events](https://reactjs.org/docs/events.html#transition-events) like [what I did](https://github.com/wellyshen/react-cool-portal/blob/master/demo/App/index.tsx) for the [demo app](#live-demo).
 
+### Build Your Customized Hook
+
+Are you tired to write the same code over and over again? It's time to build your own hook based on `react-cool-portal` then use it wherever you want.
+
+```js
+import React, { useCallback } from 'react';
+import usePortal from 'react-cool-portal';
+
+// Customize your hook based on react-cool-portal
+const useModal = (options = {}) => {
+  const { Portal, isShow, ...rest } = usePortal({
+    ...options,
+    defaultShow: false,
+    internalShowHide: false
+  });
+
+  const Modal = useCallback(
+    ({ children }) => (
+      <Portal>
+        <div class={`modal${isShow ? ' modal-open' : ''}`} tabIndex={-1}>
+          {children}
+        </div>
+      </Portal>
+    ),
+    []
+  );
+
+  return { Modal, isShow, ...rest };
+};
+
+// Use it wherever you want
+const App = () => {
+  const { Modal, show, hide } = useModal();
+
+  return (
+    <div>
+      <button onClick={show}>Open Modal</button>
+      <button onClick={hide}>Close Modal</button>
+      <Modal>
+        <div
+          class="modal-dialog"
+          role="dialog"
+          aria-labelledby="modal-label"
+          aria-modal="true"
+        >
+          <div class="modal-header">
+            <h5 id="modal-label" class="modal-title">
+              Modal title
+            </h5>
+          </div>
+          <div class="modal-body">
+            <p>Modal body text goes here.</p>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
+};
+```
+
 ## API
 
 ```js
@@ -216,13 +269,13 @@ const return = usePortal(parameter);
 
 It's returned with the following properties.
 
-| Key    | Type      | Default | Description                                                                                   |
-| ------ | --------- | ------- | --------------------------------------------------------------------------------------------- |
-| Portal | component |         | Element(s) wrapped by the component will be rendered outside the DOM hierarchy of its parent. |
-| isShow | boolean   | `false` | The show/hide state of portal.                                                                |
-| show   | function  |         | To show the portal or set the `isShow` as `true`.                                             |
-| hide   | function  |         | To hide the portal or set the `isShow` as `false`.                                            |
-| toggle | function  |         | To toggle (show/hide) the portal or set the `isShow` as `true/false`.                         |
+| Key    | Type      | Default | Description                                                                                     |
+| ------ | --------- | ------- | ----------------------------------------------------------------------------------------------- |
+| Portal | component |         | Renders children into a DOM node that exists outside the DOM hierarchy of the parent component. |
+| isShow | boolean   | `false` | The show/hide state of portal.                                                                  |
+| show   | function  |         | To show the portal or set the `isShow` as `true`.                                               |
+| hide   | function  |         | To hide the portal or set the `isShow` as `false`.                                              |
+| toggle | function  |         | To toggle (show/hide) the portal or set the `isShow` as `true/false`.                           |
 
 ### Parameter object (optional)
 
@@ -230,13 +283,18 @@ When use `react-cool-portal` you can configure the following options via the par
 
 | Key                | Type     | Default             | Description                                                                                                     |
 | ------------------ | -------- | ------------------- | --------------------------------------------------------------------------------------------------------------- |
-| containerId        | string   | `react-cool-portal` | You can use your own portal container by setting it as the id of the DOM element.                               |
+| containerId        | string   | `react-cool-portal` | You can specify the container of portal you want by setting it as the id of the DOM element.                    |
 | defaultShow        | boolean  | `true`              | The initial show/hide state of the portal.                                                                      |
 | clickOutsideToHide | boolean  | `true`              | Hide the portal by clicking outside of it.                                                                      |
 | escToHide          | boolean  | `true`              | Hide the portal by pressing ESC key.                                                                            |
 | internalShowHide   | boolean  | `true`              | Enable/disable the built-in `show/hide` portal functions, which gives you a flexible way to handle your portal. |
 | onShow             | function |                     | Triggered when portal is shown or the `isShow` set to `true`.                                                   |
 | onHide             | function |                     | Triggered when portal is hidden or the `isShow` set to `false`.                                                 |
+
+## To Do
+
+- [ ] Unit testing
+- [ ] Demo code
 
 ## Contributors ✨
 
