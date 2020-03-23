@@ -40,7 +40,7 @@ export default (
   }, [container]);
 
   useEffect(() => {
-    if ((!clickOutsideCb && !escCb) || !isShow || !container) return;
+    if (!isShow || !container) return;
 
     const handleClick = (e: MouseEvent): void => {
       if (!container.contains(e.target)) clickOutsideCb(e);
