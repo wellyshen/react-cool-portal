@@ -65,4 +65,18 @@ describe('createPortal', () => {
     fireEvent.click(getByTestId(childId));
     expect(clickOutsideCb).not.toBeCalled();
   });
+
+  it('should trigger callback when presses ESC key', () => {
+    const { escCb } = renderHelper();
+    fireEvent.keyDown(document, { keyCode: 27 });
+    expect(escCb).toBeCalled();
+  });
+
+  it('should not trigger callbacks when isShow set to false', () => {
+    const { clickOutsideCb, escCb } = renderHelper({ isShow: false });
+    fireEvent.click(document);
+    fireEvent.keyDown(document, { keyCode: 27 });
+    expect(clickOutsideCb).not.toBeCalled();
+    expect(escCb).not.toBeCalled();
+  });
 });
