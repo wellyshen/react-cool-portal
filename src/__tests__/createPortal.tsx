@@ -2,9 +2,9 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
 import createPortal from '../createPortal';
+import { defaultContainerId } from '..';
 
 describe('createPortal', () => {
-  const rootId = 'react-cool-portal';
   const childId = 'test';
 
   interface Args {
@@ -20,7 +20,7 @@ describe('createPortal', () => {
   }
 
   const renderHelper = ({
-    containerId = rootId,
+    containerId = defaultContainerId,
     isShow = true
   }: Args = {}): Return => {
     const clickOutsideCb = jest.fn();
