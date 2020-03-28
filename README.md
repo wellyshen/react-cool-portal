@@ -291,11 +291,6 @@ When use `react-cool-portal` you can configure the following options via the par
 | onShow             | function |                     | Triggered when portal is shown or the `isShow` set to `true`.                                                   |
 | onHide             | function |                     | Triggered when portal is hidden or the `isShow` set to `false`.                                                 |
 
-## To Do
-
-- [ ] Unit testing
-- [ ] Demo code
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
