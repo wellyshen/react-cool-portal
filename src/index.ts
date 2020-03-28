@@ -31,9 +31,11 @@ interface Return {
   readonly toggle: RCPF;
 }
 
+export const defaultContainerId = 'react-cool-portal';
+export const initShow = true;
 const usePortal = ({
-  containerId = 'react-cool-portal',
-  defaultShow = true,
+  containerId = defaultContainerId,
+  defaultShow = initShow,
   clickOutsideToHide = true,
   escToHide = true,
   internalShowHide = true,
