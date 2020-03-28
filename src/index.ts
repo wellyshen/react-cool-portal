@@ -4,7 +4,6 @@ import {
   useState,
   useRef,
   useEffect,
-  useMemo,
   useCallback
 } from 'react';
 
@@ -106,22 +105,14 @@ const usePortal = ({
     [hide]
   );
 
-  const Portal = useMemo(
-    () =>
-      createPortal(
-        containerId,
-        !internalShowHide || isShow,
-        clickOutsideToHide && handleHide,
-        escToHide && handleHide
-      ),
-    [
+  const Portal = useCallback(
+    createPortal(
       containerId,
-      internalShowHide,
-      isShow,
-      clickOutsideToHide,
-      escToHide,
-      handleHide
-    ]
+      !internalShowHide || isShow,
+      clickOutsideToHide && handleHide,
+      escToHide && handleHide
+    ),
+    [internalShowHide && isShow]
   );
 
   return { Portal, isShow, show, hide, toggle };
