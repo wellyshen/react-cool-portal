@@ -98,6 +98,8 @@ const App = () => {
 
 `react-cool-portal` provides many useful features, which enable you to build a component with state. For instance, modal, dropdown, tooltip and so on.
 
+[![Edit usePortal](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/useportal-v8voh?fontsize=14&hidenavigation=1&theme=dark)
+
 ```js
 import React from 'react';
 import usePortal from 'react-cool-portal';
@@ -147,6 +149,8 @@ const App = () => {
 > 🧹 When no element in the container, we will remove it for you to avoid DOM mess.
 
 The above example shows how easy you can handle the visibility of your component. You may ask how to handle the visibility with animations? No worries, you can disable the built-in `show/hide` functions by setting the `internalShowHide` option as `false` then handling the visibility of your component via the `isShow` state.
+
+[![Edit usePortal with Animation](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/useportal-with-animation-eorc2?fontsize=14&hidenavigation=1&theme=dark)
 
 ```js
 import React from 'react';
