@@ -34,7 +34,30 @@ describe('usePortal', () => {
     );
   });
 
-  it('should disable internal show/hide function', () => {
+  it('should handle internal show/hide', () => {
+    const params = [
+      defaultContainerId,
+      initShow,
+      expect.any(Function),
+      expect.any(Function)
+    ];
+    const { result } = renderHook(() => usePortal());
+    expect(createPortal).toBeCalledWith(...params);
+
+    act(() => {
+      result.current.hide();
+    });
+    params[1] = false;
+    expect(createPortal).toBeCalledWith(...params);
+
+    act(() => {
+      result.current.show();
+    });
+    params[1] = true;
+    expect(createPortal).toBeCalledWith(...params);
+  });
+
+  it('should disable internal show/hide', () => {
     const params = [
       defaultContainerId,
       true,
