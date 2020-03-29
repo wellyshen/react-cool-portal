@@ -109,11 +109,11 @@ const App = () => {
     defaultShow: false, // The default visibility of portal, default is true
     onShow: e => {
       // Triggered when portal is shown
-      // The event object will be the parameter of "show()"
+      // The event object will be the parameter of "show(e?)"
     },
     onHide: e => {
       // Triggered when portal is hidden
-      // The event object will be the parameter of "hide()", MouseEvent (on clicks outside) or KeyboardEvent (press ESC key)
+      // The event object will be the parameter of "hide(e?)", it maybe MouseEvent (on clicks outside) or KeyboardEvent (press ESC key)
     }
   });
 
@@ -292,8 +292,8 @@ When use `react-cool-portal` you can configure the following options via the par
 | clickOutsideToHide | boolean  | `true`              | Hide the portal by clicking outside of it.                                                                      |
 | escToHide          | boolean  | `true`              | Hide the portal by pressing ESC key.                                                                            |
 | internalShowHide   | boolean  | `true`              | Enable/disable the built-in `show/hide` portal functions, which gives you a flexible way to handle your portal. |
-| onShow             | function |                     | Triggered when portal is shown or the `isShow` set to `true`.                                                   |
-| onHide             | function |                     | Triggered when portal is hidden or the `isShow` set to `false`.                                                 |
+| onShow             | function | `(event?) => {}`    | Triggered when portal is shown or the `isShow` set to `true`.                                                   |
+| onHide             | function | `(event?) => {}`    | Triggered when portal is hidden or the `isShow` set to `false`.                                                 |
 
 ## Contributors ✨
 
