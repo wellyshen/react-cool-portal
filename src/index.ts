@@ -45,6 +45,8 @@ const usePortal = ({
   const skipClickOutsideRef = useRef(false);
   const onShowRef = useRef(null);
   const onHideRef = useRef(null);
+  // Workaround, because "handleHide()" will cache "isShow" state
+  const isShowRef = useRef(defaultShow);
 
   useEffect(() => {
     if (onShow) onShowRef.current = onShow;
@@ -55,47 +57,49 @@ const usePortal = ({
   }, [onHide]);
 
   const setSkipClickOutside = useCallback((): void => {
-    if (!clickOutsideToHide || !isShow) return;
+    if (!clickOutsideToHide) return;
 
     skipClickOutsideRef.current = true;
     delay(() => {
       skipClickOutsideRef.current = false;
     });
-  }, [clickOutsideToHide, isShow]);
+  }, [clickOutsideToHide]);
 
   const show = useCallback(
     e => {
       setSkipClickOutside();
 
-      if (isShow) return;
+      if (isShowRef.current) return;
 
       setIsShow(true);
+      isShowRef.current = true;
       if (onShow) onShow(e);
     },
-    [setSkipClickOutside, isShow, onShow]
+    [setSkipClickOutside, onShow]
   );
 
   const hide = useCallback(
     e => {
       setSkipClickOutside();
 
-      if (!isShow) return;
+      if (!isShowRef.current) return;
 
       setIsShow(false);
+      isShowRef.current = false;
       if (onHide) onHide(e);
     },
-    [setSkipClickOutside, isShow, onHide]
+    [setSkipClickOutside, onHide]
   );
 
   const toggle = useCallback(
     e => {
-      if (isShow) {
+      if (isShowRef.current) {
         hide(e);
       } else {
         show(e);
       }
     },
-    [isShow, hide, show]
+    [hide, show]
   );
 
   const handleHide = useCallback(
