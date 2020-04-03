@@ -13,6 +13,7 @@ import createPortal, { Portal as PortalType } from './createPortal';
 interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
   (event?: T): void;
 }
+type OnHide = RCPF<ReactMouseEvent | MouseEvent | KeyboardEvent>;
 interface Args {
   containerId?: string;
   defaultShow?: boolean;
@@ -20,7 +21,7 @@ interface Args {
   escToHide?: boolean;
   internalShowHide?: boolean;
   onShow?: RCPF;
-  onHide?: RCPF<ReactMouseEvent | MouseEvent | KeyboardEvent>;
+  onHide?: OnHide;
 }
 interface Return {
   readonly Portal: PortalType;
@@ -41,12 +42,12 @@ const usePortal = ({
   onShow,
   onHide
 }: Args = {}): Return => {
-  const [isShow, setIsShow] = useState(defaultShow);
-  const skipClickOutsideRef = useRef(false);
-  const onShowRef = useRef(null);
-  const onHideRef = useRef(null);
-  // Workaround, because "handleHide()" will cache "isShow" state
-  const isShowRef = useRef(defaultShow);
+  const [isShow, setIsShow] = useState<boolean>(defaultShow);
+  const skipClickOutsideRef = useRef<boolean>(false);
+  const onShowRef = useRef<RCPF>(null);
+  const onHideRef = useRef<OnHide>(null);
+  // Workaround: because handleHide() will cache "isShow" state
+  const isShowRef = useRef<boolean>(defaultShow);
 
   useEffect(() => {
     if (onShow) onShowRef.current = onShow;
