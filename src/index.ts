@@ -3,10 +3,10 @@ import {
   MouseEvent as ReactMouseEvent,
   useState,
   useRef,
-  useEffect,
   useCallback
 } from 'react';
 
+import useLatest from './useLatest';
 import delay from './delay';
 import createPortal, { Portal as PortalType } from './createPortal';
 
@@ -44,18 +44,10 @@ const usePortal = ({
 }: Args = {}): Return => {
   const [isShow, setIsShow] = useState<boolean>(defaultShow);
   const skipClickOutsideRef = useRef<boolean>(false);
-  const onShowRef = useRef<RCPF>(null);
-  const onHideRef = useRef<OnHide>(null);
+  const onShowRef = useLatest<RCPF>(onShow);
+  const onHideRef = useLatest<OnHide>(onHide);
   // Workaround: because handleHide() will cache "isShow" state
   const isShowRef = useRef<boolean>(defaultShow);
-
-  useEffect(() => {
-    if (onShow) onShowRef.current = onShow;
-  }, [onShow]);
-
-  useEffect(() => {
-    if (onHide) onHideRef.current = onHide;
-  }, [onHide]);
 
   const setSkipClickOutside = useCallback((): void => {
     if (!clickOutsideToHide) return;
@@ -74,9 +66,9 @@ const usePortal = ({
 
       setIsShow(true);
       isShowRef.current = true;
-      if (onShow) onShow(e);
+      if (onShowRef.current) onShowRef.current(e);
     },
-    [setSkipClickOutside, onShow]
+    [setSkipClickOutside, onShowRef]
   );
 
   const hide = useCallback(
@@ -87,9 +79,9 @@ const usePortal = ({
 
       setIsShow(false);
       isShowRef.current = false;
-      if (onHide) onHide(e);
+      if (onHideRef.current) onHideRef.current(e);
     },
-    [setSkipClickOutside, onHide]
+    [setSkipClickOutside, onHideRef]
   );
 
   const toggle = useCallback(
