@@ -201,7 +201,7 @@ const App = () => {
 };
 ```
 
-Besides that, you can also handle the visibility of your component via React [animation events](https://reactjs.org/docs/events.html#animation-events) or [translation events](https://reactjs.org/docs/events.html#transition-events) like [what I did](https://github.com/wellyshen/react-cool-portal/blob/master/demo/App/index.tsx) for the [demo app](#live-demo).
+Besides that, you can also handle the visibility of your component via React [animation events](https://reactjs.org/docs/events.html#animation-events) or [transition events](https://reactjs.org/docs/events.html#transition-events) like [what I did](https://github.com/wellyshen/react-cool-portal/blob/master/demo/App/index.tsx) for the [demo app](#live-demo).
 
 ### Build Your Customized Hook
 
