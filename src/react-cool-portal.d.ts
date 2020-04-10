@@ -30,14 +30,7 @@ declare module 'react-cool-portal' {
     readonly toggle: RCPF;
   }
 
-  const usePortal: ({
-    containerId,
-    defaultShow,
-    clickOutsideToHide,
-    escToHide,
-    onShow,
-    onHide
-  }?: Args) => Return;
+  const usePortal: (args?: Args) => Return;
 
   export default usePortal;
 }
