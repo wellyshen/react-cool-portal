@@ -68,7 +68,8 @@ const usePortal = ({
       isShowRef.current = true;
       if (onShowRef.current) onShowRef.current(e);
     },
-    [setSkipClickOutside, onShowRef]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [setSkipClickOutside]
   );
 
   const hide = useCallback(
@@ -81,7 +82,8 @@ const usePortal = ({
       isShowRef.current = false;
       if (onHideRef.current) onHideRef.current(e);
     },
-    [setSkipClickOutside, onHideRef]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [setSkipClickOutside]
   );
 
   const toggle = useCallback(
