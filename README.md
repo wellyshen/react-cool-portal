@@ -266,7 +266,7 @@ const App = () => {
 ## API
 
 ```js
-const return = usePortal(parameter);
+const returnObj = usePortal(parameterObj);
 ```
 
 ### Return object
