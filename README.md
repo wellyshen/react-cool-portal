@@ -19,7 +19,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 
 ![portal_modal](https://user-images.githubusercontent.com/21308003/76686161-6ff78580-6654-11ea-916b-117c85862711.gif)
 
-⚡️ Try yourself: https://react-cool-portal.netlify.com
+⚡️ Try yourself: https://react-cool-portal.netlify.app
 
 ## Features
 
