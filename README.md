@@ -28,7 +28,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - 🤖 Built-in [state controllers](#use-with-state), event listeners and many [useful features](#api) for a comprehensive DX.
 - 🧱 Used as a scaffold to [build your customized hook](#build-your-customized-hook).
 - 🧹 Auto remove un-used portal container for you. Doesn't produce any DOM mess.
-- 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
+- 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering compatibility.
 - 🦠 Tiny size ([~ 1.4KB gzipped](https://bundlephobia.com/result?p=react-cool-portal)). No external dependencies, aside for the `react` and `react-dom`.
 
