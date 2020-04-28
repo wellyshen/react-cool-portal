@@ -10,7 +10,7 @@ describe('usePortal', () => {
 
   it('should create Portal with default parameters correctly', () => {
     renderHook(() => usePortal());
-    expect(createPortal).toBeCalledWith(
+    expect(createPortal).toHaveBeenCalledWith(
       defaultContainerId,
       initShow,
       expect.any(Function),
@@ -26,7 +26,7 @@ describe('usePortal', () => {
     renderHook(() =>
       usePortal({ containerId, defaultShow, clickOutsideToHide, escToHide })
     );
-    expect(createPortal).toBeCalledWith(
+    expect(createPortal).toHaveBeenCalledWith(
       containerId,
       defaultShow,
       clickOutsideToHide,
@@ -39,22 +39,22 @@ describe('usePortal', () => {
       defaultContainerId,
       initShow,
       expect.any(Function),
-      expect.any(Function)
+      expect.any(Function),
     ];
     const { result } = renderHook(() => usePortal());
-    expect(createPortal).toBeCalledWith(...params);
+    expect(createPortal).toHaveBeenCalledWith(...params);
 
     act(() => {
       result.current.hide();
     });
     params[1] = false;
-    expect(createPortal).toBeCalledWith(...params);
+    expect(createPortal).toHaveBeenCalledWith(...params);
 
     act(() => {
       result.current.show();
     });
     params[1] = true;
-    expect(createPortal).toBeCalledWith(...params);
+    expect(createPortal).toHaveBeenCalledWith(...params);
   });
 
   it('should disable internal show/hide', () => {
@@ -62,15 +62,15 @@ describe('usePortal', () => {
       defaultContainerId,
       true,
       expect.any(Function),
-      expect.any(Function)
+      expect.any(Function),
     ];
     const { result } = renderHook(() => usePortal({ internalShowHide: false }));
-    expect(createPortal).toBeCalledWith(...params);
+    expect(createPortal).toHaveBeenCalledWith(...params);
 
     act(() => {
       result.current.hide();
     });
-    expect(createPortal).toBeCalledWith(...params);
+    expect(createPortal).toHaveBeenCalledWith(...params);
   });
 
   it('should return default isShow correctly', () => {
@@ -110,7 +110,7 @@ describe('usePortal', () => {
     act(() => {
       result.current.show();
     });
-    expect(onShow).not.toBeCalled();
+    expect(onShow).not.toHaveBeenCalled();
 
     act(() => {
       result.current.hide();
@@ -119,7 +119,7 @@ describe('usePortal', () => {
       // @ts-ignore
       result.current.show(e);
     });
-    expect(onShow).toBeCalledWith(e);
+    expect(onShow).toHaveBeenCalledWith(e);
 
     act(() => {
       result.current.toggle();
@@ -128,7 +128,7 @@ describe('usePortal', () => {
       // @ts-ignore
       result.current.toggle(e);
     });
-    expect(onShow).toBeCalledWith(e);
+    expect(onShow).toHaveBeenCalledWith(e);
   });
 
   it('should trigger onHide correctly', () => {
@@ -139,7 +139,7 @@ describe('usePortal', () => {
     act(() => {
       result.current.hide();
     });
-    expect(onHide).not.toBeCalled();
+    expect(onHide).not.toHaveBeenCalled();
 
     act(() => {
       result.current.show();
@@ -148,7 +148,7 @@ describe('usePortal', () => {
       // @ts-ignore
       result.current.hide(e);
     });
-    expect(onHide).toBeCalledWith(e);
+    expect(onHide).toHaveBeenCalledWith(e);
 
     act(() => {
       result.current.toggle();
@@ -157,6 +157,6 @@ describe('usePortal', () => {
       // @ts-ignore
       result.current.toggle(e);
     });
-    expect(onHide).toBeCalledWith(e);
+    expect(onHide).toHaveBeenCalledWith(e);
   });
 });

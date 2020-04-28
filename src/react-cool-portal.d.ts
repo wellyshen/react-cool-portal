@@ -3,7 +3,7 @@ declare module 'react-cool-portal' {
     SyntheticEvent,
     MouseEvent as ReactMouseEvent,
     SFC,
-    ReactNode
+    ReactNode,
   } from 'react';
 
   export interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {

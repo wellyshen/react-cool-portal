@@ -21,7 +21,7 @@ describe('createPortal', () => {
 
   const renderHelper = ({
     containerId = defaultContainerId,
-    isShow = true
+    isShow = true,
   }: Args = {}): Return => {
     const clickOutsideCb = jest.fn();
     const escCb = jest.fn();
@@ -57,26 +57,26 @@ describe('createPortal', () => {
   it('should trigger callback when clicks outside of the child', () => {
     const { clickOutsideCb } = renderHelper();
     fireEvent.click(document);
-    expect(clickOutsideCb).toBeCalled();
+    expect(clickOutsideCb).toHaveBeenCalled();
   });
 
   it('should not trigger callback when clicks inside of the child', () => {
     const { getByTestId, clickOutsideCb } = renderHelper();
     fireEvent.click(getByTestId(childId));
-    expect(clickOutsideCb).not.toBeCalled();
+    expect(clickOutsideCb).not.toHaveBeenCalled();
   });
 
   it('should trigger callback when presses ESC key', () => {
     const { escCb } = renderHelper();
     fireEvent.keyDown(document, { keyCode: 27 });
-    expect(escCb).toBeCalled();
+    expect(escCb).toHaveBeenCalled();
   });
 
   it('should not trigger callbacks when isShow set to false', () => {
     const { clickOutsideCb, escCb } = renderHelper({ isShow: false });
     fireEvent.click(document);
     fireEvent.keyDown(document, { keyCode: 27 });
-    expect(clickOutsideCb).not.toBeCalled();
-    expect(escCb).not.toBeCalled();
+    expect(clickOutsideCb).not.toHaveBeenCalled();
+    expect(escCb).not.toHaveBeenCalled();
   });
 });

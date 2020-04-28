@@ -17,14 +17,14 @@ import {
   modalHeader,
   modalTitle,
   modalClose,
-  modalBody
+  modalBody,
 } from './styles';
 
 const App: SFC<{}> = () => {
   const [isFadeOut, setIsFadeOut] = useState(false);
   const { Portal, show, hide, isShow } = usePortal({
     defaultShow: false,
-    escToHide: false
+    escToHide: false,
   });
 
   const close = (): void => {

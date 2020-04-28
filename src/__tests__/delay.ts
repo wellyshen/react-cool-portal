@@ -7,9 +7,9 @@ describe('delay', () => {
     const cb = jest.fn();
     // @ts-ignore
     delay(cb);
-    expect(cb).not.toBeCalled();
+    expect(cb).not.toHaveBeenCalled();
     jest.advanceTimersByTime(100);
-    expect(cb).toBeCalled();
+    expect(cb).toHaveBeenCalled();
   });
 
   it('should trigger callback according to a specific time', () => {
@@ -18,8 +18,8 @@ describe('delay', () => {
     // @ts-ignore
     delay(cb, time);
     jest.advanceTimersByTime(time - 1);
-    expect(cb).not.toBeCalled();
+    expect(cb).not.toHaveBeenCalled();
     jest.advanceTimersByTime(time);
-    expect(cb).toBeCalled();
+    expect(cb).toHaveBeenCalled();
   });
 });

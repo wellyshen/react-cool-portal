@@ -3,7 +3,7 @@ import {
   MouseEvent as ReactMouseEvent,
   useState,
   useRef,
-  useCallback
+  useCallback,
 } from 'react';
 
 import useLatest from './useLatest';
@@ -40,7 +40,7 @@ const usePortal = ({
   escToHide = true,
   internalShowHide = true,
   onShow,
-  onHide
+  onHide,
 }: Args = {}): Return => {
   const [isShow, setIsShow] = useState<boolean>(defaultShow);
   const skipClickOutsideRef = useRef<boolean>(false);
@@ -59,7 +59,7 @@ const usePortal = ({
   }, [clickOutsideToHide]);
 
   const show = useCallback(
-    e => {
+    (e) => {
       setSkipClickOutside();
 
       if (isShowRef.current) return;
@@ -73,7 +73,7 @@ const usePortal = ({
   );
 
   const hide = useCallback(
-    e => {
+    (e) => {
       setSkipClickOutside();
 
       if (!isShowRef.current) return;
@@ -87,7 +87,7 @@ const usePortal = ({
   );
 
   const toggle = useCallback(
-    e => {
+    (e) => {
       if (isShowRef.current) {
         hide(e);
       } else {
@@ -98,7 +98,7 @@ const usePortal = ({
   );
 
   const handleHide = useCallback(
-    e => {
+    (e) => {
       if (!skipClickOutsideRef.current) hide(e);
     },
     [hide]
