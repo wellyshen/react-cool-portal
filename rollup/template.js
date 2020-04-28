@@ -14,9 +14,9 @@ export default ({ files }) => `
       <title>React Cool Portal</title>
       <meta property="og:title" content="React Cool Portal" />
       <meta property="og:type" content="website" />
-      <meta property="og:image" content="https://react-cool-portal.netlify.com/assets/og_image.png" />
+      <meta property="og:image" content="https://react-cool-portal.netlify.app/assets/og_image.png" />
       <meta property="og:description" content="React hook for Portals, which renders modals, dropdowns, tooltips etc. to <body> or else." />
-      <meta property="og:url" content="https://react-cool-portal.netlify.com" />
+      <meta property="og:url" content="https://react-cool-portal.netlify.app" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@react-cool-portal" />
       <meta name="twitter:creator" content="@wellyshen" />
