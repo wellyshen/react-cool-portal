@@ -14,7 +14,7 @@ interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
   (event?: T): void;
 }
 type OnHide = RCPF<ReactMouseEvent | MouseEvent | KeyboardEvent>;
-interface Args {
+export interface Args {
   containerId?: string;
   defaultShow?: boolean;
   clickOutsideToHide?: boolean;
