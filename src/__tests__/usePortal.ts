@@ -1,13 +1,18 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 
 import createPortal from '../createPortal';
-import usePortal, { Args, defaultContainerId, initShow } from '..';
+import usePortal, {
+  Args,
+  Return as Current,
+  defaultContainerId,
+  initShow,
+} from '..';
 
 jest.mock('../createPortal', () => jest.fn());
 
 describe('usePortal', () => {
   const e = { test: 'test' };
-  const renderHelper = (args: Args = {}): any =>
+  const renderHelper = (args: Args = {}): { current: Current } =>
     renderHook(() => usePortal(args)).result;
 
   it('should create Portal with default parameters correctly', () => {

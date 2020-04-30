@@ -23,7 +23,7 @@ export interface Args {
   onShow?: RCPF;
   onHide?: OnHide;
 }
-interface Return {
+export interface Return {
   readonly Portal: PortalType;
   readonly isShow: boolean;
   readonly show: RCPF;
