@@ -7,10 +7,8 @@ jest.mock('../createPortal', () => jest.fn());
 
 describe('usePortal', () => {
   const e = { test: 'test' };
-  const renderHelper = (args: Args = {}): any => {
-    const { result } = renderHook(() => usePortal(args));
-    return result;
-  };
+  const renderHelper = (args: Args = {}): any =>
+    renderHook(() => usePortal(args)).result;
 
   it('should create Portal with default parameters correctly', () => {
     renderHelper();
