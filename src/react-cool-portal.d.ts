@@ -2,7 +2,7 @@ declare module 'react-cool-portal' {
   import {
     SyntheticEvent,
     MouseEvent as ReactMouseEvent,
-    SFC,
+    FC,
     ReactNode,
   } from 'react';
 
@@ -10,7 +10,7 @@ declare module 'react-cool-portal' {
     (event?: T): void;
   }
 
-  type Portal = SFC<{ children: ReactNode }>;
+  type Portal = FC<{ children: ReactNode }>;
 
   interface Args {
     containerId?: string;

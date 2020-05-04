@@ -1,4 +1,4 @@
-import { ReactNode, SFC, ReactPortal, useState, useEffect } from 'react';
+import { ReactNode, FC, ReactPortal, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 import delay from './delay';
@@ -9,7 +9,7 @@ interface Callback<T extends MouseEvent | KeyboardEvent> {
 interface Props {
   children: ReactNode;
 }
-export type Portal = SFC<Props>;
+export type Portal = FC<Props>;
 
 const createEl = (id: string): HTMLDivElement => {
   const el = document.createElement('div');

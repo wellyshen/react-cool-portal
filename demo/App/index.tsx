@@ -1,4 +1,4 @@
-import React, { SFC, MouseEvent, useState, useEffect } from 'react';
+import React, { FC, MouseEvent, useState, useEffect } from 'react';
 import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
@@ -20,7 +20,7 @@ import {
   modalBody,
 } from './styles';
 
-const App: SFC<{}> = () => {
+const App: FC<{}> = () => {
   const [isFadeOut, setIsFadeOut] = useState(false);
   const { Portal, show, hide, isShow } = usePortal({
     defaultShow: false,
