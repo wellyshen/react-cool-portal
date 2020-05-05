@@ -55,8 +55,8 @@ Here are some minimal examples of how does it work. You can learn more about it 
 Inserts an element or component into the a different location in the DOM.
 
 ```js
-import React from 'react';
-import usePortal from 'react-cool-portal';
+import React from "react";
+import usePortal from "react-cool-portal";
 
 const App = () => {
   const { Portal } = usePortal();
@@ -76,11 +76,11 @@ const App = () => {
 By default, the children of portal is rendered into `<div id="react-cool-portal">` of `<body>`. You can specify the DOM element you want through the `containerId` option.
 
 ```js
-import React from 'react';
-import usePortal from 'react-cool-portal';
+import React from "react";
+import usePortal from "react-cool-portal";
 
 const App = () => {
-  const { Portal } = usePortal({ containerId: 'my-portal-root' });
+  const { Portal } = usePortal({ containerId: "my-portal-root" });
 
   return (
     <div>
@@ -101,27 +101,27 @@ const App = () => {
 [![Edit usePortal](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/useportal-v8voh?fontsize=14&hidenavigation=1&theme=dark)
 
 ```js
-import React from 'react';
-import usePortal from 'react-cool-portal';
+import React from "react";
+import usePortal from "react-cool-portal";
 
 const App = () => {
   const { Portal, isShow, show, hide, toggle } = usePortal({
     defaultShow: false, // The default visibility of portal, default is true
-    onShow: e => {
+    onShow: (e) => {
       // Triggered when portal is shown
       // The event object will be the parameter of "show(e?)"
     },
-    onHide: e => {
+    onHide: (e) => {
       // Triggered when portal is hidden
       // The event object will be the parameter of "hide(e?)", it maybe MouseEvent (on clicks outside) or KeyboardEvent (press ESC key)
-    }
+    },
   });
 
   return (
     <div>
       <button onClick={show}>Open Modal</button>
       <button onClick={hide}>Close Modal</button>
-      <button onClick={toggle}>{isShow ? 'Close' : 'Open'} Modal</button>
+      <button onClick={toggle}>{isShow ? "Close" : "Open"} Modal</button>
       <Portal>
         <div class="modal" tabIndex={-1}>
           <div
@@ -153,30 +153,30 @@ The above example shows how easy you can handle the visibility of your component
 [![Edit usePortal with Animation](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/useportal-with-animation-eorc2?fontsize=14&hidenavigation=1&theme=dark)
 
 ```js
-import React from 'react';
-import usePortal from 'react-cool-portal';
+import React from "react";
+import usePortal from "react-cool-portal";
 
 const App = () => {
   const { Portal, isShow, show, hide, toggle } = usePortal({
     defaultShow: false,
     internalShowHide: false, // Disable the built-in show/hide portal functions, default is true
-    onShow: e => {
+    onShow: (e) => {
       // Triggered when "isShow" is set as true
     },
-    onHide: e => {
+    onHide: (e) => {
       // Triggered when "isShow" is set as false
-    }
+    },
   });
 
   return (
     <div>
       <button onClick={show}>Open Modal</button>
       <button onClick={hide}>Close Modal</button>
-      <button onClick={toggle}>{isShow ? 'Close' : 'Open'} Modal</button>
+      <button onClick={toggle}>{isShow ? "Close" : "Open"} Modal</button>
       <Portal>
         <div
           // Now you can use the "isShow" state to handle the CSS animations
-          class={`modal${isShow ? ' modal-open' : ''}`}
+          class={`modal${isShow ? " modal-open" : ""}`}
           tabIndex={-1}
         >
           <div
@@ -208,21 +208,21 @@ Besides that, you can also handle the visibility of your component via React [an
 Are you tired to write the same code over and over again? It's time to build your own hook based on `react-cool-portal` then use it wherever you want.
 
 ```js
-import React, { useCallback } from 'react';
-import usePortal from 'react-cool-portal';
+import React, { useCallback } from "react";
+import usePortal from "react-cool-portal";
 
 // Customize your hook based on react-cool-portal
 const useModal = (options = {}) => {
   const { Portal, isShow, ...rest } = usePortal({
     ...options,
     defaultShow: false,
-    internalShowHide: false
+    internalShowHide: false,
   });
 
   const Modal = useCallback(
     ({ children }) => (
       <Portal>
-        <div class={`modal${isShow ? ' modal-open' : ''}`} tabIndex={-1}>
+        <div class={`modal${isShow ? " modal-open" : ""}`} tabIndex={-1}>
           {children}
         </div>
       </Portal>

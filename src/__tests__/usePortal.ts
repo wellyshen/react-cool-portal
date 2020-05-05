@@ -1,21 +1,21 @@
-import { renderHook, act } from '@testing-library/react-hooks';
+import { renderHook, act } from "@testing-library/react-hooks";
 
-import createPortal from '../createPortal';
+import createPortal from "../createPortal";
 import usePortal, {
   Args,
   Return as Current,
   defaultContainerId,
   initShow,
-} from '..';
+} from "..";
 
-jest.mock('../createPortal', () => jest.fn());
+jest.mock("../createPortal", () => jest.fn());
 
-describe('usePortal', () => {
-  const e = { test: 'test' };
+describe("usePortal", () => {
+  const e = { test: "test" };
   const renderHelper = (args: Args = {}): { current: Current } =>
     renderHook(() => usePortal(args)).result;
 
-  it('should create Portal with default parameters correctly', () => {
+  it("should create Portal with default parameters correctly", () => {
     renderHelper();
     expect(createPortal).toHaveBeenCalledWith(
       defaultContainerId,
@@ -25,8 +25,8 @@ describe('usePortal', () => {
     );
   });
 
-  it('should create Portal correctly', () => {
-    const containerId = 'my-portal-root';
+  it("should create Portal correctly", () => {
+    const containerId = "my-portal-root";
     const defaultShow = false;
     const clickOutsideToHide = false;
     const escToHide = false;
@@ -39,7 +39,7 @@ describe('usePortal', () => {
     );
   });
 
-  it('should handle internal show/hide', () => {
+  it("should handle internal show/hide", () => {
     const params = [
       defaultContainerId,
       initShow,
@@ -62,7 +62,7 @@ describe('usePortal', () => {
     expect(createPortal).toHaveBeenCalledWith(...params);
   });
 
-  it('should disable internal show/hide', () => {
+  it("should disable internal show/hide", () => {
     const params = [
       defaultContainerId,
       true,
@@ -78,7 +78,7 @@ describe('usePortal', () => {
     expect(createPortal).toHaveBeenCalledWith(...params);
   });
 
-  it('should return default isShow correctly', () => {
+  it("should return default isShow correctly", () => {
     let result = renderHelper();
     expect(result.current.isShow).toBeTruthy();
 
@@ -86,7 +86,7 @@ describe('usePortal', () => {
     expect(result.current.isShow).toBeFalsy();
   });
 
-  it('should return isShow correctly', () => {
+  it("should return isShow correctly", () => {
     const result = renderHelper();
 
     act(() => {
@@ -109,7 +109,7 @@ describe('usePortal', () => {
     expect(result.current.isShow).toBeTruthy();
   });
 
-  it('should trigger onShow correctly', () => {
+  it("should trigger onShow correctly", () => {
     const onShow = jest.fn();
     const result = renderHelper({ onShow });
     act(() => {
@@ -136,7 +136,7 @@ describe('usePortal', () => {
     expect(onShow).toHaveBeenCalledWith(e);
   });
 
-  it('should trigger onHide correctly', () => {
+  it("should trigger onHide correctly", () => {
     const onHide = jest.fn();
     const result = renderHelper({ defaultShow: false, onHide });
     act(() => {

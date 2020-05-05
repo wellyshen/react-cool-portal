@@ -1,11 +1,11 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
 
-import createPortal from '../createPortal';
-import { defaultContainerId } from '..';
+import createPortal from "../createPortal";
+import { defaultContainerId } from "..";
 
-describe('createPortal', () => {
-  const childId = 'test';
+describe("createPortal", () => {
+  const childId = "test";
 
   interface Args {
     containerId?: string;
@@ -35,17 +35,17 @@ describe('createPortal', () => {
     return { clickOutsideCb, escCb, baseElement, getByTestId, unmount };
   };
 
-  it('should render correctly', () => {
+  it("should render correctly", () => {
     const { baseElement } = renderHelper();
     expect(baseElement).toMatchSnapshot();
   });
 
-  it('should not render child', () => {
+  it("should not render child", () => {
     const { baseElement } = renderHelper({ isShow: false });
     expect(baseElement).toMatchSnapshot();
   });
 
-  it('should auto remove root', () => {
+  it("should auto remove root", () => {
     jest.useFakeTimers();
 
     const { baseElement, unmount } = renderHelper();
@@ -54,25 +54,25 @@ describe('createPortal', () => {
     expect(baseElement).toMatchSnapshot();
   });
 
-  it('should trigger callback when clicks outside of the child', () => {
+  it("should trigger callback when clicks outside of the child", () => {
     const { clickOutsideCb } = renderHelper();
     fireEvent.click(document);
     expect(clickOutsideCb).toHaveBeenCalled();
   });
 
-  it('should not trigger callback when clicks inside of the child', () => {
+  it("should not trigger callback when clicks inside of the child", () => {
     const { getByTestId, clickOutsideCb } = renderHelper();
     fireEvent.click(getByTestId(childId));
     expect(clickOutsideCb).not.toHaveBeenCalled();
   });
 
-  it('should trigger callback when presses ESC key', () => {
+  it("should trigger callback when presses ESC key", () => {
     const { escCb } = renderHelper();
     fireEvent.keyDown(document, { keyCode: 27 });
     expect(escCb).toHaveBeenCalled();
   });
 
-  it('should not trigger callbacks when isShow set to false', () => {
+  it("should not trigger callbacks when isShow set to false", () => {
     const { clickOutsideCb, escCb } = renderHelper({ isShow: false });
     fireEvent.click(document);
     fireEvent.keyDown(document, { keyCode: 27 });

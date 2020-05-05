@@ -1,9 +1,9 @@
-import React, { FC, MouseEvent, useState, useEffect } from 'react';
-import { Global, css } from '@emotion/core';
-import normalize from 'normalize.css';
+import React, { FC, MouseEvent, useState, useEffect } from "react";
+import { Global, css } from "@emotion/core";
+import normalize from "normalize.css";
 
-import GitHubCorner from '../GitHubCorner';
-import usePortal from '../../src';
+import GitHubCorner from "../GitHubCorner";
+import usePortal from "../../src";
 import {
   root,
   container,
@@ -18,7 +18,7 @@ import {
   modalTitle,
   modalClose,
   modalBody,
-} from './styles';
+} from "./styles";
 
 const App: FC<{}> = () => {
   const [isFadeOut, setIsFadeOut] = useState(false);
@@ -34,7 +34,7 @@ const App: FC<{}> = () => {
   const handleClickBackdrop = (e: MouseEvent): void => {
     const { id } = e.target as HTMLDivElement;
 
-    if (id === 'modal' || id === 'modal-dialog') close();
+    if (id === "modal" || id === "modal-dialog") close();
   };
 
   const handleAnimEnd = (): void => {
@@ -49,10 +49,10 @@ const App: FC<{}> = () => {
       if (isShow && e.keyCode === 27) close();
     };
 
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
 
     return (): void => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isShow]);
 
@@ -69,7 +69,7 @@ const App: FC<{}> = () => {
         <h1 css={title}>React Cool Portal</h1>
         <p css={subtitle}>
           {
-            'React hook for Portals, which renders modals, dropdowns, tooltips etc. to <body> or else.'
+            "React hook for Portals, which renders modals, dropdowns, tooltips etc. to <body> or else."
           }
         </p>
         <button css={btn} onClick={show} type="button">
@@ -92,7 +92,7 @@ const App: FC<{}> = () => {
                   <h5 css={modalTitle} id="exampleModalLabel">
                     <span role="img" aria-label="Hello">
                       👋🏻
-                    </span>{' '}
+                    </span>{" "}
                     Hola
                   </h5>
                   <button

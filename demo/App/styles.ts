@@ -1,6 +1,6 @@
-import { css, keyframes } from '@emotion/core';
+import { css, keyframes } from "@emotion/core";
 
-import mq from '../utils/mq';
+import mq from "../utils/mq";
 
 const { sm, md, lg } = mq;
 
@@ -48,7 +48,7 @@ const fadeOut = keyframes`
 
 export const root = css`
   body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
   }
 `;
 

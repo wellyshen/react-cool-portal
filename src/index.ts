@@ -4,11 +4,11 @@ import {
   useState,
   useRef,
   useCallback,
-} from 'react';
+} from "react";
 
-import useLatest from './useLatest';
-import delay from './delay';
-import createPortal, { Portal as PortalType } from './createPortal';
+import useLatest from "./useLatest";
+import delay from "./delay";
+import createPortal, { Portal as PortalType } from "./createPortal";
 
 interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
   (event?: T): void;
@@ -31,7 +31,7 @@ export interface Return {
   readonly toggle: RCPF;
 }
 
-export const defaultContainerId = 'react-cool-portal';
+export const defaultContainerId = "react-cool-portal";
 export const initShow = true;
 const usePortal = ({
   containerId = defaultContainerId,

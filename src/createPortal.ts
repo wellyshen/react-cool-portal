@@ -1,7 +1,7 @@
-import { ReactNode, FC, ReactPortal, useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
+import { ReactNode, FC, ReactPortal, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
-import delay from './delay';
+import delay from "./delay";
 
 interface Callback<T extends MouseEvent | KeyboardEvent> {
   (event: T): void | false;
@@ -12,8 +12,8 @@ interface Props {
 export type Portal = FC<Props>;
 
 const createEl = (id: string): HTMLDivElement => {
-  const el = document.createElement('div');
-  el.setAttribute('id', id);
+  const el = document.createElement("div");
+  el.setAttribute("id", id);
   document.body.appendChild(el);
 
   return el;
@@ -34,7 +34,7 @@ export default (
       if (!container) return;
 
       delay(() => {
-        if (container.innerHTML === '') container.remove();
+        if (container.innerHTML === "") container.remove();
       });
     };
   }, [container]);
@@ -49,13 +49,13 @@ export default (
       if (e.keyCode === 27) escCb(e);
     };
 
-    if (clickOutsideCb) document.addEventListener('click', handleClick);
-    if (escCb) document.addEventListener('keydown', handleKeyDown);
+    if (clickOutsideCb) document.addEventListener("click", handleClick);
+    if (escCb) document.addEventListener("keydown", handleKeyDown);
 
     // eslint-disable-next-line consistent-return
     return (): void => {
-      if (clickOutsideCb) document.removeEventListener('click', handleClick);
-      if (escCb) document.removeEventListener('keydown', handleKeyDown);
+      if (clickOutsideCb) document.removeEventListener("click", handleClick);
+      if (escCb) document.removeEventListener("keydown", handleKeyDown);
     };
   }, [container]);
 

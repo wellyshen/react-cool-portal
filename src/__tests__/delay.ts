@@ -1,9 +1,9 @@
-import delay from '../delay';
+import delay from "../delay";
 
-describe('delay', () => {
+describe("delay", () => {
   jest.useFakeTimers();
 
-  it('should trigger callback when time is up', () => {
+  it("should trigger callback when time is up", () => {
     const cb = jest.fn();
     // @ts-ignore
     delay(cb);
@@ -12,7 +12,7 @@ describe('delay', () => {
     expect(cb).toHaveBeenCalled();
   });
 
-  it('should trigger callback according to a specific time', () => {
+  it("should trigger callback according to a specific time", () => {
     const cb = jest.fn();
     const time = 500;
     // @ts-ignore
