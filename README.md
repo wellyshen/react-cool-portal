@@ -285,15 +285,15 @@ It's returned with the following properties.
 
 When use `react-cool-portal` you can configure the following options via the parameter.
 
-| Key                | Type     | Default             | Description                                                                                                     |
-| ------------------ | -------- | ------------------- | --------------------------------------------------------------------------------------------------------------- |
-| containerId        | string   | `react-cool-portal` | You can specify the container of portal you want by setting it as the id of the DOM element.                    |
-| defaultShow        | boolean  | `true`              | The initial show/hide state of the portal.                                                                      |
-| clickOutsideToHide | boolean  | `true`              | Hide the portal by clicking outside of it.                                                                      |
-| escToHide          | boolean  | `true`              | Hide the portal by pressing ESC key.                                                                            |
-| internalShowHide   | boolean  | `true`              | Enable/disable the built-in `show/hide` portal functions, which gives you a flexible way to handle your portal. |
-| onShow             | function |                     | Triggered when portal is shown or the `isShow` set to `true`.                                                   |
-| onHide             | function |                     | Triggered when portal is hidden or the `isShow` set to `false`.                                                 |
+| Key                | Type     | Default             | Description                                                                                                           |
+| ------------------ | -------- | ------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| containerId        | string   | `react-cool-portal` | You can specify your own container id from an existing DOM element or let this hook automatically creates it for you. |
+| defaultShow        | boolean  | `true`              | The initial show/hide state of the portal.                                                                            |
+| clickOutsideToHide | boolean  | `true`              | Hide the portal by clicking outside of it.                                                                            |
+| escToHide          | boolean  | `true`              | Hide the portal by pressing ESC key.                                                                                  |
+| internalShowHide   | boolean  | `true`              | Enable/disable the built-in `show/hide` portal functions, which gives you a flexible way to handle your portal.       |
+| onShow             | function |                     | Triggered when portal is shown or the `isShow` set to `true`.                                                         |
+| onHide             | function |                     | Triggered when portal is hidden or the `isShow` set to `false`.                                                       |
 
 ## Contributors ✨
 
