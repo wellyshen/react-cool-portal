@@ -10,18 +10,21 @@ import useLatest from "./useLatest";
 import delay from "./delay";
 import createPortal, { Portal as PortalType } from "./createPortal";
 
-interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
-  (event?: T): void;
+interface OnShow<T extends SyntheticEvent | Event = ReactMouseEvent> {
+  (event: T): void;
 }
-type OnHide = RCPF<ReactMouseEvent | MouseEvent | KeyboardEvent>;
+type OnHide = OnShow<ReactMouseEvent | MouseEvent | KeyboardEvent>;
 export interface Args {
   containerId?: string;
   defaultShow?: boolean;
   clickOutsideToHide?: boolean;
   escToHide?: boolean;
   internalShowHide?: boolean;
-  onShow?: RCPF;
+  onShow?: OnShow;
   onHide?: OnHide;
+}
+interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
+  (event?: T): void;
 }
 export interface Return {
   readonly Portal: PortalType;
@@ -44,7 +47,7 @@ const usePortal = ({
 }: Args = {}): Return => {
   const [isShow, setIsShow] = useState<boolean>(defaultShow);
   const skipClickOutsideRef = useRef<boolean>(false);
-  const onShowRef = useLatest<RCPF>(onShow);
+  const onShowRef = useLatest<OnShow>(onShow);
   const onHideRef = useLatest<OnHide>(onHide);
   // Workaround: because handleHide() will cache "isShow" state
   const isShowRef = useRef<boolean>(defaultShow);

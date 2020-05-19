@@ -6,11 +6,15 @@ declare module "react-cool-portal" {
     ReactNode,
   } from "react";
 
+  export interface OnShow<T extends SyntheticEvent | Event = ReactMouseEvent> {
+    (event: T): void;
+  }
+
+  export type OnHide = OnShow<ReactMouseEvent | MouseEvent | KeyboardEvent>;
+
   export interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
     (event?: T): void;
   }
-
-  type Portal = FC<{ children: ReactNode }>;
 
   interface Args {
     containerId?: string;
@@ -18,12 +22,12 @@ declare module "react-cool-portal" {
     clickOutsideToHide?: boolean;
     escToHide?: boolean;
     internalShowHide?: boolean;
-    onShow?: RCPF;
-    onHide?: RCPF<ReactMouseEvent | MouseEvent | KeyboardEvent>;
+    onShow?: OnShow;
+    onHide?: OnHide;
   }
 
   interface Return {
-    readonly Portal: Portal;
+    readonly Portal: FC<{ children: ReactNode }>;
     readonly isShow: boolean;
     readonly show: RCPF;
     readonly hide: RCPF;
