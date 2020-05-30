@@ -12,11 +12,11 @@ describe("createPortal", () => {
     isShow?: boolean;
   }
   interface Return {
-    clickOutsideCb: Function;
-    escCb: Function;
+    clickOutsideCb: any;
+    escCb: any;
     baseElement: any;
-    getByTestId: Function;
-    unmount: Function;
+    getByTestId: any;
+    unmount: any;
   }
 
   const renderHelper = ({

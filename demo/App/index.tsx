@@ -20,7 +20,7 @@ import {
   modalBody,
 } from "./styles";
 
-const App: FC<{}> = () => {
+const App: FC = () => {
   const [isFadeOut, setIsFadeOut] = useState(false);
   const { Portal, show, hide, isShow } = usePortal({
     defaultShow: false,
