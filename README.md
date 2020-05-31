@@ -4,7 +4,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 
 ❤️ it? ⭐️ it on [GitHub](https://github.com/wellyshen/react-cool-portal/stargazers) or [Tweet](https://twitter.com/intent/tweet?text=With%20@react-cool-portal,%20I%20can%20build%20modals,%20dropdowns,%20tooltips%20etc.%20without%20struggle!%20Thanks,%20@Welly%20Shen%20🤩) about it.
 
-[![build status](https://img.shields.io/travis/wellyshen/react-cool-portal/master?style=flat-square)](https://travis-ci.org/wellyshen/react-cool-portal)
+[![build status](https://img.shields.io/github/workflow/status/wellyshen/react-cool-portal/CI?style=flat-square)](https://github.com/wellyshen/react-cool-portal/actions?query=workflow%3ACI)
 [![coverage status](https://img.shields.io/coveralls/github/wellyshen/react-cool-portal?style=flat-square)](https://coveralls.io/github/wellyshen/react-cool-portal?branch=master)
 [![npm version](https://img.shields.io/npm/v/react-cool-portal?style=flat-square)](https://www.npmjs.com/package/react-cool-portal)
 [![npm downloads](https://img.shields.io/npm/dm/react-cool-portal?style=flat-square)](https://www.npmtrends.com/react-cool-portal)
