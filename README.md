@@ -227,7 +227,7 @@ const useModal = (options = {}) => {
         </div>
       </Portal>
     ),
-    []
+    [isShow]
   );
 
   return { Modal, isShow, ...rest };
