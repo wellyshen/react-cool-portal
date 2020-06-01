@@ -1,6 +1,6 @@
 {
   "name": "react-cool-portal",
-  "version": "1.0.11",
+  "version": "1.0.10",
   "description": "React hook for Portals, which renders modals, dropdowns, tooltips etc. to <body> or else.",
   "license": "MIT",
   "homepage": "https://react-cool-portal.netlify.com",
