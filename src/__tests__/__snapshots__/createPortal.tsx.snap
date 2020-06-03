@@ -12,7 +12,7 @@ exports[`createPortal should not render portal 1`] = `
 </body>
 `;
 
-exports[`createPortal should render correctly 1`] = `
+exports[`createPortal should render portal 1`] = `
 <body>
   <div />
   <div
