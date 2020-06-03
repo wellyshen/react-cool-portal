@@ -28,6 +28,8 @@ export default (
   const [container, setContainer] = useState(null);
 
   useEffect(() => {
+    if (!isShow) return (): void => null;
+
     setContainer(document.getElementById(id) || createEl(id));
 
     return (): void => {
@@ -40,7 +42,7 @@ export default (
   }, [container]);
 
   useEffect(() => {
-    if (!isShow || !container) return;
+    if (!isShow || !container) return (): void => null;
 
     const handleClick = (e: MouseEvent): void => {
       if (!container.contains(e.target)) clickOutsideCb(e);
@@ -52,7 +54,6 @@ export default (
     if (clickOutsideCb) document.addEventListener("click", handleClick);
     if (escCb) document.addEventListener("keydown", handleKeyDown);
 
-    // eslint-disable-next-line consistent-return
     return (): void => {
       if (clickOutsideCb) document.removeEventListener("click", handleClick);
       if (escCb) document.removeEventListener("keydown", handleKeyDown);

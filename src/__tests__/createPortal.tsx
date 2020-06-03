@@ -35,17 +35,17 @@ describe("createPortal", () => {
     return { clickOutsideCb, escCb, baseElement, getByTestId, unmount };
   };
 
-  it("should render correctly", () => {
-    const { baseElement } = renderHelper();
-    expect(baseElement).toMatchSnapshot();
-  });
-
-  it("should not render child", () => {
+  it("should not render portal", () => {
     const { baseElement } = renderHelper({ isShow: false });
     expect(baseElement).toMatchSnapshot();
   });
 
-  it("should auto remove root", () => {
+  it("should render portal", () => {
+    const { baseElement } = renderHelper();
+    expect(baseElement).toMatchSnapshot();
+  });
+
+  it("should auto remove container", () => {
     jest.useFakeTimers();
 
     const { baseElement, unmount } = renderHelper();
