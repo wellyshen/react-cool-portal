@@ -1,16 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createPortal should auto remove root 1`] = `
+exports[`createPortal should auto remove container 1`] = `
 <body>
   <div />
 </body>
 `;
 
-exports[`createPortal should not render child 1`] = `
+exports[`createPortal should not render portal 1`] = `
 <body>
-  <div
-    id="react-cool-portal"
-  />
   <div />
 </body>
 `;
