@@ -26,7 +26,7 @@ export interface Args {
 interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
   (event?: T): void;
 }
-export interface Return {
+interface Return {
   readonly Portal: PortalType;
   readonly isShow: boolean;
   readonly show: RCPF;
