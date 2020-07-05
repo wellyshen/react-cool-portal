@@ -148,7 +148,7 @@ const App = () => {
 
 > 🧹 When no element in the container, we will remove it for you to avoid DOM mess.
 
-The above example shows how easy you can handle the visibility of your component. You may ask how to handle the visibility with animations? No worries, you can disable the built-in `show/hide` functions by setting the `internalShowHide` option as `false` then handling the visibility of your component via the `isShow` state.
+The above example shows how easy you can handle the visibility of your component. You may ask how to handle the visibility with animations? No worries, you can disable the built-in `show/hide` functions by setting the `internalShowHide` option to `false` then handling the visibility of your component via the `isShow` state.
 
 [![Edit usePortal with Animation](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/useportal-with-animation-eorc2?fontsize=14&hidenavigation=1&theme=dark)
 
@@ -161,10 +161,10 @@ const App = () => {
     defaultShow: false,
     internalShowHide: false, // Disable the built-in show/hide portal functions, default is true
     onShow: (e) => {
-      // Triggered when "isShow" is set as true
+      // Triggered when "isShow" is set to true
     },
     onHide: (e) => {
-      // Triggered when "isShow" is set as false
+      // Triggered when "isShow" is set to false
     },
   });
 
@@ -277,9 +277,9 @@ It's returned with the following properties.
 | ------ | --------- | ------- | ----------------------------------------------------------------------------------------------- |
 | Portal | component |         | Renders children into a DOM node that exists outside the DOM hierarchy of the parent component. |
 | isShow | boolean   | `false` | The show/hide state of portal.                                                                  |
-| show   | function  |         | To show the portal or set the `isShow` as `true`.                                               |
-| hide   | function  |         | To hide the portal or set the `isShow` as `false`.                                              |
-| toggle | function  |         | To toggle (show/hide) the portal or set the `isShow` as `true/false`.                           |
+| show   | function  |         | To show the portal or set the `isShow` to `true`.                                               |
+| hide   | function  |         | To hide the portal or set the `isShow` to `false`.                                              |
+| toggle | function  |         | To toggle (show/hide) the portal or set the `isShow` to `true/false`.                           |
 
 ### Parameter object (optional)
 
