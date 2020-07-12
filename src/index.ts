@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import {
   SyntheticEvent,
   MouseEvent as ReactMouseEvent,
@@ -71,7 +73,6 @@ const usePortal = ({
       isShowRef.current = true;
       if (onShowRef.current) onShowRef.current(e);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [setSkipClickOutside]
   );
 
@@ -85,7 +86,6 @@ const usePortal = ({
       isShowRef.current = false;
       if (onHideRef.current) onHideRef.current(e);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [setSkipClickOutside]
   );
 
@@ -107,7 +107,6 @@ const usePortal = ({
     [hide]
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const Portal = useCallback(
     createPortal(
       containerId,
