@@ -107,6 +107,7 @@ const usePortal = ({
     [hide]
   );
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const Portal = useCallback(
     createPortal(
       containerId,
