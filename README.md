@@ -123,19 +123,19 @@ const App = () => {
       <button onClick={hide}>Close Modal</button>
       <button onClick={toggle}>{isShow ? "Close" : "Open"} Modal</button>
       <Portal>
-        <div class="modal" tabIndex={-1}>
+        <div className="modal" tabIndex={-1}>
           <div
-            class="modal-dialog"
+            className="modal-dialog"
             role="dialog"
             aria-labelledby="modal-label"
             aria-modal="true"
           >
-            <div class="modal-header">
-              <h5 id="modal-label" class="modal-title">
+            <div className="modal-header">
+              <h5 id="modal-label" className="modal-title">
                 Modal title
               </h5>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <p>Modal body text goes here.</p>
             </div>
           </div>
@@ -176,21 +176,21 @@ const App = () => {
       <Portal>
         <div
           // Now you can use the "isShow" state to handle the CSS animations
-          class={`modal${isShow ? " modal-open" : ""}`}
+          className={`modal${isShow ? " modal-open" : ""}`}
           tabIndex={-1}
         >
           <div
-            class="modal-dialog"
+            className="modal-dialog"
             role="dialog"
             aria-labelledby="modal-label"
             aria-modal="true"
           >
-            <div class="modal-header">
-              <h5 id="modal-label" class="modal-title">
+            <div className="modal-header">
+              <h5 id="modal-label" className="modal-title">
                 Modal title
               </h5>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <p>Modal body text goes here.</p>
             </div>
           </div>
@@ -222,7 +222,7 @@ const useModal = (options = {}) => {
   const Modal = useCallback(
     ({ children }) => (
       <Portal>
-        <div class={`modal${isShow ? " modal-open" : ""}`} tabIndex={-1}>
+        <div className={`modal${isShow ? " modal-open" : ""}`} tabIndex={-1}>
           {children}
         </div>
       </Portal>
@@ -243,17 +243,17 @@ const App = () => {
       <button onClick={hide}>Close Modal</button>
       <Modal>
         <div
-          class="modal-dialog"
+          className="modal-dialog"
           role="dialog"
           aria-labelledby="modal-label"
           aria-modal="true"
         >
-          <div class="modal-header">
-            <h5 id="modal-label" class="modal-title">
+          <div className="modal-header">
+            <h5 id="modal-label" className="modal-title">
               Modal title
             </h5>
           </div>
-          <div class="modal-body">
+          <div className="modal-body">
             <p>Modal body text goes here.</p>
           </div>
         </div>
