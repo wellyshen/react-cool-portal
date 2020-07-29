@@ -263,6 +263,32 @@ const App = () => {
 };
 ```
 
+One problem of the above example is that CSS transition/animation will be cut off due to the re-creating of the `Portal` component. So if you want to apply transitions or animations to the wrapped element of the customized hook. The `isShow` need to be passed from the props as below.
+
+```js
+const useModal = (options = {}) => {
+  const { Portal, ...rest } = usePortal({
+    ...options,
+    defaultShow: false,
+    internalShowHide: false,
+  });
+
+  const Modal = useCallback(
+    // Pass the "isShow" from props to prevent CSS transition/animation to be cut off
+    ({ isShow, children }) => (
+      <Portal>
+        <div className={`modal${isShow ? " modal-open" : ""}`} tabIndex={-1}>
+          {children}
+        </div>
+      </Portal>
+    ),
+    []
+  );
+
+  return { Modal, ...rest };
+};
+```
+
 ## API
 
 ```js
