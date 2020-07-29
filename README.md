@@ -263,7 +263,9 @@ const App = () => {
 };
 ```
 
-One problem of the above example is that CSS transition/animation will be cut off due to the re-creating of the `Portal` component. So if you want to apply transitions or animations to the wrapped element of the customized hook. The `isShow` need to be passed from the props as below.
+One problem of the above example is that CSS transition/animation will be cut off due to the re-creating of the `Portal` component. So if you want to apply transitions or animations to the wrapped element of the customized hook. The `isShow` need to be passed from the props.
+
+[![Edit usePortal - custom](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/useportal-custom-clnqz?fontsize=14&hidenavigation=1&theme=dark)
 
 ```js
 const useModal = (options = {}) => {
