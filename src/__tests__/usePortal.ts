@@ -116,7 +116,7 @@ describe("usePortal", () => {
       result.current.hide();
     });
     act(() => {
-      // @ts-ignore
+      // @ts-expect-error
       result.current.show(e);
     });
     expect(onShow).toHaveBeenCalledWith(e);
@@ -125,7 +125,7 @@ describe("usePortal", () => {
       result.current.toggle();
     });
     act(() => {
-      // @ts-ignore
+      // @ts-expect-error
       result.current.toggle(e);
     });
     expect(onShow).toHaveBeenCalledWith(e);
@@ -143,7 +143,7 @@ describe("usePortal", () => {
       result.current.show();
     });
     act(() => {
-      // @ts-ignore
+      // @ts-expect-error
       result.current.hide(e);
     });
     expect(onHide).toHaveBeenCalledWith(e);
@@ -152,7 +152,7 @@ describe("usePortal", () => {
       result.current.toggle();
     });
     act(() => {
-      // @ts-ignore
+      // @ts-expect-error
       result.current.toggle(e);
     });
     expect(onHide).toHaveBeenCalledWith(e);
