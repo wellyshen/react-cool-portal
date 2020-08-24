@@ -48,7 +48,10 @@ const fadeOut = keyframes`
 
 export const root = css`
   body {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
+    h1 {
+      font-family: "Bungee Shade", cursive;
+    }
   }
 `;
 
@@ -70,32 +73,38 @@ export const container = css`
 `;
 
 export const title = css`
-  margin: 0 0 0.75rem;
+  margin: 0 0 1rem;
+  font-size: 8vw;
+  ${md} {
+    font-size: 4vw;
+  }
 `;
 
 export const subtitle = css`
-  margin: 0 0 2.5rem;
+  margin: 0 0 5rem;
+  ${md} {
+    font-size: 1.5vw;
+  }
 `;
 
 export const btn = css`
-  padding: 0.375rem 0.75rem;
-  border: 1px solid transparent;
+  padding: 1rem 2rem;
+  border: none;
   border-color: #6c757d;
-  border-radius: 0.25rem;
   line-height: 1.5;
+  font-size: 1.25rem;
   color: #fff;
-  background: #6c757d;
+  background: #000;
   cursor: pointer;
   user-select: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   &:hover {
-    border-color: #545b62;
-    background: #5a6268;
+    background: #333;
   }
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
+    box-shadow: 0 0 0 5px rgba(130, 138, 145, 0.5);
   }
 `;
 
@@ -126,7 +135,6 @@ export const modalContent = css`
   background: #fff;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 0.3rem;
 `;
 
 export const modalHeader = css`
@@ -134,21 +142,21 @@ export const modalHeader = css`
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 3px dashed #dee2e6;
 `;
 
 export const modalTitle = css`
   margin: 0;
   font-size: 1.25rem;
-  font-weight: 500;
+  font-weight: bold;
   line-height: 1.5;
 `;
 
 export const modalClose = css`
-  margin: -1rem -1rem -1rem;
-  padding: 1rem;
+  margin: -1rem -0.5rem -1rem;
+  padding: 0.5rem 1rem;
   border: none;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
   line-height: 1;
   color: #000;

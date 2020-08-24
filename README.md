@@ -1,4 +1,4 @@
-# React Cool Portal
+# <em><b>REACT COOL PORTAL</b></em>
 
 This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) for [Portals](https://reactjs.org/docs/portals.html). It helps you render children into a DOM node that exists outside the DOM hierarchy of the parent component. From now on you will never need to struggle with modals, dropdowns, tooltips etc. Check the [features](#features) section out to learn more. Hope you guys 👍🏻 it.
 

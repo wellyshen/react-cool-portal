@@ -66,14 +66,14 @@ const App: FC = () => {
       />
       <div css={container}>
         <GitHubCorner url="https://github.com/wellyshen/react-cool-portal" />
-        <h1 css={title}>React Cool Portal</h1>
+        <h1 css={title}>REACT COOL PORTAL</h1>
         <p css={subtitle}>
           {
             "React hook for Portals, which renders modals, dropdowns, tooltips etc. to <body> or else."
           }
         </p>
         <button css={btn} onClick={show} type="button">
-          Open Modal
+          OPEN MODAL
         </button>
         <Portal>
           <div
