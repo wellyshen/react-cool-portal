@@ -17,7 +17,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 
 ## Live Demo
 
-![demo](https://user-images.githubusercontent.com/21308003/91047325-713dcd00-e64c-11ea-8f1d-040db9a95035.gif)
+![demo](https://user-images.githubusercontent.com/21308003/91049364-b1eb1580-e64f-11ea-9776-4668551db40d.gif)
 
 ⚡️ Try yourself: https://react-cool-portal.netlify.app
 

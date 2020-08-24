@@ -134,7 +134,7 @@ export const modalContent = css`
   max-width: 500px;
   background: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 3px solid rgba(0, 0, 0, 0.2);
 `;
 
 export const modalHeader = css`
