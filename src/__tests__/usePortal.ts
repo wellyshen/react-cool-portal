@@ -29,8 +29,8 @@ describe("usePortal", () => {
     expect(createPortal).toHaveBeenCalledWith(
       containerId,
       defaultShow,
-      clickOutsideToHide,
-      escToHide
+      undefined,
+      undefined
     );
   });
 

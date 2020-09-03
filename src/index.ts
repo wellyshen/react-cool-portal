@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import {
+  FC,
   SyntheticEvent,
   MouseEvent as ReactMouseEvent,
   useState,
@@ -10,7 +11,7 @@ import {
 
 import useLatest from "./useLatest";
 import delay from "./delay";
-import createPortal, { Portal as PortalType } from "./createPortal";
+import createPortal, { Props as PortalProps } from "./createPortal";
 
 interface OnShow<T extends SyntheticEvent | Event = ReactMouseEvent> {
   (event: T): void;
@@ -29,7 +30,7 @@ interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
   (event?: T): void;
 }
 interface Return {
-  readonly Portal: PortalType;
+  readonly Portal: FC<PortalProps>;
   readonly isShow: boolean;
   readonly show: RCPF;
   readonly hide: RCPF;
@@ -49,12 +50,12 @@ const usePortal = ({
 }: Args = {}): Return => {
   const [isShow, setIsShow] = useState<boolean>(defaultShow);
   const skipClickOutsideRef = useRef<boolean>(false);
-  const onShowRef = useLatest<OnShow>(onShow);
-  const onHideRef = useLatest<OnHide>(onHide);
+  const onShowRef = useLatest<OnShow | undefined>(onShow);
+  const onHideRef = useLatest<OnHide | undefined>(onHide);
   // Workaround: because handleHide() will cache "isShow" state
   const isShowRef = useRef<boolean>(defaultShow);
 
-  const setSkipClickOutside = useCallback((): void => {
+  const setSkipClickOutside = useCallback(() => {
     if (!clickOutsideToHide) return;
 
     skipClickOutsideRef.current = true;
@@ -111,8 +112,8 @@ const usePortal = ({
     createPortal(
       containerId,
       !internalShowHide || isShow,
-      clickOutsideToHide && handleHide,
-      escToHide && handleHide
+      clickOutsideToHide ? handleHide : undefined,
+      escToHide ? handleHide : undefined
     ),
     [internalShowHide && isShow]
   );

@@ -27,17 +27,17 @@ const App: FC = () => {
     escToHide: false,
   });
 
-  const close = (): void => {
+  const close = () => {
     setIsFadeOut(true);
   };
 
-  const handleClickBackdrop = (e: MouseEvent): void => {
+  const handleClickBackdrop = (e: MouseEvent) => {
     const { id } = e.target as HTMLDivElement;
 
     if (id === "modal" || id === "modal-dialog") close();
   };
 
-  const handleAnimEnd = (): void => {
+  const handleAnimEnd = () => {
     if (!isFadeOut) return;
 
     setIsFadeOut(false);
@@ -45,13 +45,13 @@ const App: FC = () => {
   };
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent): void => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (isShow && e.keyCode === 27) close();
     };
 
     document.addEventListener("keydown", handleKeyDown);
 
-    return (): void => {
+    return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isShow]);
