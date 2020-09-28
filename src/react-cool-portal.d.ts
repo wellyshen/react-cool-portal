@@ -27,11 +27,11 @@ declare module "react-cool-portal" {
   }
 
   interface Return {
-    readonly Portal: FC<{ children: ReactNode }>;
-    readonly isShow: boolean;
-    readonly show: RCPF;
-    readonly hide: RCPF;
-    readonly toggle: RCPF;
+    Portal: FC<{ children: ReactNode }>;
+    isShow: boolean;
+    show: RCPF;
+    hide: RCPF;
+    toggle: RCPF;
   }
 
   const usePortal: (args?: Args) => Return;

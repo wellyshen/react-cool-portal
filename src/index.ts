@@ -30,11 +30,11 @@ interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
   (event?: T): void;
 }
 interface Return {
-  readonly Portal: FC<PortalProps>;
-  readonly isShow: boolean;
-  readonly show: RCPF;
-  readonly hide: RCPF;
-  readonly toggle: RCPF;
+  Portal: FC<PortalProps>;
+  isShow: boolean;
+  show: RCPF;
+  hide: RCPF;
+  toggle: RCPF;
 }
 
 export const defaultContainerId = "react-cool-portal";
