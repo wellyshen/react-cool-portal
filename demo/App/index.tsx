@@ -46,7 +46,7 @@ const App: FC = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (isShow && e.keyCode === 27) close();
+      if (isShow && e.code === "Escape") close();
     };
 
     document.addEventListener("keydown", handleKeyDown);

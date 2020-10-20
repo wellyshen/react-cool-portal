@@ -49,7 +49,7 @@ export default (
     };
     const handleKeyDown = (e: KeyboardEvent) => {
       // @ts-expect-error
-      if (e.keyCode === 27) escCb(e);
+      if (e.code === "Escape") escCb(e);
     };
 
     if (clickOutsideCb) document.addEventListener("click", handleClick);
