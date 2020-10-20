@@ -68,7 +68,7 @@ describe("createPortal", () => {
 
   it("should trigger callback when presses ESC key", () => {
     const { escCb } = renderHelper();
-    fireEvent.keyDown(document, { keyCode: 27 });
+    fireEvent.keyDown(document, { code: "Escape" });
     expect(escCb).toHaveBeenCalled();
   });
 
