@@ -44,8 +44,14 @@ export default (
     if (!isShow || !container) return () => null;
 
     const handleClick = (e: MouseEvent) => {
-      // @ts-expect-error
-      if (!container.contains(e.target as HTMLElement)) clickOutsideCb(e);
+      if (
+        // Used to avoid this issue: https://github.com/wellyshen/react-cool-portal/issues/390
+        // @ts-expect-error
+        e.target.parentElement &&
+        !container.contains(e.target as HTMLElement)
+      )
+        // @ts-expect-error
+        clickOutsideCb(e);
     };
     const handleKeyDown = (e: KeyboardEvent) => {
       // @ts-expect-error
