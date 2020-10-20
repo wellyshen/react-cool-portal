@@ -43,26 +43,31 @@ export default (
   useEffect(() => {
     if (!isShow || !container) return () => null;
 
-    const handleClick = (e: MouseEvent) => {
-      if (
-        // Used to avoid this issue: https://github.com/wellyshen/react-cool-portal/issues/390
-        // @ts-expect-error
-        e.target.parentElement &&
-        !container.contains(e.target as HTMLElement)
-      )
-        // @ts-expect-error
-        clickOutsideCb(e);
+    let isClickOutside = false;
+    const handleMouseDown = (e: MouseEvent) => {
+      isClickOutside = !container.contains(e.target as HTMLElement);
     };
+    const handleClick = (e: MouseEvent) => {
+      // @ts-expect-error
+      if (isClickOutside) clickOutsideCb(e);
+    };
+
     const handleKeyDown = (e: KeyboardEvent) => {
       // @ts-expect-error
       if (e.key === "Escape") escCb(e);
     };
 
-    if (clickOutsideCb) document.addEventListener("click", handleClick);
+    if (clickOutsideCb) {
+      document.addEventListener("mousedown", handleMouseDown);
+      document.addEventListener("click", handleClick);
+    }
     if (escCb) document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      if (clickOutsideCb) document.removeEventListener("click", handleClick);
+      if (clickOutsideCb) {
+        document.removeEventListener("mousedown", handleMouseDown);
+        document.removeEventListener("click", handleClick);
+      }
       if (escCb) document.removeEventListener("keydown", handleKeyDown);
     };
   }, [container]);

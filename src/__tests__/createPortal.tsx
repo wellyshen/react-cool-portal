@@ -56,26 +56,28 @@ describe("createPortal", () => {
 
   it("should trigger callback when clicks outside of the child", () => {
     const { clickOutsideCb } = renderHelper();
-    fireEvent.click(document.body);
+    fireEvent.mouseDown(document);
+    fireEvent.click(document);
     expect(clickOutsideCb).toHaveBeenCalled();
   });
 
   it("should not trigger callback when clicks inside of the child", () => {
     const { getByTestId, clickOutsideCb } = renderHelper();
+    fireEvent.mouseDown(getByTestId(childId));
     fireEvent.click(getByTestId(childId));
     expect(clickOutsideCb).not.toHaveBeenCalled();
   });
 
   it("should trigger callback when presses ESC key", () => {
     const { escCb } = renderHelper();
-    fireEvent.keyDown(document.body, { key: "Escape" });
+    fireEvent.keyDown(document, { key: "Escape" });
     expect(escCb).toHaveBeenCalled();
   });
 
   it("should not trigger callbacks when isShow set to false", () => {
     const { clickOutsideCb, escCb } = renderHelper({ isShow: false });
-    fireEvent.click(document.body);
-    fireEvent.keyDown(document.body, { keyCode: 27 });
+    fireEvent.click(document);
+    fireEvent.keyDown(document, { key: "Escape" });
     expect(clickOutsideCb).not.toHaveBeenCalled();
     expect(escCb).not.toHaveBeenCalled();
   });
