@@ -27,7 +27,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - 🎣 React [Portals](https://reactjs.org/docs/portals.html) feat. [Hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook).
 - 🤖 Built-in [state controllers](#use-with-state), event listeners and many [useful features](#api) for a comprehensive DX.
 - 🧱 Used as a scaffold to [build your customized hook](#build-your-customized-hook).
-- 🧹 Auto remove un-used portal container for you. Doesn't produce any DOM mess.
+- 🧹 Auto removes the un-used portal container for you. Doesn't produce any DOM mess.
 - 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering compatibility.
 - 🦠 Tiny size ([~ 0.9KB gzipped](https://bundlephobia.com/result?p=react-cool-portal)). No external dependencies, aside for the `react` and `react-dom`.
@@ -52,7 +52,7 @@ Here are some minimal examples of how does it work. You can learn more about it 
 
 ### Basic Use Case
 
-Inserts an element or component into the a different location in the DOM.
+Inserts an element or component into a different location in the DOM.
 
 ```js
 import React from "react";
