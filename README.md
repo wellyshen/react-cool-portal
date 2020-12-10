@@ -55,7 +55,6 @@ Here are some minimal examples of how does it work. You can learn more about it 
 Inserts an element or component into a different location in the DOM.
 
 ```js
-import React from "react";
 import usePortal from "react-cool-portal";
 
 const App = () => {
@@ -76,7 +75,6 @@ const App = () => {
 By default, the children of portal is rendered into `<div id="react-cool-portal">` of `<body>`. You can specify the DOM element you want through the `containerId` option.
 
 ```js
-import React from "react";
 import usePortal from "react-cool-portal";
 
 const App = () => {
@@ -101,7 +99,6 @@ const App = () => {
 [![Edit usePortal](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/useportal-v8voh?fontsize=14&hidenavigation=1&theme=dark)
 
 ```js
-import React from "react";
 import usePortal from "react-cool-portal";
 
 const App = () => {
@@ -153,7 +150,6 @@ The above example shows how easy you can handle the visibility of your component
 [![Edit usePortal with Animation](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/useportal-with-animation-eorc2?fontsize=14&hidenavigation=1&theme=dark)
 
 ```js
-import React from "react";
 import usePortal from "react-cool-portal";
 
 const App = () => {
@@ -208,7 +204,7 @@ Besides that, you can also handle the visibility of your component via React [an
 Are you tired to write the same code over and over again? It's time to build your own hook based on `react-cool-portal` then use it wherever you want.
 
 ```js
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import usePortal from "react-cool-portal";
 
 // Customize your hook based on react-cool-portal
