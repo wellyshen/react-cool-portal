@@ -94,7 +94,7 @@ const App = () => {
 
 ### Use with State
 
-`react-cool-portal` provides many useful features, which enable you to build a component with state. For instance, modal, dropdown, tooltip and so on.
+`react-cool-portal` provides many useful features, which enable you to build a component with state. For instance, modal, dropdown, tooltip, and so on.
 
 [![Edit usePortal](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/useportal-v8voh?fontsize=14&hidenavigation=1&theme=dark)
 
