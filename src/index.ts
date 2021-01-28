@@ -114,7 +114,7 @@ const usePortal = ({
       clickOutsideToHide ? handleHide : undefined,
       escToHide ? handleHide : undefined
     ),
-    [internalShowHide && isShow]
+    [internalShowHide, isShow]
   );
 
   return { Portal, isShow, show, hide, toggle };
