@@ -44,15 +44,11 @@ describe("usePortal", () => {
     const result = renderHelper();
     expect(createPortal).toHaveBeenCalledWith(...params);
 
-    act(() => {
-      result.current.hide();
-    });
+    act(() => result.current.hide());
     params[1] = false;
     expect(createPortal).toHaveBeenCalledWith(...params);
 
-    act(() => {
-      result.current.show();
-    });
+    act(() => result.current.show());
     params[1] = true;
     expect(createPortal).toHaveBeenCalledWith(...params);
   });
@@ -67,9 +63,7 @@ describe("usePortal", () => {
     const result = renderHelper({ internalShowHide: false });
     expect(createPortal).toHaveBeenCalledWith(...params);
 
-    act(() => {
-      result.current.hide();
-    });
+    act(() => result.current.hide());
     expect(createPortal).toHaveBeenCalledWith(...params);
   });
 
@@ -84,77 +78,49 @@ describe("usePortal", () => {
   it("should return isShow correctly", () => {
     const result = renderHelper();
 
-    act(() => {
-      result.current.hide();
-    });
+    act(() => result.current.hide());
     expect(result.current.isShow).toBeFalsy();
 
-    act(() => {
-      result.current.show();
-    });
+    act(() => result.current.show());
     expect(result.current.isShow).toBeTruthy();
 
-    act(() => {
-      result.current.toggle();
-    });
+    act(() => result.current.toggle());
     expect(result.current.isShow).toBeFalsy();
-    act(() => {
-      result.current.toggle();
-    });
+    act(() => result.current.toggle());
     expect(result.current.isShow).toBeTruthy();
   });
 
   it("should trigger onShow correctly", () => {
     const onShow = jest.fn();
     const result = renderHelper({ onShow });
-    act(() => {
-      result.current.show();
-    });
+    act(() => result.current.show());
     expect(onShow).not.toHaveBeenCalled();
 
-    act(() => {
-      result.current.hide();
-    });
-    act(() => {
-      // @ts-expect-error
-      result.current.show(e);
-    });
+    act(() => result.current.hide());
+    // @ts-expect-error
+    act(() => result.current.show(e));
     expect(onShow).toHaveBeenCalledWith(e);
 
-    act(() => {
-      result.current.toggle();
-    });
-    act(() => {
-      // @ts-expect-error
-      result.current.toggle(e);
-    });
+    act(() => result.current.toggle());
+    // @ts-expect-error
+    act(() => result.current.toggle(e));
     expect(onShow).toHaveBeenCalledWith(e);
   });
 
   it("should trigger onHide correctly", () => {
     const onHide = jest.fn();
     const result = renderHelper({ defaultShow: false, onHide });
-    act(() => {
-      result.current.hide();
-    });
+    act(() => result.current.hide());
     expect(onHide).not.toHaveBeenCalled();
 
-    act(() => {
-      result.current.show();
-    });
-    act(() => {
-      // @ts-expect-error
-      result.current.hide(e);
-    });
+    act(() => result.current.show());
+    // @ts-expect-error
+    act(() => result.current.hide(e));
     expect(onHide).toHaveBeenCalledWith(e);
 
-    act(() => {
-      result.current.toggle();
-    });
-    act(() => {
-      // @ts-expect-error
-      result.current.toggle(e);
-    });
+    act(() => result.current.toggle());
+    // @ts-expect-error
+    act(() => result.current.toggle(e));
     expect(onHide).toHaveBeenCalledWith(e);
   });
 });
