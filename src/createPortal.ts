@@ -20,6 +20,7 @@ const createEl = (id: string): HTMLDivElement => {
 
 export default (
   id: string,
+  autoRemoveContainer: boolean,
   isShow: boolean,
   clickOutsideCb?: Callback<MouseEvent>,
   escCb?: Callback<KeyboardEvent>
@@ -35,7 +36,8 @@ export default (
       if (!container) return;
 
       delay(() => {
-        if (container.innerHTML === "") container.remove();
+        if (autoRemoveContainer && container.innerHTML === "")
+          container.remove();
       });
     };
   }, [container]);

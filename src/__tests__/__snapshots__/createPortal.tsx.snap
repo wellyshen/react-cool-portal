@@ -6,6 +6,15 @@ exports[`createPortal should auto remove container 1`] = `
 </body>
 `;
 
+exports[`createPortal should not auto remove container 1`] = `
+<body>
+  <div />
+  <div
+    id="react-cool-portal"
+  />
+</body>
+`;
+
 exports[`createPortal should not render portal 1`] = `
 <body>
   <div />

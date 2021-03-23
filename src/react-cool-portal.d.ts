@@ -18,6 +18,7 @@ declare module "react-cool-portal" {
 
   interface Args {
     containerId?: string;
+    autoRemoveContainer?: boolean;
     defaultShow?: boolean;
     clickOutsideToHide?: boolean;
     escToHide?: boolean;
