@@ -8,6 +8,7 @@ describe("createPortal", () => {
 
   interface Args {
     containerId?: string;
+    autoRemoveContainer?: boolean;
     isShow?: boolean;
   }
   interface Return {
@@ -20,11 +21,18 @@ describe("createPortal", () => {
 
   const renderHelper = ({
     containerId = defaultContainerId,
+    autoRemoveContainer = true,
     isShow = true,
   }: Args = {}): Return => {
     const clickOutsideCb = jest.fn();
     const escCb = jest.fn();
-    const Portal = createPortal(containerId, isShow, clickOutsideCb, escCb);
+    const Portal = createPortal(
+      containerId,
+      autoRemoveContainer,
+      isShow,
+      clickOutsideCb,
+      escCb
+    );
     const { baseElement, getByTestId, unmount } = render(
       <Portal>
         <div data-testid={childId}>Test</div>
@@ -48,6 +56,17 @@ describe("createPortal", () => {
     jest.useFakeTimers();
 
     const { baseElement, unmount } = renderHelper();
+    unmount();
+    jest.runAllTimers();
+    expect(baseElement).toMatchSnapshot();
+  });
+
+  it("should not auto remove container", () => {
+    jest.useFakeTimers();
+
+    const { baseElement, unmount } = renderHelper({
+      autoRemoveContainer: false,
+    });
     unmount();
     jest.runAllTimers();
     expect(baseElement).toMatchSnapshot();

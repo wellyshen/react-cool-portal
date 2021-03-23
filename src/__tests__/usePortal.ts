@@ -1,7 +1,12 @@
 import { renderHook, act } from "@testing-library/react-hooks";
 
 import createPortal from "../createPortal";
-import usePortal, { Args, defaultContainerId, initShow } from "..";
+import usePortal, {
+  Args,
+  defaultContainerId,
+  initAutoRemoveContainer,
+  initShow,
+} from "..";
 
 jest.mock("../createPortal", () => jest.fn());
 
@@ -14,6 +19,7 @@ describe("usePortal", () => {
     renderHelper();
     expect(createPortal).toHaveBeenCalledWith(
       defaultContainerId,
+      initAutoRemoveContainer,
       initShow,
       expect.any(Function),
       expect.any(Function)
@@ -22,12 +28,14 @@ describe("usePortal", () => {
 
   it("should create Portal correctly", () => {
     const containerId = "my-portal-root";
+    const autoRemoveContainer = true;
     const defaultShow = false;
     const clickOutsideToHide = false;
     const escToHide = false;
     renderHelper({ containerId, defaultShow, clickOutsideToHide, escToHide });
     expect(createPortal).toHaveBeenCalledWith(
       containerId,
+      autoRemoveContainer,
       defaultShow,
       undefined,
       undefined
@@ -37,6 +45,7 @@ describe("usePortal", () => {
   it("should handle internal show/hide", () => {
     const params = [
       defaultContainerId,
+      initAutoRemoveContainer,
       initShow,
       expect.any(Function),
       expect.any(Function),
@@ -45,17 +54,18 @@ describe("usePortal", () => {
     expect(createPortal).toHaveBeenCalledWith(...params);
 
     act(() => result.current.hide());
-    params[1] = false;
+    params[2] = false;
     expect(createPortal).toHaveBeenCalledWith(...params);
 
     act(() => result.current.show());
-    params[1] = true;
+    params[2] = true;
     expect(createPortal).toHaveBeenCalledWith(...params);
   });
 
   it("should disable internal show/hide", () => {
     const params = [
       defaultContainerId,
+      initAutoRemoveContainer,
       true,
       expect.any(Function),
       expect.any(Function),

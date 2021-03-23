@@ -18,6 +18,7 @@ interface OnShow<T extends SyntheticEvent | Event = ReactMouseEvent> {
 }
 export interface Args {
   containerId?: string;
+  autoRemoveContainer?: boolean;
   defaultShow?: boolean;
   clickOutsideToHide?: boolean;
   escToHide?: boolean;
@@ -37,9 +38,11 @@ interface Return {
 }
 
 export const defaultContainerId = "react-cool-portal";
+export const initAutoRemoveContainer = true;
 export const initShow = true;
 const usePortal = ({
   containerId = defaultContainerId,
+  autoRemoveContainer = initAutoRemoveContainer,
   defaultShow = initShow,
   clickOutsideToHide = true,
   escToHide = true,
@@ -110,6 +113,7 @@ const usePortal = ({
   const Portal = useCallback(
     createPortal(
       containerId,
+      autoRemoveContainer,
       !internalShowHide || isShow,
       clickOutsideToHide ? handleHide : undefined,
       escToHide ? handleHide : undefined
