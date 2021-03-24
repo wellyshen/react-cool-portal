@@ -145,7 +145,7 @@ const App = () => {
 };
 ```
 
-> 🧹 When no element in the container, we will remove it for you to avoid DOM mess.
+> 🧹 When no element in the container, we will remove it for you to avoid DOM mess. However, the feature can be turn off via the [autoRemoveContainer](#parameter-object-optional) option.
 
 The above example shows how easy you can handle the visibility of your component. You may ask how to handle the visibility with animations? No worries, you can disable the built-in `show/hide` functions by setting the `internalShowHide` option to `false` then handling the visibility of your component via the `isShow` state.
 
