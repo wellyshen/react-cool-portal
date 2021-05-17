@@ -14,7 +14,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-cool-portal?style=flat-square)](https://bundlephobia.com/result?p=react-cool-portal)
 [![MIT licensed](https://img.shields.io/github/license/wellyshen/react-cool-portal?style=flat-square)](https://raw.githubusercontent.com/wellyshen/react-cool-portal/master/LICENSE)
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange?style=flat-square)](#contributors-)
-[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](https://github.com/wellyshen/react-cool-portal/blob/master/CONTRIBUTING.md)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
 [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Freact-cool-portal)](https://twitter.com/intent/tweet?text=With%20@react-cool-portal,%20I%20can%20build%20modals,%20dropdowns,%20tooltips%20etc.%20without%20struggle!%20Thanks,%20@Welly%20Shen%20🤩)
 
 ## Live Demo
@@ -199,7 +199,7 @@ const App = () => {
 };
 ```
 
-Besides that, you can also handle the visibility of your component via React [animation events](https://reactjs.org/docs/events.html#animation-events) or [transition events](https://reactjs.org/docs/events.html#transition-events) like [what I did](https://github.com/wellyshen/react-cool-portal/blob/master/demo/App/index.tsx) for the [demo app](#live-demo).
+Besides that, you can also handle the visibility of your component via React [animation events](https://reactjs.org/docs/events.html#animation-events) or [transition events](https://reactjs.org/docs/events.html#transition-events) like [what I did](demo/App/index.tsx) for the [demo app](#live-demo).
 
 ### Build Your Customized Hook
 
