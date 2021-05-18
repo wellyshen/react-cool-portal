@@ -16,7 +16,7 @@ declare module "react-cool-portal" {
     (event?: T): void;
   }
 
-  interface Args {
+  export interface Args {
     containerId?: string;
     autoRemoveContainer?: boolean;
     defaultShow?: boolean;
@@ -27,7 +27,7 @@ declare module "react-cool-portal" {
     onHide?: OnHide;
   }
 
-  interface Return {
+  export interface Return {
     Portal: FC<{ children: ReactNode }>;
     isShow: boolean;
     show: RCPF;
