@@ -1,4 +1,4 @@
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 
 import createPortal from "../createPortal";
 import { defaultContainerId } from "..";
@@ -15,7 +15,6 @@ describe("createPortal", () => {
     clickOutsideCb: any;
     escCb: any;
     baseElement: any;
-    getByTestId: any;
     unmount: any;
   }
 
@@ -33,13 +32,13 @@ describe("createPortal", () => {
       clickOutsideCb,
       escCb
     );
-    const { baseElement, getByTestId, unmount } = render(
+    const { baseElement, unmount } = render(
       <Portal>
         <div data-testid={childId}>Test</div>
       </Portal>
     );
 
-    return { clickOutsideCb, escCb, baseElement, getByTestId, unmount };
+    return { clickOutsideCb, escCb, baseElement, unmount };
   };
 
   it("should not render portal", () => {
@@ -80,9 +79,9 @@ describe("createPortal", () => {
   });
 
   it("should not trigger callback when clicks inside of the child", () => {
-    const { getByTestId, clickOutsideCb } = renderHelper();
-    fireEvent.mouseDown(getByTestId(childId));
-    fireEvent.click(getByTestId(childId));
+    const { clickOutsideCb } = renderHelper();
+    fireEvent.mouseDown(screen.getByTestId(childId));
+    fireEvent.click(screen.getByTestId(childId));
     expect(clickOutsideCb).not.toHaveBeenCalled();
   });
 
