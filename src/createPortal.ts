@@ -19,60 +19,61 @@ const createEl = (id: string): HTMLDivElement => {
 };
 
 export default (
-  id: string,
-  autoRemoveContainer: boolean,
-  isShow: boolean,
-  clickOutsideCb?: Callback<MouseEvent>,
-  escCb?: Callback<KeyboardEvent>
-) => ({ children }: Props): ReactPortal | null => {
-  const [container, setContainer] = useState<HTMLElement>();
+    id: string,
+    autoRemoveContainer: boolean,
+    isShow: boolean,
+    clickOutsideCb?: Callback<MouseEvent>,
+    escCb?: Callback<KeyboardEvent>
+  ) =>
+  ({ children }: Props): ReactPortal | null => {
+    const [container, setContainer] = useState<HTMLElement>();
 
-  useEffect(() => {
-    if (!isShow) return () => null;
+    useEffect(() => {
+      if (!isShow) return () => null;
 
-    setContainer(document.getElementById(id) || createEl(id));
+      setContainer(document.getElementById(id) || createEl(id));
 
-    return () => {
-      if (!container) return;
+      return () => {
+        if (!container) return;
 
-      delay(() => {
-        if (autoRemoveContainer && container.innerHTML === "")
-          container.remove();
-      });
-    };
-  }, [container]);
+        delay(() => {
+          if (autoRemoveContainer && container.innerHTML === "")
+            container.remove();
+        });
+      };
+    }, [container]);
 
-  useEffect(() => {
-    if (!isShow || !container) return () => null;
+    useEffect(() => {
+      if (!isShow || !container) return () => null;
 
-    let isClickOutside = false;
-    const handleMouseDown = (e: MouseEvent) => {
-      isClickOutside = !container.contains(e.target as HTMLElement);
-    };
-    const handleClick = (e: MouseEvent) => {
-      // @ts-expect-error
-      if (isClickOutside) clickOutsideCb(e);
-    };
+      let isClickOutside = false;
+      const handleMouseDown = (e: MouseEvent) => {
+        isClickOutside = !container.contains(e.target as HTMLElement);
+      };
+      const handleClick = (e: MouseEvent) => {
+        // @ts-expect-error
+        if (isClickOutside) clickOutsideCb(e);
+      };
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // @ts-expect-error
-      if (e.key === "Escape") escCb(e);
-    };
+      const handleKeyDown = (e: KeyboardEvent) => {
+        // @ts-expect-error
+        if (e.key === "Escape") escCb(e);
+      };
 
-    if (clickOutsideCb) {
-      document.addEventListener("mousedown", handleMouseDown);
-      document.addEventListener("click", handleClick);
-    }
-    if (escCb) document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
       if (clickOutsideCb) {
-        document.removeEventListener("mousedown", handleMouseDown);
-        document.removeEventListener("click", handleClick);
+        document.addEventListener("mousedown", handleMouseDown);
+        document.addEventListener("click", handleClick);
       }
-      if (escCb) document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [container]);
+      if (escCb) document.addEventListener("keydown", handleKeyDown);
 
-  return isShow && container ? createPortal(children, container) : null;
-};
+      return () => {
+        if (clickOutsideCb) {
+          document.removeEventListener("mousedown", handleMouseDown);
+          document.removeEventListener("click", handleClick);
+        }
+        if (escCb) document.removeEventListener("keydown", handleKeyDown);
+      };
+    }, [container]);
+
+    return isShow && container ? createPortal(children, container) : null;
+  };
