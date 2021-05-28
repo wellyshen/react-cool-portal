@@ -11,7 +11,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 [![npm version](https://img.shields.io/npm/v/react-cool-portal?style=flat-square)](https://www.npmjs.com/package/react-cool-portal)
 [![npm downloads](https://img.shields.io/npm/dm/react-cool-portal?style=flat-square)](https://www.npmtrends.com/react-cool-portal)
 [![npm downloads](https://img.shields.io/npm/dt/react-cool-portal?style=flat-square)](https://www.npmtrends.com/react-cool-portal)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-cool-portal?style=flat-square)](https://bundlephobia.com/result?p=react-cool-portal)
+[![gzip size](https://badgen.net/bundlephobia/minzip/react-cool-portal?label=gzip%20size&style=flat-square)](https://bundlephobia.com/result?p=react-cool-portal)
 [![MIT licensed](https://img.shields.io/github/license/wellyshen/react-cool-portal?style=flat-square)](https://raw.githubusercontent.com/wellyshen/react-cool-portal/master/LICENSE)
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange?style=flat-square)](#contributors-)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
