@@ -11,6 +11,7 @@ import {
 
 import useLatest from "./useLatest";
 import delay from "./delay";
+import shouldHide from "./shouldHide";
 import createPortal, { Props as PortalProps } from "./createPortal";
 
 interface OnShow<T extends SyntheticEvent | Event = ReactMouseEvent> {
@@ -20,8 +21,8 @@ export interface Args {
   containerId?: string;
   autoRemoveContainer?: boolean;
   defaultShow?: boolean;
-  clickOutsideToHide?: boolean;
-  escToHide?: boolean;
+  clickOutsideToHide?: boolean | string[];
+  escToHide?: boolean | string[];
   internalShowHide?: boolean;
   onShow?: OnShow;
   onHide?: OnShow<ReactMouseEvent | MouseEvent | KeyboardEvent>;
@@ -40,6 +41,7 @@ interface Return {
 export const defaultContainerId = "react-cool-portal";
 export const initAutoRemoveContainer = true;
 export const initShow = true;
+
 const usePortal = ({
   containerId = defaultContainerId,
   autoRemoveContainer = initAutoRemoveContainer,
@@ -76,7 +78,7 @@ const usePortal = ({
       isShowRef.current = true;
       if (onShowRef.current) onShowRef.current(e);
     },
-    [setSkipClickOutside]
+    [onShowRef, setSkipClickOutside]
   );
 
   const hide = useCallback(
@@ -89,7 +91,7 @@ const usePortal = ({
       isShowRef.current = false;
       if (onHideRef.current) onHideRef.current(e);
     },
-    [setSkipClickOutside]
+    [onHideRef, setSkipClickOutside]
   );
 
   const toggle = useCallback(
@@ -105,7 +107,12 @@ const usePortal = ({
 
   const handleHide = useCallback(
     (e) => {
-      if (!skipClickOutsideRef.current) hide(e);
+      if (
+        !skipClickOutsideRef.current &&
+        ((e.type === "click" && shouldHide(clickOutsideToHide)) ||
+          (e.type === "keydown" && shouldHide(escToHide)))
+      )
+        hide(e);
     },
     [hide]
   );
@@ -115,8 +122,8 @@ const usePortal = ({
       containerId,
       autoRemoveContainer,
       !internalShowHide || isShow,
-      clickOutsideToHide ? handleHide : undefined,
-      escToHide ? handleHide : undefined
+      handleHide,
+      handleHide
     ),
     [internalShowHide, isShow]
   );

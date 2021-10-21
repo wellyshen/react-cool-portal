@@ -30,15 +30,13 @@ describe("usePortal", () => {
     const containerId = "my-portal-root";
     const autoRemoveContainer = true;
     const defaultShow = false;
-    const clickOutsideToHide = false;
-    const escToHide = false;
-    renderHelper({ containerId, defaultShow, clickOutsideToHide, escToHide });
+    renderHelper({ containerId, defaultShow });
     expect(createPortal).toHaveBeenCalledWith(
       containerId,
       autoRemoveContainer,
       defaultShow,
-      undefined,
-      undefined
+      expect.any(Function),
+      expect.any(Function)
     );
   });
 

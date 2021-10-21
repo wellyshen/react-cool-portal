@@ -105,11 +105,11 @@ const App = () => {
     defaultShow: false, // The default visibility of portal, default is true
     onShow: (e) => {
       // Triggered when portal is shown
-      // The event object will be the parameter of "show(e?)"
+      // The event object will be the parameter of `show(e?)`
     },
     onHide: (e) => {
       // Triggered when portal is hidden
-      // The event object will be the parameter of "hide(e?)", it maybe MouseEvent (on clicks outside) or KeyboardEvent (press ESC key)
+      // The event object will be the parameter of `hide(e?)`, it maybe MouseEvent (on clicks outside) or KeyboardEvent (press ESC key)
     },
   });
 
@@ -156,10 +156,10 @@ const App = () => {
     defaultShow: false,
     internalShowHide: false, // Disable the built-in show/hide portal functions, default is true
     onShow: (e) => {
-      // Triggered when "isShow" is set to true
+      // Triggered when `isShow` is set to true
     },
     onHide: (e) => {
-      // Triggered when "isShow" is set to false
+      // Triggered when `isShow` is set to false
     },
   });
 
@@ -170,7 +170,7 @@ const App = () => {
       <button onClick={toggle}>{isShow ? "Close" : "Open"} Modal</button>
       <Portal>
         <div
-          // Now you can use the "isShow" state to handle the CSS animations
+          // Now you can use the `isShow` state to handle the CSS animations
           className={`modal${isShow ? " modal-open" : ""}`}
           tabIndex={-1}
         >
@@ -271,7 +271,7 @@ const useModal = (options = {}) => {
   });
 
   const Modal = useCallback(
-    // Pass the "isShow" from props to prevent CSS transition/animation to be cut off
+    // Pass the `isShow` from props to prevent CSS transition/animation to be cut off
     ({ isShow, children }) => (
       <Portal>
         <div className={`modal${isShow ? " modal-open" : ""}`} tabIndex={-1}>
@@ -283,6 +283,41 @@ const useModal = (options = {}) => {
   );
 
   return { Modal, ...rest };
+};
+```
+
+## Conditionally ESC or Click Outside to Hide
+
+**ESC or click outside to hide** is an out-of-box feature of `react-cool-portal`. However, you can conditionally hide the portal based on the presence or absence of an element. Here we take a nested modal as the example:
+
+```js
+import usePortal from "react-cool-portal";
+
+const App = () => {
+  const [showChildModal, setShowChildModal] = useState(false);
+  const { Portal: ChildModal, show } = usePortal({ defaultShow: false });
+  const { Portal: ParentModal } = usePortal({
+    // Provide the class name of the child modal, so the parent modal will only be hidden when the child modal is hidden
+    escToHide: ["child-modal"],
+    // The same as `escToHide`
+    clickOutsideToHide: ["child-modal"],
+  });
+
+  return (
+    <div>
+      <ParentModal>
+        <div>
+          <p>I'm parent modal.</p>
+          <button onClick={show}>Open Child Modal</button>
+          <ChildModal>
+            <div className="child-modal">
+              <p>I'm child modal.</p>
+            </div>
+          </ChildModal>
+        </div>
+      </ParentModal>
+    </div>
+  );
 };
 ```
 
@@ -308,16 +343,16 @@ It's returned with the following properties.
 
 When use `react-cool-portal` you can configure the following options via the parameter.
 
-| Key                 | Type     | Default             | Description                                                                                                           |
-| ------------------- | -------- | ------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| containerId         | string   | `react-cool-portal` | You can specify your own container id from an existing DOM element or let this hook automatically creates it for you. |
-| autoRemoveContainer | boolean  | `true`              | Enable/disable the built-in automatically remove container function.                                                  |
-| defaultShow         | boolean  | `true`              | The initial show/hide state of the portal.                                                                            |
-| clickOutsideToHide  | boolean  | `true`              | Hide the portal by clicking outside of it.                                                                            |
-| escToHide           | boolean  | `true`              | Hide the portal by pressing ESC key.                                                                                  |
-| internalShowHide    | boolean  | `true`              | Enable/disable the built-in `show/hide` portal functions, which gives you a flexible way to handle your portal.       |
-| onShow              | function |                     | Triggered when portal is shown or the `isShow` set to `true`.                                                         |
-| onHide              | function |                     | Triggered when portal is hidden or the `isShow` set to `false`.                                                       |
+| Key                 | Type             | Default             | Description                                                                                                                              |
+| ------------------- | ---------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| containerId         | string           | `react-cool-portal` | You can specify your own container id from an existing DOM element or let this hook automatically creates it for you.                    |
+| autoRemoveContainer | boolean          | `true`              | Enable/disable the built-in automatically remove container function.                                                                     |
+| defaultShow         | boolean          | `true`              | The initial show/hide state of the portal.                                                                                               |
+| clickOutsideToHide  | boolean \| array | `true`              | Hide the portal by clicking outside of it. For conditionally hide please see the [example](#conditionally-esc-or-click-outside-to-hide). |
+| escToHide           | boolean \| array | `true`              | Hide the portal by pressing ESC key. For conditionally hide please see the [example](#conditionally-esc-or-click-outside-to-hide).       |
+| internalShowHide    | boolean          | `true`              | Enable/disable the built-in `show/hide` portal functions, which gives you a flexible way to handle your portal.                          |
+| onShow              | function         |                     | Triggered when portal is shown or the `isShow` set to `true`.                                                                            |
+| onHide              | function         |                     | Triggered when portal is hidden or the `isShow` set to `false`.                                                                          |
 
 ## Articles / Blog Posts
 
