@@ -49,6 +49,7 @@ const fadeOut = keyframes`
 export const root = css`
   body {
     font-family: "Roboto", sans-serif;
+
     h1 {
       font-family: "Bungee Shade", cursive;
     }
@@ -99,9 +100,11 @@ export const btn = css`
   user-select: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
   &:hover {
     background: #333;
   }
+
   &:focus {
     outline: none;
     box-shadow: 0 0 0 5px rgba(130, 138, 145, 0.5);
@@ -164,6 +167,7 @@ export const modalClose = css`
   text-shadow: 0 1px 0 #fff;
   opacity: 0.5;
   cursor: pointer;
+
   &:hover {
     opacity: 0.75;
   }
