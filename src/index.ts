@@ -107,10 +107,11 @@ const usePortal = ({
 
   const handleHide = useCallback(
     (e) => {
+      if (skipClickOutsideRef.current) return;
+
       if (
-        !skipClickOutsideRef.current &&
-        ((e.type === "click" && shouldHide(clickOutsideToHide)) ||
-          (e.type === "keydown" && shouldHide(escToHide)))
+        (e.type === "click" && shouldHide(clickOutsideToHide)) ||
+        (e.type === "keydown" && shouldHide(escToHide))
       )
         hide(e);
     },
