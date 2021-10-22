@@ -8,7 +8,7 @@ import usePortal, {
   initShow,
 } from "..";
 
-jest.mock("../createPortal", () => jest.fn());
+jest.mock("../createPortal");
 
 describe("usePortal", () => {
   const e = { test: "test" };
