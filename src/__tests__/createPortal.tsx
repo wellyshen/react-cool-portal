@@ -3,44 +3,43 @@ import { render, fireEvent, screen } from "@testing-library/react";
 import createPortal from "../createPortal";
 import { defaultContainerId } from "..";
 
+interface Args {
+  containerId?: string;
+  autoRemoveContainer?: boolean;
+  isShow?: boolean;
+}
+
+interface Return {
+  clickOutsideCb: any;
+  escCb: any;
+  baseElement: any;
+  unmount: any;
+}
+
+const renderHelper = ({
+  containerId = defaultContainerId,
+  autoRemoveContainer = true,
+  isShow = true,
+}: Args = {}): Return => {
+  const clickOutsideCb = jest.fn();
+  const escCb = jest.fn();
+  const Portal = createPortal(
+    containerId,
+    autoRemoveContainer,
+    isShow,
+    clickOutsideCb,
+    escCb
+  );
+  const result = render(
+    <Portal>
+      <div data-testid="target">Test</div>
+    </Portal>
+  );
+
+  return { clickOutsideCb, escCb, ...result };
+};
+
 describe("createPortal", () => {
-  const childId = "test";
-
-  interface Args {
-    containerId?: string;
-    autoRemoveContainer?: boolean;
-    isShow?: boolean;
-  }
-  interface Return {
-    clickOutsideCb: any;
-    escCb: any;
-    baseElement: any;
-    unmount: any;
-  }
-
-  const renderHelper = ({
-    containerId = defaultContainerId,
-    autoRemoveContainer = true,
-    isShow = true,
-  }: Args = {}): Return => {
-    const clickOutsideCb = jest.fn();
-    const escCb = jest.fn();
-    const Portal = createPortal(
-      containerId,
-      autoRemoveContainer,
-      isShow,
-      clickOutsideCb,
-      escCb
-    );
-    const { baseElement, unmount } = render(
-      <Portal>
-        <div data-testid={childId}>Test</div>
-      </Portal>
-    );
-
-    return { clickOutsideCb, escCb, baseElement, unmount };
-  };
-
   it("should not render portal", () => {
     const { baseElement } = renderHelper({ isShow: false });
     expect(baseElement).toMatchSnapshot();
@@ -71,17 +70,17 @@ describe("createPortal", () => {
     expect(baseElement).toMatchSnapshot();
   });
 
-  it("should trigger callback when clicks outside of the child", () => {
+  it("should trigger callback when clicks outside of the target", () => {
     const { clickOutsideCb } = renderHelper();
     fireEvent.mouseDown(document);
     fireEvent.click(document);
     expect(clickOutsideCb).toHaveBeenCalled();
   });
 
-  it("should not trigger callback when clicks inside of the child", () => {
+  it("should not trigger callback when clicks inside of the target", () => {
     const { clickOutsideCb } = renderHelper();
-    fireEvent.mouseDown(screen.getByTestId(childId));
-    fireEvent.click(screen.getByTestId(childId));
+    fireEvent.mouseDown(screen.getByTestId("target"));
+    fireEvent.click(screen.getByTestId("target"));
     expect(clickOutsideCb).not.toHaveBeenCalled();
   });
 

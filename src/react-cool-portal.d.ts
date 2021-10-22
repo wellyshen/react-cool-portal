@@ -20,8 +20,8 @@ declare module "react-cool-portal" {
     containerId?: string;
     autoRemoveContainer?: boolean;
     defaultShow?: boolean;
-    clickOutsideToHide?: boolean;
-    escToHide?: boolean;
+    clickOutsideToHide?: boolean | string[];
+    escToHide?: boolean | string[];
     internalShowHide?: boolean;
     onShow?: OnShow;
     onHide?: OnHide;

@@ -28,7 +28,7 @@ exports[`createPortal should render portal 1`] = `
     id="react-cool-portal"
   >
     <div
-      data-testid="test"
+      data-testid="target"
     >
       Test
     </div>
