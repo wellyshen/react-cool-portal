@@ -17,6 +17,7 @@ import createPortal, { Props as PortalProps } from "./createPortal";
 interface OnShow<T extends SyntheticEvent | Event = ReactMouseEvent> {
   (event: T): void;
 }
+
 export interface Args {
   containerId?: string;
   autoRemoveContainer?: boolean;
@@ -27,10 +28,12 @@ export interface Args {
   onShow?: OnShow;
   onHide?: OnShow<ReactMouseEvent | MouseEvent | KeyboardEvent>;
 }
+
 interface RCPF<T extends SyntheticEvent | Event = ReactMouseEvent> {
   (event?: T): void;
 }
-interface Return {
+
+export interface Return {
   Portal: FC<PortalProps>;
   isShow: boolean;
   show: RCPF;
@@ -39,13 +42,11 @@ interface Return {
 }
 
 export const defaultContainerId = "react-cool-portal";
-export const initAutoRemoveContainer = true;
-export const initShow = true;
 
 const usePortal = ({
   containerId = defaultContainerId,
-  autoRemoveContainer = initAutoRemoveContainer,
-  defaultShow = initShow,
+  autoRemoveContainer = true,
+  defaultShow = true,
   clickOutsideToHide = true,
   escToHide = true,
   internalShowHide = true,

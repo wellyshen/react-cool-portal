@@ -74,6 +74,7 @@
     "@rollup/plugin-node-resolve": "^13.0.6",
     "@rollup/plugin-replace": "^3.0.0",
     "@rollup/plugin-url": "^6.1.0",
+    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^27.0.2",

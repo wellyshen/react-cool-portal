@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`usePortal should render portal correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="ref"
+    />
+    <button
+      data-testid="btn"
+      type="button"
+    >
+      Show Ref
+    </button>
+    <div
+      data-testid="is-show"
+    />
+  </div>
+  <div
+    id="react-cool-portal"
+  >
+    <div
+      data-testid="target"
+    >
+      Test
+    </div>
+  </div>
+</body>
+`;
