@@ -297,7 +297,7 @@ const App = () => {
   const [showChildModal, setShowChildModal] = useState(false);
   const { Portal: ChildModal, show } = usePortal({ defaultShow: false });
   const { Portal: ParentModal } = usePortal({
-    // Provide the class name of the child modal, so the parent modal will only be hidden when the child modal is hidden
+    // Provide the class name of the child modal, so the parent modal will only be hidden after the child modal is hidden
     escToHide: ["child-modal"],
     // The same as `escToHide`
     clickOutsideToHide: ["child-modal"],
