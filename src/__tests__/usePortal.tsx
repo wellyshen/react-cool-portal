@@ -47,7 +47,7 @@ const renderHelper = (args?: Args) => {
     </Compo>
   );
 
-  // @ts-expect-error
+  // @ts-ignore
   return { ...obj, ...result };
 };
 
@@ -112,10 +112,10 @@ describe("usePortal", () => {
     const onShow = jest.fn();
     const e = { test: "test" };
     const { hide, show } = renderHelper({ onHide, onShow });
-    // @ts-expect-error
+    // @ts-ignore
     act(() => hide(e));
     expect(onHide).toHaveBeenCalledWith(e);
-    // @ts-expect-error
+    // @ts-ignore
     act(() => show(e));
     expect(onShow).toHaveBeenCalledWith(e);
   });

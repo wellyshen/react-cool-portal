@@ -196,7 +196,7 @@ const App = () => {
 };
 ```
 
-Besides that, you can also handle the visibility of your component via React [animation events](https://reactjs.org/docs/events.html#animation-events) or [transition events](https://reactjs.org/docs/events.html#transition-events) like [what I did](demo/App/index.tsx) for the [demo app](#live-demo).
+Besides that, you can also handle the visibility of your component via React [animation events](https://reactjs.org/docs/events.html#animation-events) or [transition events](https://reactjs.org/docs/events.html#transition-events) like [what I did](app/src/App/index.tsx) for the [demo app](#live-demo).
 
 ### Build Your Customized Hook
 
@@ -343,16 +343,16 @@ It's returned with the following properties.
 
 When use `react-cool-portal` you can configure the following options via the parameter.
 
-| Key                 | Type             | Default             | Description                                                                                                                              |
-| ------------------- | ---------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| containerId         | string           | `react-cool-portal` | You can specify your own container id from an existing DOM element or let this hook automatically creates it for you.                    |
-| autoRemoveContainer | boolean          | `true`              | Enable/disable the built-in automatically remove container function.                                                                     |
-| defaultShow         | boolean          | `true`              | The initial show/hide state of the portal.                                                                                               |
+| Key                 | Type             | Default             | Description                                                                                                                                          |
+| ------------------- | ---------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| containerId         | string           | `react-cool-portal` | You can specify your own container id from an existing DOM element or let this hook automatically creates it for you.                                |
+| autoRemoveContainer | boolean          | `true`              | Enable/disable the built-in automatically remove container function.                                                                                 |
+| defaultShow         | boolean          | `true`              | The initial show/hide state of the portal.                                                                                                           |
 | clickOutsideToHide  | boolean \| array | `true`              | Hide the portal by clicking outside of it. You can also provide class name(s) for [conditionally hide](#conditionally-esc-or-click-outside-to-hide). |
 | escToHide           | boolean \| array | `true`              | Hide the portal by pressing ESC key. You can also provide class name(s) for [conditionally hide](#conditionally-esc-or-click-outside-to-hide).       |
-| internalShowHide    | boolean          | `true`              | Enable/disable the built-in `show/hide` portal functions, which gives you a flexible way to handle your portal.                          |
-| onShow              | function         |                     | Triggered when portal is shown or the `isShow` set to `true`.                                                                            |
-| onHide              | function         |                     | Triggered when portal is hidden or the `isShow` set to `false`.                                                                          |
+| internalShowHide    | boolean          | `true`              | Enable/disable the built-in `show/hide` portal functions, which gives you a flexible way to handle your portal.                                      |
+| onShow              | function         |                     | Triggered when portal is shown or the `isShow` set to `true`.                                                                                        |
+| onHide              | function         |                     | Triggered when portal is hidden or the `isShow` set to `false`.                                                                                      |
 
 ## Articles / Blog Posts
 

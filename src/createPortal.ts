@@ -1,4 +1,5 @@
-import { ReactNode, ReactPortal, useState, useEffect } from "react";
+import type { ReactNode, ReactPortal } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 import delay from "./delay";
@@ -51,12 +52,12 @@ export default (
         isClickOutside = !container.contains(e.target as HTMLElement);
       };
       const handleClick = (e: MouseEvent) => {
-        // @ts-expect-error
+        // @ts-ignore
         if (isClickOutside) clickOutsideCb(e);
       };
 
       const handleKeyDown = (e: KeyboardEvent) => {
-        // @ts-expect-error
+        // @ts-ignore
         if (e.key === "Escape") escCb(e);
       };
 

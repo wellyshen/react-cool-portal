@@ -4,7 +4,7 @@ describe("shouldHide", () => {
   it("should return correctly with on/off", () => {
     expect(shouldHide(true)).toBeTruthy();
     expect(shouldHide(false)).toBeFalsy();
-    // @ts-expect-error
+    // @ts-ignore
     expect(shouldHide(undefined)).toBeFalsy();
   });
 
